@@ -62,23 +62,22 @@ public final class Position {
         return result;
     }
 
+    @Override
+    public String toString() {
+        return "(" + col + ", " + row + ")";
+    }
+
     /**
      * Get Neighbor position in given direction
      * @param direction where to take the neighbor position
      * @return neighbor position in given direction
      */
     public Position getNeighbourPos(Side direction) {
-        switch (direction) {
-            case NORTH:
-                return new Position(row - 1, col);
-            case SOUTH:
-                return new Position(row + 1, col);
-            case EAST:
-                return new Position(row, col + 1);
-            case WEST:
-                return new Position(row, col - 1);
-            default:
-                return null;
-        }
+        return switch (direction) {
+            case NORTH -> new Position(row - 1, col);
+            case SOUTH -> new Position(row + 1, col);
+            case EAST -> new Position(row, col + 1);
+            case WEST -> new Position(row, col - 1);
+        };
     }
 }

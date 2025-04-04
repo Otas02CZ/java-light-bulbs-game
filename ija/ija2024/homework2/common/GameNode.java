@@ -38,27 +38,6 @@ public class GameNode implements ToolField, GameObservable {
     protected GameObserver gameObserver;
 
     /**
-    * Helper function for simplification of toString override
-    */
-    protected String getToString(String name) {
-        // required order of sides
-        List<Side> orderedSides = Arrays.asList(Side.NORTH, Side.EAST, Side.SOUTH, Side.WEST);
-
-        // get active connectors
-        List<String> activeConnectors = orderedSides.stream()
-                .filter(side -> connectors.getOrDefault(side, false))
-                .map(Enum::name)
-                .toList();
-
-        // format return message
-        return String.format("{%s[%d@%d][%s]}",
-                name,
-                position.getRow(),
-                position.getCol(),
-                String.join(",", activeConnectors));
-    }
-
-    /**
      * Stores which sides are connectors to other nodes
      */
     protected HashMap<Side, Boolean> connectors;
@@ -297,5 +276,26 @@ public class GameNode implements ToolField, GameObservable {
         if (gameObserver == null)
             return;
         this.gameObserver.update(this);
+    }
+
+    /**
+     * Helper function for simplification of toString override
+     */
+    protected String getToString(String name) {
+        // required order of sides
+        List<Side> orderedSides = Arrays.asList(Side.NORTH, Side.EAST, Side.SOUTH, Side.WEST);
+
+        // get active connectors
+        List<String> activeConnectors = orderedSides.stream()
+                .filter(side -> connectors.getOrDefault(side, false))
+                .map(Enum::name)
+                .toList();
+
+        // format return message
+        return String.format("{%s[%d@%d][%s]}",
+                name,
+                position.getRow(),
+                position.getCol(),
+                String.join(",", activeConnectors));
     }
 }
