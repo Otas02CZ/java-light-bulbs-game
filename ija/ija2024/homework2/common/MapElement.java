@@ -31,8 +31,10 @@ public class MapElement {
     }
 
     public String[] getRepresentation(String bfr1, String bfr2, String bfr3) {
-        String signal = "\uD83D\uDFE9";
-        String space = "\uD83E\uDDAF";
+        //String signal = "\uD83D\uDFE9";
+        //String space = "\uD83E\uDDAF";
+        String signal = "XX";
+        String space = "  ";
         String middle = (hasConnections()) ? signal : space;
         bfr1 += space + ((isConnectedOnSide(Side.NORTH)) ? signal : space) + space;
         bfr2 += ((isConnectedOnSide(Side.WEST)) ? signal : space) + middle + ((isConnectedOnSide(Side.EAST)) ? signal : space);

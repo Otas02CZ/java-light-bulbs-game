@@ -136,7 +136,7 @@ public class MapGenerator {
 
         StringBuilder bfr0 = new StringBuilder();
         for (int x = 0; x < cols; x++) {
-            bfr0.append(String.format("%4d   ", x));
+            bfr0.append(String.format("%4d  ", x));
         }
         System.out.println(bfr0); // Print column indexes
 
