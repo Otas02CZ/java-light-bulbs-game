@@ -9,12 +9,13 @@ public class MapGenerator {
     final private MapElement[][] map;
     private Position rootPosition;
     final private PriorityQueue queue;
+    final private Random random;
 
     public MapGenerator(int rows, int cols, float emptyPercentage) {
         this.rows = rows;
         this.cols = cols;
         map = new MapElement[rows][cols];
-        Random random = new Random();
+        random = new Random();
 
         // fill in blank elements
         for (int y = 0; y < rows; y++) {
@@ -122,6 +123,22 @@ public class MapGenerator {
             queue.executeMove(elm, neighbour);
             AddAvailableMoves(neighbour);
             steps++;
+        }
+    }
+
+    public void randomizeMap(int amountOfRotations) {
+
+        int rotationsDone = 0;
+        while (rotationsDone < amountOfRotations) {
+            int x = random.nextInt(rows);
+            int y = random.nextInt(cols);
+
+            MapElement elm = map[x][y];
+            if (elm == null) continue;
+
+            elm.rotate();
+
+            rotationsDone++;
         }
     }
 

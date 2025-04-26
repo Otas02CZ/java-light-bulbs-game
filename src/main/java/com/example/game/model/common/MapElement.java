@@ -4,6 +4,8 @@ public class MapElement {
 
     final private Position pos;
 
+    private int rotated = 0;
+
     private boolean north = false;
     private boolean south = false;
     private boolean west = false;
@@ -29,6 +31,28 @@ public class MapElement {
             case EAST -> east;
         };
     }
+
+    public void rotate() {
+
+        // north <-> East
+        boolean tmp = north;
+        north = east;
+        east = tmp;
+
+        //  north <-> south
+        tmp = south;
+        south = north;
+        north = tmp;
+
+        // north <- West
+        tmp = west;
+        west = north;
+        north = tmp;
+
+        rotated++;
+    }
+
+    public int getRotated() {return rotated;}
 
     public String[] getRepresentation(String bfr1, String bfr2, String bfr3) {
         //String signal = "\uD83D\uDFE9";

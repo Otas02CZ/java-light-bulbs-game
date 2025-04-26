@@ -7,5 +7,7 @@ public class MainCLI {
         MapGenerator mapGenerator = new MapGenerator(5, 5, 0.2f);
         mapGenerator.generateMap();
         mapGenerator.printMapTerminal();
+        mapGenerator.randomizeMap(20);
+        mapGenerator.printMapTerminal();
     }
 }
