@@ -34,4 +34,14 @@ public class GameNodeLink extends GameNode {
     public String toString() {
         return getToString("L");
     }
+
+    @Override
+    public void represent(StringBuilder bfr1, StringBuilder bfr2, StringBuilder bfr3) {
+        String space = "\uD83E\uDDAF";
+        String wire = powered ?  "\uD83D\uDFE9" :  "\uD83D\uDFE5";
+
+        bfr1.append(space).append(containsConnector(Side.NORTH) ? wire : space).append(space);
+        bfr2.append(containsConnector(Side.WEST) ? wire : space).append(wire).append(containsConnector(Side.EAST) ? wire : space);
+        bfr3.append(space).append(containsConnector(Side.SOUTH) ? wire : space).append(space);
+    }
 }

@@ -38,6 +38,7 @@ public class MapGenerator {
 
             // add the initial moves for the root element
             root = map[y][x];
+            if (root != null) map[y][x].setRoot();
         }
 
         AddAvailableMoves(root);

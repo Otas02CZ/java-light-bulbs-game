@@ -1,5 +1,9 @@
 package com.example.game.model.common;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class MapElement {
 
     final private Position pos;
@@ -58,20 +62,15 @@ public class MapElement {
     public int getRotated() {return rotated;}
 
     public Side[] getSides() {
+        List<Side> sidesList = new ArrayList<>();
 
-        Side[] returnSides = new Side[4];
-        if (isLight()) {
-            if (north) returnSides[0] = Side.NORTH;
-            if (south) returnSides[0] = Side.SOUTH;
-            if (west) returnSides[0] = Side.WEST;
-            if (east) returnSides[0] = Side.EAST;
-            return returnSides;
-        }
+        if (north) sidesList.add(Side.NORTH);
+        if (south) sidesList.add(Side.SOUTH);
+        if (west)  sidesList.add(Side.WEST);
+        if (east)  sidesList.add(Side.EAST);
 
-        if (north) returnSides[0] = Side.NORTH;
-        if (south) returnSides[1] = Side.SOUTH;
-        if (west) returnSides[2] = Side.WEST;
-        if (east) returnSides[3] = Side.EAST;
+        Side[] returnSides = sidesList.toArray(new Side[0]);
+
         return returnSides;
     }
 

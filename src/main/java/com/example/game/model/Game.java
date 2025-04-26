@@ -23,6 +23,11 @@ import java.util.Stack;
  * implements GameObserver - for notifications informing about the need of recalculate connections
  */
 public class Game implements ToolEnvironment, GameObservable.GameObserver {
+
+    boolean gameWon = false;
+
+    private int amountOfBulbs;
+
     /**
      * Map storing nodes in game world (2D space)
      */
@@ -79,29 +84,34 @@ public class Game implements ToolEnvironment, GameObservable.GameObserver {
         Game game = Game.create(rows, cols);
 
         MapGenerator generator = new MapGenerator(rows, cols, emptyCoef);
+        generator.generateMap();
         generator.randomizeMap(shuffleCoef);
+
+        //generator.printMapTerminal();
 
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
                 GameNode node = game.map[i][j];
                 MapElement elm = generator.getMapElement(node.getPosition());
-                if (elm == null) continue;
+                if (elm == null || !elm.hasConnections()) continue;
 
                 int rotation = elm.getRotated();
 
                 Side[] sides = elm.getSides();
-                if (elm.isLight()) {
-                    game.createBulbNode(node.getPosition(), sides[0]).setRotation(rotation);
+                if (elm.isPower()) {
+                    game.createPowerNode(node.getPosition(), sides).setRotation(rotation);
                     continue;
                 }
 
-                if (elm.isPower()) {
-                    game.createPowerNode(node.getPosition(), sides).setRotation(rotation);
+                if (elm.isLight()) {
+                    game.createBulbNode(node.getPosition(), sides[0]).setRotation(rotation);
                     continue;
                 }
                 game.createLinkNode(node.getPosition(), sides).setRotation(rotation);
             }
         }
+
+        game.powerUp();
 
         return game;
     }
@@ -134,8 +144,7 @@ public class Game implements ToolEnvironment, GameObservable.GameObserver {
     }
 
     public boolean hasWon() {
-        // TODO
-        return false;
+        return gameWon;
     }
 
     /**
@@ -145,17 +154,9 @@ public class Game implements ToolEnvironment, GameObservable.GameObserver {
      * @return GameNode instance
      */
     public GameNode createLinkNode(Position position, Side... sides) {
-        if (this.isPositionInvalid(position))
-            return null;
-
-        if (this.areSidesInvalid(sides))
-            return null;
-
-        if (this.areSidesAtPositionInvalid(position, sides))
-            return null;
-
-        if (sides.length < 2)
-            return null;
+        if (this.isPositionInvalid(position)) return null;
+        if (this.areSidesInvalid(sides)) return null;
+        if (sides.length < 2) return null;
 
         GameNode node = new GameNodeLink(position, sides);
         node.setupGameObserver(this);
@@ -172,17 +173,11 @@ public class Game implements ToolEnvironment, GameObservable.GameObserver {
      * @return GameNode instance
      */
     public GameNode createPowerNode(Position position, Side... sides) {
-        if (this.isPositionInvalid(position))
-            return null;
+        if (this.isPositionInvalid(position)) return null;
 
-        if (this.areSidesInvalid(sides))
-            return null;
+        if (this.areSidesInvalid(sides)) return null;
 
-        if (this.areSidesAtPositionInvalid(position, sides))
-            return null;
-
-        if (this.powerNode != null)
-            return null;
+        if (this.powerNode != null) return null;
 
         GameNodePower node = new GameNodePower(position, sides);
         node.setupGameObserver(this);
@@ -201,19 +196,14 @@ public class Game implements ToolEnvironment, GameObservable.GameObserver {
      * @return GameNode instance
      */
     public GameNode createBulbNode(Position position, Side side) {
-        if (this.isPositionInvalid(position))
-            return null;
-
-        if (this.areSidesInvalid(side))
-            return null;
-
-        if (this.areSidesAtPositionInvalid(position, side))
-            return null;
+        if (this.isPositionInvalid(position)) return null;
+        if (this.areSidesInvalid(side)) return null;
 
         GameNode node = new GameNodeBulb(position, side);
         node.setupGameObserver(this);
 
         this.map[position.getRow()][position.getCol()] = node;
+        amountOfBulbs++;
 
         return node;
     }
@@ -273,6 +263,8 @@ public class Game implements ToolEnvironment, GameObservable.GameObserver {
      * Performs connection recalculation (lights up everything connected to source)
      */
     private void powerUp() {
+
+        int bulbsOn = 0;
         this.turnAllOff();
         GameNode node = this.powerNode;
         if (node == null)
@@ -290,8 +282,9 @@ public class Game implements ToolEnvironment, GameObservable.GameObserver {
                 stack.push(neighbor);
             }
             node.turnOn();
-
+            if (node.isBulb()) bulbsOn++;
         }
+        if (bulbsOn == amountOfBulbs) gameWon = true;
     }
 
     /**
@@ -326,6 +319,7 @@ public class Game implements ToolEnvironment, GameObservable.GameObserver {
      * @return true if invalid, otherwise false
      */
     private boolean areSidesInvalid(Side... sides) {
+
         if (sides == null || sides.length == 0 || sides.length > 4)
             return true;
 
@@ -340,50 +334,13 @@ public class Game implements ToolEnvironment, GameObservable.GameObserver {
     }
 
     /**
-     * Checks that we can have a node connecting to given side at given position
-     * @param position Position
-     * @param sides Side[] to check
-     * @return true if invalid, otherwise false
-     */
-    private boolean areSidesAtPositionInvalid(Position position, Side... sides) {
-        if (position.getRow() == 0) {
-            for (Side side : sides) {
-                if (side == Side.NORTH)
-                    return true;
-            }
-        }
-
-        if (position.getRow() == this.sizeRows-1) {
-            for (Side side : sides) {
-                if (side == Side.SOUTH)
-                    return true;
-            }
-        }
-
-        if (position.getCol() == 0) {
-            for (Side side : sides) {
-                if (side == Side.WEST)
-                    return true;
-            }
-        }
-
-        if (position.getCol() == this.sizeCols-1) {
-            for (Side side : sides) {
-                if (side == Side.EAST)
-                    return true;
-            }
-        }
-
-        return false;
-    }
-
-    /**
      * Method to check, if two nodes are facing each other
      * @param side Side
      * @param secondary GameNode to check
      * @return true if invalid, otherwise false
      */
     private boolean faceEachOther(Side side, GameNode secondary) {
+        if (secondary == null) return false;
         return switch (side) {
             case NORTH -> secondary.south();
             case SOUTH -> secondary.north();
@@ -403,7 +360,6 @@ public class Game implements ToolEnvironment, GameObservable.GameObserver {
         ArrayList<GameNode> neighbours;
         neighbours = new ArrayList<>();
 
-
         for (Side side : gameNode.getConnectedSides()) {
             GameNode node = this.node(gameNode.getPosition().getNeighbourPos(side));
             if (this.faceEachOther(side, node) && !node.light())
@@ -411,5 +367,23 @@ public class Game implements ToolEnvironment, GameObservable.GameObserver {
         }
 
         return neighbours;
+    }
+
+    public void printMapTerminal() {
+
+        StringBuilder bfr1, bfr2, bfr3;
+
+        for (int i = 0; i < this.sizeRows; i++) {
+            bfr1 = new StringBuilder();
+            bfr2 = new StringBuilder();
+            bfr3 = new StringBuilder();
+
+            for (int j = 0; j < this.sizeCols; j++) {
+                this.map[i][j].represent(bfr1, bfr2, bfr3);
+            }
+            System.out.println(bfr1.toString());
+            System.out.println(bfr2.toString());
+            System.out.println(bfr3.toString());
+        }
     }
 }

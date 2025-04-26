@@ -328,4 +328,11 @@ public class GameNode implements ToolField, GameObservable {
                 position.getCol(),
                 String.join(",", activeConnectors));
     }
+
+    public void represent(StringBuilder bfr1, StringBuilder bfr2, StringBuilder bfr3) {
+        String space = "\uD83E\uDDAF";
+        bfr1.append(space).append(space).append(space);
+        bfr2.append(space).append(space).append(space);
+        bfr3.append(space).append(space).append(space);
+    }
 }

@@ -34,4 +34,16 @@ public class GameNodePower extends GameNode {
     public String toString() {
         return getToString("P");
     }
+
+    @Override
+    public void represent(StringBuilder bfr1, StringBuilder bfr2, StringBuilder bfr3) {
+        String space = "\uD83E\uDDAF";
+        String wire = powered ?  "\uD83D\uDFE9" :  "\uD83D\uDFE5";
+        String middle = "\uD83E\uDEAB";
+
+        bfr1.append(space).append(containsConnector(Side.NORTH) ? wire : space).append(space);
+        bfr2.append(containsConnector(Side.WEST) ? wire : space).append(middle).append(containsConnector(Side.EAST) ? wire : space);
+        bfr3.append(space).append(containsConnector(Side.SOUTH) ? wire : space).append(space);
+    }
+
 }
