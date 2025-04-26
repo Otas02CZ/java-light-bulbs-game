@@ -87,17 +87,19 @@ public class Game implements ToolEnvironment, GameObservable.GameObserver {
                 MapElement elm = generator.getMapElement(node.getPosition());
                 if (elm == null) continue;
 
+                int rotation = elm.getRotated();
+
                 Side[] sides = elm.getSides();
                 if (elm.isLight()) {
-                    game.createBulbNode(node.getPosition(), sides[0]);
+                    game.createBulbNode(node.getPosition(), sides[0]).setRotation(rotation);
                     continue;
                 }
 
                 if (elm.isPower()) {
-                    game.createPowerNode(node.getPosition(), sides);
+                    game.createPowerNode(node.getPosition(), sides).setRotation(rotation);
                     continue;
                 }
-                game.createLinkNode(node.getPosition(), sides);
+                game.createLinkNode(node.getPosition(), sides).setRotation(rotation);
             }
         }
 
