@@ -63,7 +63,7 @@ public class Game implements ToolEnvironment, GameObservable.GameObserver {
         game.map = new GameNode[rows][cols];
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
-                GameNode node = new GameNode(new Position(i + 1, j + 1));
+                GameNode node = new GameNode(new Position(i, j));
                 game.map[i][j] = node;
                 node.setupGameObserver(game);
             }
@@ -73,9 +73,35 @@ public class Game implements ToolEnvironment, GameObservable.GameObserver {
         return game;
     }
 
-    public static Game generate(int rows, int cols, int emptyCoef, int shuffleCoef) {
+    public static Game generate(int rows, int cols, float emptyCoef, int shuffleCoef) {
         // TODO game generation support
-        return Game.create(rows, cols);
+        // TODO tell ota, ti dám my říkat co dělat ty ... xd
+        Game game = Game.create(rows, cols);
+
+        MapGenerator generator = new MapGenerator(rows, cols, emptyCoef);
+        generator.randomizeMap(shuffleCoef);
+
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                GameNode node = game.map[i][j];
+                MapElement elm = generator.getMapElement(node.getPosition());
+                if (elm == null) continue;
+
+                Side[] sides = elm.getSides();
+                if (elm.isLight()) {
+                    game.createBulbNode(node.getPosition(), sides[0]);
+                    continue;
+                }
+
+                if (elm.isPower()) {
+                    game.createPowerNode(node.getPosition(), sides);
+                    continue;
+                }
+                game.createLinkNode(node.getPosition(), sides);
+            }
+        }
+
+        return game;
     }
 
     public static Game load(String path) {
@@ -132,7 +158,7 @@ public class Game implements ToolEnvironment, GameObservable.GameObserver {
         GameNode node = new GameNodeLink(position, sides);
         node.setupGameObserver(this);
 
-        this.map[position.getRow()-1][position.getCol()-1] = node;
+        this.map[position.getRow()][position.getCol()] = node;
 
         return node;
     }
@@ -159,7 +185,7 @@ public class Game implements ToolEnvironment, GameObservable.GameObserver {
         GameNodePower node = new GameNodePower(position, sides);
         node.setupGameObserver(this);
 
-        this.map[position.getRow()-1][position.getCol()-1] = node;
+        this.map[position.getRow()][position.getCol()] = node;
 
         this.powerNode = node;
 
@@ -185,7 +211,7 @@ public class Game implements ToolEnvironment, GameObservable.GameObserver {
         GameNode node = new GameNodeBulb(position, side);
         node.setupGameObserver(this);
 
-        this.map[position.getRow()-1][position.getCol()-1] = node;
+        this.map[position.getRow()][position.getCol()] = node;
 
         return node;
     }
@@ -213,7 +239,7 @@ public class Game implements ToolEnvironment, GameObservable.GameObserver {
         if (this.isPositionInvalid(position))
             return null;
 
-        return this.map[position.getRow()-1][position.getCol()-1];
+        return this.map[position.getRow()][position.getCol()];
     }
 
     /**
@@ -223,7 +249,7 @@ public class Game implements ToolEnvironment, GameObservable.GameObserver {
      * @return ToolField node
      */
     public ToolField fieldAt(int row, int col) {
-        return this.map[row-1][col-1];
+        return this.map[row][col];
     }
 
     /**
@@ -286,13 +312,10 @@ public class Game implements ToolEnvironment, GameObservable.GameObserver {
         if (position == null)
             return true;
 
-        if (position.getRow() < 1 || position.getRow() > this.sizeRows)
+        if (position.getRow() < 0 || position.getRow() >= this.sizeRows)
             return true;
 
-        if (position.getCol() < 1 || position.getCol() > this.sizeCols)
-            return true;
-
-        return false;
+        return position.getCol() < 0 || position.getCol() >= this.sizeCols;
     }
 
     /**
@@ -321,28 +344,28 @@ public class Game implements ToolEnvironment, GameObservable.GameObserver {
      * @return true if invalid, otherwise false
      */
     private boolean areSidesAtPositionInvalid(Position position, Side... sides) {
-        if (position.getRow() == 1) {
+        if (position.getRow() == 0) {
             for (Side side : sides) {
                 if (side == Side.NORTH)
                     return true;
             }
         }
 
-        if (position.getRow() == this.sizeRows) {
+        if (position.getRow() == this.sizeRows-1) {
             for (Side side : sides) {
                 if (side == Side.SOUTH)
                     return true;
             }
         }
 
-        if (position.getCol() == 1) {
+        if (position.getCol() == 0) {
             for (Side side : sides) {
                 if (side == Side.WEST)
                     return true;
             }
         }
 
-        if (position.getCol() == this.sizeCols) {
+        if (position.getCol() == this.sizeCols-1) {
             for (Side side : sides) {
                 if (side == Side.EAST)
                     return true;

@@ -23,6 +23,17 @@ import java.util.Arrays;
  * It is expanded in Bulb, Link and Power nodes
  */
 public class GameNode implements ToolField, GameObservable {
+
+    /**
+     * CurrentRotation
+     */
+    private int rotation;
+
+    /**
+     * Countr for rotations
+     */
+    private int totalRotations = 0;
+
     /**
      * Position in 2D space
      */
@@ -111,6 +122,9 @@ public class GameNode implements ToolField, GameObservable {
             tempConnectors.put(Side.NORTH, false);
 
         connectors = tempConnectors;
+
+        totalRotations++;
+        rotation = (rotation + 1) % 4;
         this.notifyObservers();
         this.notifyGameObserver();
     }
@@ -282,14 +296,16 @@ public class GameNode implements ToolField, GameObservable {
         this.gameObserver.update(this);
     }
 
+    public void setRotation(int rotation) {
+        this.rotation = rotation;
+    }
+
     public int usedTurns() {
-        // TODO
-        return 0;
+        return totalRotations;
     }
 
     public int remainingTurns() {
-        // TODO
-        return 0;
+        return -rotation + 4;
     }
 
     /**

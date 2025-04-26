@@ -5,6 +5,7 @@ public class MapElement {
     final private Position pos;
 
     private int rotated = 0;
+    private boolean isRoot = false;
 
     private boolean north = false;
     private boolean south = false;
@@ -32,6 +33,8 @@ public class MapElement {
         };
     }
 
+    public void setRoot() {isRoot = true;};
+
     public void rotate() {
 
         // north <-> East
@@ -53,6 +56,37 @@ public class MapElement {
     }
 
     public int getRotated() {return rotated;}
+
+    public Side[] getSides() {
+
+        Side[] returnSides = new Side[4];
+        if (isLight()) {
+            if (north) returnSides[0] = Side.NORTH;
+            if (south) returnSides[0] = Side.SOUTH;
+            if (west) returnSides[0] = Side.WEST;
+            if (east) returnSides[0] = Side.EAST;
+            return returnSides;
+        }
+
+        if (north) returnSides[0] = Side.NORTH;
+        if (south) returnSides[1] = Side.SOUTH;
+        if (west) returnSides[2] = Side.WEST;
+        if (east) returnSides[3] = Side.EAST;
+        return returnSides;
+    }
+
+    public boolean isPower() {
+        return isRoot;
+    }
+
+    public boolean isLight() {
+        int count = 0;
+        count += north ? 1 : 0;
+        count += south ? 1 : 0;
+        count += west ? 1 : 0;
+        count += east ? 1 : 0;
+        return count == 1;
+    }
 
     public String[] getRepresentation(String bfr1, String bfr2, String bfr3) {
         //String signal = "\uD83D\uDFE9";
