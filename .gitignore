@@ -2,3 +2,4 @@
 *.idea*
 ija-project.iml
 *target*
+*.log
