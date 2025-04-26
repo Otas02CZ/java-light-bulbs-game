@@ -1,8 +1,6 @@
 
 package com.example.game.shared;
 
-import com.example.game.shared.Observable;
-
 public interface ToolField extends Observable {
     void turn();
 
@@ -21,4 +19,9 @@ public interface ToolField extends Observable {
     boolean isBulb();
 
     boolean isPower();
+
+    int remainingTurns();
+
+    int usedTurns();
+    
 }
