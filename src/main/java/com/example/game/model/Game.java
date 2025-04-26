@@ -7,11 +7,12 @@
  * DESCRIPTION: Class Game representing LightBulb game
  */
 
-package ija.ija2024.homework2.game;
+package com.example.game.model;
 
-import ija.ija2024.homework2.common.*;
-import ija.ija2024.tool.common.ToolEnvironment;
-import ija.ija2024.tool.common.ToolField;
+import com.example.game.model.common.*;
+import com.example.game.shared.GameObservable;
+import com.example.game.shared.ToolEnvironment;
+import com.example.game.shared.ToolField;
 
 import java.util.ArrayList;
 import java.util.Stack;

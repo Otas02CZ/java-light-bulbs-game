@@ -7,7 +7,7 @@
  * DESCRIPTION: Class GameNodeBulb extending GameNode
  */
 
-package ija.ija2024.homework2.common;
+package com.example.game.model.common;
 
 /**
  * Extended GameNode representing a Bulb

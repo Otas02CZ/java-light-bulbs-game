@@ -1,7 +1,6 @@
-package ija.ija2024.homework2.common;
-import java.util.Objects;
+package com.example.game.model.common;
+
 import java.util.Random;
-import java.util.Scanner;
 
 public class MapGenerator {
 

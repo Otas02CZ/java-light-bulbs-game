@@ -7,11 +7,15 @@
  * DESCRIPTION: Class GameNode an element of 2D Game
  */
 
-package ija.ija2024.homework2.common;
+package com.example.game.model.common;
 
-import ija.ija2024.tool.common.ToolField;
-import java.util.*;
+import com.example.game.shared.ToolField;
+import com.example.game.shared.GameObservable;
 import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Arrays;
+
 
 /**
  * GameNode element used in 2D Game space

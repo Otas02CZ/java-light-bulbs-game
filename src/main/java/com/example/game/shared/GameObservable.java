@@ -8,7 +8,7 @@
  * when game nodes require connection recalculation
  */
 
-package ija.ija2024.homework2.common;
+package com.example.game.shared;
 
 /**
  * Game observable interface for observables that need to notify Game about

@@ -7,7 +7,7 @@
  * DESCRIPTION: Class representing XY position in 2D space
  */
 
-package ija.ija2024.homework2.common;
+package com.example.game.model.common;
 
 /**
  * Stores XY coordinates in 2D space

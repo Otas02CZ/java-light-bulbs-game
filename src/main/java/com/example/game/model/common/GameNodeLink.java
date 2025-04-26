@@ -7,7 +7,7 @@
  * DESCRIPTION: Class GameNodeLink an element of 2D Game
  */
 
-package ija.ija2024.homework2.common;
+package com.example.game.model.common;
 
 /**
  * Extended GameNode representing a Link

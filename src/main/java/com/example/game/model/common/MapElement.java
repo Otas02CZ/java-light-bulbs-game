@@ -1,4 +1,4 @@
-package ija.ija2024.homework2.common;
+package com.example.game.model.common;
 
 public class MapElement {
 
