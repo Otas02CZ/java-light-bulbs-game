@@ -6,45 +6,40 @@ public class MapGenerator {
 
     final private int rows;
     final private int cols;
-    private MapElement[][] map;
+    final private MapElement[][] map;
     private Position rootPosition;
-    private Random random;
-    private PriorityQueue queue;
+    final private PriorityQueue queue;
 
-    public MapGenerator(int rows, int cols) {
+    public MapGenerator(int rows, int cols, float emptyPercentage) {
         this.rows = rows;
         this.cols = cols;
         map = new MapElement[rows][cols];
-        this.random = new Random();
+        Random random = new Random();
 
         // fill in blank elements
         for (int y = 0; y < rows; y++) {
             for (int x = 0; x < cols; x++) {
-                map[y][x] = new MapElement(new Position(y, x)); // replace later with actual stuff
-                // why the fuck do you want the first param in position be y????
-                /*
-                     col -> (in a normal world that would be x)
-                row  +-------+
-                ||   |       |
-                \/   |       |
-                (y)  +-------+
-
-                 from this diagram, i would use what normal people do, and use the format (x, y)
-                 but for some reason you have (row, col) which means you have (y, x), which is stupid .....
-                */
+                if (Math.random() < emptyPercentage) {
+                    map[y][x] = null;
+                } else {
+                    map[y][x] = new MapElement(new Position(y, x));
+                }
             }
         }
 
         // create the queue
         queue = new PriorityQueue(random);
+        MapElement root = null;
 
-        int x = random.nextInt(rows);
-        int y = random.nextInt(cols);
+        while (root == null) {
+            int x = random.nextInt(rows);
+            int y = random.nextInt(cols);
 
-        // add the initial moves for the root element
-        MapElement root = map[y][x];
+            // add the initial moves for the root element
+            root = map[y][x];
+        }
+
         AddAvailableMoves(root);
-
         removeInvalidMoves();
     }
 
@@ -140,15 +135,22 @@ public class MapGenerator {
         System.out.println(bfr0); // Print column indexes
 
         for (int y = 0; y < rows; y++) {
-            String bfr1 = "  ";
-            String bfr2 = String.format("%-2d", y); // Add row index for bfr2
-            String bfr3 = "  ";
+            StringBuilder bfr1 = new StringBuilder("  ");
+            StringBuilder bfr2 = new StringBuilder(String.format("%-2d", y)); // Add row index for bfr2
+            StringBuilder bfr3 = new StringBuilder("  ");
 
             for (int x = 0; x < cols; x++) {
-                String[] result = map[y][x].getRepresentation(bfr1, bfr2, bfr3);
-                bfr1 = result[0];
-                bfr2 = result[1];
-                bfr3 = result[2];
+                if (map[y][x] == null) {
+                    bfr1.append("      ");
+                    bfr2.append("      ");
+                    bfr3.append("      ");
+                } else {
+
+                String[] result = map[y][x].getRepresentation(bfr1.toString(), bfr2.toString(), bfr3.toString());
+                bfr1 = new StringBuilder(result[0]);
+                bfr2 = new StringBuilder(result[1]);
+                bfr3 = new StringBuilder(result[2]);
+                }
             }
 
             System.out.println(bfr1);
