@@ -282,6 +282,16 @@ public class GameNode implements ToolField, GameObservable {
         this.gameObserver.update(this);
     }
 
+    public int usedTurns() {
+        // TODO
+        return 0;
+    }
+
+    public int remainingTurns() {
+        // TODO
+        return 0;
+    }
+
     /**
      * Helper function for simplification of toString override
      */

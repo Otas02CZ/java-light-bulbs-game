@@ -73,6 +73,43 @@ public class Game implements ToolEnvironment, GameObservable.GameObserver {
         return game;
     }
 
+    public static Game generate(int rows, int cols, int emptyCoef, int shuffleCoef) {
+        // TODO game generation support
+        return Game.create(rows, cols);
+    }
+
+    public static Game load(String path) {
+        // TODO: file loading support
+        return Game.create(1,1);
+    }
+
+    public void save(String path) {
+        // TODO save file to file
+    }
+
+    public void undo() {
+        // TODO undo operation on game model
+    }
+
+    public void redo() {
+        // TODO redo operation on game model
+    }
+
+    public boolean canUndo() {
+        // TODO
+        return false;
+    }
+
+    public boolean canRedo() {
+        // TODO
+        return false;
+    }
+
+    public boolean hasWon() {
+        // TODO
+        return false;
+    }
+
     /**
      * Creates single Link node at given position
      * @param position Position where to create the node
