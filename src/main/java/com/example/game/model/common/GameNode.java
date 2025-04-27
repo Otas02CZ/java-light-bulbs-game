@@ -38,14 +38,12 @@ public class GameNode implements ToolField, GameObservable {
      * Position in 2D space
      */
     protected Position position;
+
     /**
      * Is this node currently powered by source
      */
     protected boolean powered;
-    /**
-     * Stores list of all registered observers for GUI notifications
-     */
-    protected ArrayList<Observer> observers;
+
     /**
      * Stores reference to gameObserver, used to notify Game when
      * connection recheck is required
@@ -68,7 +66,6 @@ public class GameNode implements ToolField, GameObservable {
         connectors.put(Side.EAST, false);
         this.position = new Position(0, 0);
         this.powered = false;
-        this.observers = new ArrayList<>();
         this.gameObserver = null;
     }
 
@@ -84,7 +81,6 @@ public class GameNode implements ToolField, GameObservable {
         connectors.put(Side.EAST, false);
         this.position = position;
         this.powered = false;
-        this.observers = new ArrayList<>();
         this.gameObserver = null;
     }
 
@@ -125,7 +121,6 @@ public class GameNode implements ToolField, GameObservable {
 
         totalRotations++;
         rotation = (rotation + 1) % 4;
-        this.notifyObservers();
         this.notifyGameObserver();
     }
 
@@ -174,7 +169,6 @@ public class GameNode implements ToolField, GameObservable {
         if (!powered)
             return;
         powered = false;
-        this.notifyObservers();
     }
 
     /**
@@ -184,13 +178,12 @@ public class GameNode implements ToolField, GameObservable {
         if (powered)
             return;
         powered = true;
-        this.notifyObservers();
     }
 
     /**
      * Overrides toString to print in format:
      * {TYPE[ROW@COL][SIDE_1,SIDE_2,...]}
-     * @return
+     * @return String string representation
      */
     @Override
     public String toString() {
@@ -242,33 +235,6 @@ public class GameNode implements ToolField, GameObservable {
             }
         }
         return connectedSides;
-    }
-
-    // Implementations of interfaces for observables
-
-    /**
-     * Save given observer to list of supported GUI observers
-     * @param observer to support
-     */
-    public void addObserver(Observer observer) {
-        this.observers.add(observer);
-    }
-
-    /**
-     * Attempts to remove given observer from list of known GUI observers
-     * @param observer to remove
-     */
-    public void removeObserver(Observer observer) {
-        this.observers.remove(observer);
-    }
-
-    /**
-     * Notifies all known GUI observers
-     */
-    public void notifyObservers() {
-        for (Observer observer : observers) {
-            observer.update(this);
-        }
     }
 
     /**

@@ -1,7 +1,7 @@
 
 package com.example.game.shared;
 
-public interface ToolField extends Observable {
+public interface ToolField {
     void turn();
 
     boolean north();
