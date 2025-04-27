@@ -28,6 +28,8 @@ public class Game implements ToolEnvironment, GameObservable.GameObserver {
 
     private int amountOfBulbs;
 
+    private UndoBackLog undoBackLog;
+
     /**
      * Map storing nodes in game world (2D space)
      */
@@ -74,20 +76,18 @@ public class Game implements ToolEnvironment, GameObservable.GameObserver {
             }
         }
         game.powerNode = null;
+        game.undoBackLog = new UndoBackLog();
 
         return game;
     }
 
     public static Game generate(int rows, int cols, float emptyCoef, int shuffleCoef) {
-        // TODO game generation support
-        // TODO tell ota, ti dám my říkat co dělat ty ... xd
+        // TODO game generation support (lifeline?)
         Game game = Game.create(rows, cols);
 
         MapGenerator generator = new MapGenerator(rows, cols, emptyCoef);
         generator.generateMap();
         generator.randomizeMap(shuffleCoef);
-
-        //generator.printMapTerminal();
 
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
@@ -112,7 +112,6 @@ public class Game implements ToolEnvironment, GameObservable.GameObserver {
         }
 
         game.powerUp();
-
         return game;
     }
 
@@ -134,13 +133,11 @@ public class Game implements ToolEnvironment, GameObservable.GameObserver {
     }
 
     public boolean canUndo() {
-        // TODO
-        return false;
+        return undoBackLog.canUndo();
     }
 
     public boolean canRedo() {
-        // TODO
-        return false;
+        return undoBackLog.canRedo();
     }
 
     public boolean hasWon() {
