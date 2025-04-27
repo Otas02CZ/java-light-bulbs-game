@@ -9,6 +9,9 @@
 
 package com.example.game.model.common;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 /**
  * Extended GameNode representing a Bulb
  */
@@ -43,5 +46,12 @@ public class GameNodeBulb extends GameNode {
         bfr1.append(space).append(containsConnector(Side.NORTH) ? wire : space).append(space);
         bfr2.append(containsConnector(Side.WEST) ? wire : space).append(middle).append(containsConnector(Side.EAST) ? wire : space);
         bfr3.append(space).append(containsConnector(Side.SOUTH) ? wire : space).append(space);
+    }
+
+    @Override
+    public JSONObject toJSON() {
+        JSONObject obj = super.toJSON();
+        obj.put("type", "bulb");
+        return obj;
     }
 }

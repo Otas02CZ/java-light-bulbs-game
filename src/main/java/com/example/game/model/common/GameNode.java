@@ -16,6 +16,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Arrays;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 
 /**
  * GameNode element used in 2D Game space
@@ -27,12 +30,12 @@ public class GameNode implements ToolField, GameObservable {
     /**
      * CurrentRotation
      */
-    private int rotation;
+    protected int rotation;
 
     /**
      * Countr for rotations
      */
-    private int totalRotations = 0;
+    protected int totalRotations = 0;
 
     /**
      * Position in 2D space
@@ -184,7 +187,7 @@ public class GameNode implements ToolField, GameObservable {
     /**
      * Overrides toString to print in format:
      * {TYPE[ROW@COL][SIDE_1,SIDE_2,...]}
-     * @return String string representation
+     * @return String representation
      */
     @Override
     public String toString() {
@@ -267,6 +270,10 @@ public class GameNode implements ToolField, GameObservable {
         this.rotation = rotation;
     }
 
+    public void setTotalRotations(int totalRotations) {
+        this.totalRotations = totalRotations;
+    }
+
     public int usedTurns() {
         return totalRotations;
     }
@@ -301,5 +308,25 @@ public class GameNode implements ToolField, GameObservable {
         bfr1.append(space).append(space).append(space);
         bfr2.append(space).append(space).append(space);
         bfr3.append(space).append(space).append(space);
+    }
+
+
+    public JSONObject toJSON() {
+        JSONObject obj = new JSONObject();
+        obj.put("rotation", rotation);
+        obj.put("totalRotations", totalRotations);
+
+        JSONArray arr = new JSONArray();
+        for (Side side : connectors.keySet()) {
+            if (connectors.get(side)) {
+                JSONObject sideObj = new JSONObject();
+                sideObj.put("side", side);
+                arr.put(sideObj);
+            }
+        }
+
+        obj.put("sides", arr);
+        obj.put("type", "None");
+        return obj;
     }
 }

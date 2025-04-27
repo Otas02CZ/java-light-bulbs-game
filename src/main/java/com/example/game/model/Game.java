@@ -14,6 +14,14 @@ import com.example.game.shared.GameObservable;
 import com.example.game.shared.ToolEnvironment;
 import com.example.game.shared.ToolField;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Stack;
 
@@ -29,6 +37,8 @@ public class Game implements ToolEnvironment, GameObservable.GameObserver {
     private int amountOfBulbs;
 
     private UndoBackLog undoBackLog;
+
+    private int timeLeft;
 
     /**
      * Map storing nodes in game world (2D space)
@@ -82,7 +92,6 @@ public class Game implements ToolEnvironment, GameObservable.GameObserver {
     }
 
     public static Game generate(int rows, int cols, float emptyCoef, int shuffleCoef) {
-        // TODO game generation support (lifeline?)
         Game game = Game.create(rows, cols);
 
         MapGenerator generator = new MapGenerator(rows, cols, emptyCoef);
@@ -115,13 +124,134 @@ public class Game implements ToolEnvironment, GameObservable.GameObserver {
         return game;
     }
 
+    private static JSONObject createJSON(String path) throws JSONException {
+        try {
+            String content = new String(Files.readAllBytes(Paths.get(path)));
+            return new JSONObject(content);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null; // Or throw exception if you want
+        }
+    }
+
     public static Game load(String path) {
-        // TODO: file loading support
-        return Game.create(1,1);
+
+        JSONObject data = createJSON(path);
+        if (data == null) return null;
+
+        // game size
+        int rows = data.getInt("rows");
+        int cols = data.getInt("cols");
+        Game game = Game.create(rows, cols);
+
+        // game attributes
+        game.gameWon = data.getBoolean("won");
+        game.timeLeft = data.getInt("timeleft");
+        game.amountOfBulbs = data.getInt("bulbAmount");
+
+        // backlog
+        JSONObject backlog = data.getJSONObject("backlog");
+        JSONArray buffer = backlog.getJSONArray("buffer");
+        int currentIndex = backlog.getInt("currentIndex");
+
+        // set up the moves buffer
+        UndoBackLog undoBackLog = new UndoBackLog();
+        for (int i = 0; i < buffer.length(); i++) {
+            JSONObject pos = buffer.getJSONObject(i);
+            int col = pos.getInt("col");
+            int row = pos.getInt("row");
+            Position p = new Position(row, col);
+            undoBackLog.AddMove(p);
+        }
+
+        // set up the index
+        undoBackLog.setIndex(currentIndex);
+        game.undoBackLog = undoBackLog;
+
+        // map
+        JSONArray map = data.getJSONArray("map");
+        for (int i = 0; i < map.length(); i++) {
+            JSONObject gameNode = map.getJSONObject(i);
+
+            // attributes
+            int rotation = gameNode.getInt("rotation");
+            int totalRotations = gameNode.getInt("totalRotations");
+            String type = gameNode.getString("type");
+            JSONArray sides = gameNode.getJSONArray("sides");
+            ArrayList<Side> sidesList = new ArrayList<>();
+
+            // sides
+            for (int j = 0; j < sides.length(); j++) {
+                JSONObject side = sides.getJSONObject(j);
+                switch (side.getString("side")) {
+                    case "WEST":
+                        sidesList.add(Side.WEST);
+                        break;
+                    case "EAST":
+                        sidesList.add(Side.EAST);
+                        break;
+                    case "SOUTH":
+                        sidesList.add(Side.SOUTH);
+                        break;
+                    case "NORTH":
+                        sidesList.add(Side.NORTH);
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            // creating each game node
+            int rw = i/rows;
+            int cl = i%cols;
+            Position p = new Position(rw, cl);
+            GameNode node;
+            switch (type) {
+                case "None":
+                    continue;
+                case "bulb":
+                    node = game.createBulbNode(p, sidesList.getFirst());
+                    break;
+                case "link":
+                    node = game.createLinkNode(p, sidesList.toArray(new Side[0]));
+                    break;
+                case "power":
+                    node = game.createPowerNode(p, sidesList.toArray(new Side[0]));
+                    break;
+                default:
+                    throw new RuntimeException("Unsupported type: " + type);
+            }
+            node.setRotation(rotation);
+            node.setTotalRotations(totalRotations);
+        }
+        game.powerUp();
+        return game;
     }
 
     public void save(String path) {
-        // TODO save file to file
+
+        JSONObject obj = new JSONObject();
+        obj.put("rows", this.rows());
+        obj.put("cols", this.cols());
+        obj.put("timeleft", this.timeLeft);
+        obj.put("bulbAmount", this.amountOfBulbs);
+        obj.put("won", this.gameWon);
+        obj.put("backlog", this.undoBackLog.toJson());
+        JSONArray obj2 = new JSONArray();
+        for (int i = 0; i < rows(); i++) {
+            for (int j = 0; j < cols(); j++) {
+                GameNode node = map[i][j];
+                obj2.put(node.toJSON());
+            }
+        }
+        obj.put("map", obj2);
+
+        try (FileWriter file = new FileWriter(path)) {
+            file.write(obj.toString(2)); // 2 = pretty print with 2-space indent
+            file.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void undo() {

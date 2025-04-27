@@ -69,9 +69,7 @@ public class MapElement {
         if (west)  sidesList.add(Side.WEST);
         if (east)  sidesList.add(Side.EAST);
 
-        Side[] returnSides = sidesList.toArray(new Side[0]);
-
-        return returnSides;
+        return sidesList.toArray(new Side[0]);
     }
 
     public boolean isPower() {

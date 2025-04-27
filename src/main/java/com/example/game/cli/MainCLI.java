@@ -19,7 +19,13 @@ public class MainCLI {
             System.out.println("ERROR");
         }
         Logger.obtain().log("nadhera");
-        Game game = Game.generate(3, 3, 0.1f, 5);
+
+        // create a new game
+        //Game game = Game.generate(3, 3, 0.1f, 5);
+
+        // load game1.json
+        Game game = Game.load("./game1.json");
+        if (game == null) throw new RuntimeException("Error on loading game");
 
         Scanner scanner = new Scanner(System.in);
         Pattern pattern = Pattern.compile("\\d+ \\d+"); // regex: number, space, number
@@ -47,6 +53,10 @@ public class MainCLI {
                 continue;
             }
 
+            if (input.equalsIgnoreCase("/save")) {
+                game.save("./game1.json");
+                continue;
+            }
 
             Matcher matcher = pattern.matcher(input);
 
