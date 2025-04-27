@@ -125,11 +125,18 @@ public class Game implements ToolEnvironment, GameObservable.GameObserver {
     }
 
     public void undo() {
-        // TODO undo operation on game model
+        if (!canUndo()) return;
+        Position pos = undoBackLog.Undo();
+        // this needs left turn
+        this.map[pos.getRow()][pos.getCol()].internalTurn(true);
+        this.powerUp();
     }
 
     public void redo() {
-        // TODO redo operation on game model
+        if (!canRedo()) return;
+        Position pos = undoBackLog.Redo();
+        this.map[pos.getRow()][pos.getCol()].internalTurn(false);
+        this.powerUp();
     }
 
     public boolean canUndo() {
@@ -171,16 +178,13 @@ public class Game implements ToolEnvironment, GameObservable.GameObserver {
      */
     public GameNode createPowerNode(Position position, Side... sides) {
         if (this.isPositionInvalid(position)) return null;
-
         if (this.areSidesInvalid(sides)) return null;
-
         if (this.powerNode != null) return null;
 
         GameNodePower node = new GameNodePower(position, sides);
         node.setupGameObserver(this);
 
         this.map[position.getRow()][position.getCol()] = node;
-
         this.powerNode = node;
 
         return node;
@@ -253,6 +257,7 @@ public class Game implements ToolEnvironment, GameObservable.GameObserver {
      * @param observable that issued the notification
      */
     public void update(GameObservable observable) {
+        undoBackLog.AddMove(observable.getPosition());
         this.powerUp();
     }
 

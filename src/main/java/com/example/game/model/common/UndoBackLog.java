@@ -26,15 +26,17 @@ public class UndoBackLog {
     }
 
     public Position Undo() {
-        return  buffer.get(currentIndex--);
+        currentIndex--;
+        return  buffer.get(currentIndex+1);
     }
 
     public Position Redo() {
-        return buffer.get(currentIndex++);
+        currentIndex++;
+        return buffer.get(currentIndex);
     }
 
     public boolean canUndo() {
-        return currentIndex > 0;
+        return currentIndex != -1;
     }
 
     public boolean canRedo() {

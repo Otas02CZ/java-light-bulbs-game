@@ -5,7 +5,6 @@ import java.io.IOException;
 import com.example.game.logger.Logger;
 import com.example.game.model.Game;
 import com.example.game.model.common.GameNode;
-import com.example.game.model.common.MapGenerator;
 import com.example.game.model.common.Position;
 
 import java.util.Scanner;
@@ -20,12 +19,6 @@ public class MainCLI {
             System.out.println("ERROR");
         }
         Logger.obtain().log("nadhera");
-        //MapGenerator mapGenerator = new MapGenerator(5, 5, 0.2f);
-        //mapGenerator.generateMap();
-        //mapGenerator.printMapTerminal();
-        //mapGenerator.randomizeMap(20);
-        //mapGenerator.printMapTerminal();
-
         Game game = Game.generate(3, 3, 0.1f, 5);
 
         Scanner scanner = new Scanner(System.in);
@@ -35,12 +28,25 @@ public class MainCLI {
         while (true) {
             // print map
             game.printMapTerminal();
+            System.out.println("Undo: " + (game.canUndo() ? "Yes" : "No"));
+            System.out.println("Redo: " + (game.canRedo() ? "Yes" : "No"));
 
             if (game.hasWon()) break;
 
             // get user input
             System.out.print("Enter row & col (separated by a space): ");
             String input = scanner.nextLine();
+
+            if (input.equalsIgnoreCase("/undo")) {
+                game.undo();
+                continue;
+            }
+
+            if (input.equalsIgnoreCase("/redo")) {
+                game.redo();
+                continue;
+            }
+
 
             Matcher matcher = pattern.matcher(input);
 

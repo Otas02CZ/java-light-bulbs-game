@@ -91,36 +91,37 @@ public class GameNode implements ToolField, GameObservable {
         return position;
     }
 
+    public void internalTurn(boolean left) {
+        HashMap<Side, Boolean> tempConnectors = new HashMap<>();
+
+        tempConnectors.put(Side.EAST, connectors.get(!left ? Side.NORTH : Side.SOUTH));
+        tempConnectors.put(Side.SOUTH, connectors.get(!left ? Side.EAST : Side.WEST));
+        tempConnectors.put(Side.WEST, connectors.get(!left ? Side.SOUTH : Side.NORTH));
+        tempConnectors.put(Side.NORTH, connectors.get(!left ? Side.WEST : Side.EAST));
+
+        connectors = tempConnectors;
+
+        if (!left) {
+            totalRotations++;
+            rotation = (rotation + 1) % 4;
+            return;
+        }
+
+        totalRotations--;
+        rotation = (rotation + 3)%4;
+
+    }
+
     /**
      * Turns (rotates) node 90 deg clockwise
      */
     public void turn() {
-        HashMap<Side, Boolean> tempConnectors = new HashMap<>();
+        internalTurn(false);
+        this.notifyGameObserver();
+    }
 
-        if (connectors.get(Side.NORTH))
-            tempConnectors.put(Side.EAST, true);
-        else
-            tempConnectors.put(Side.EAST, false);
-
-        if (connectors.get(Side.EAST))
-            tempConnectors.put(Side.SOUTH, true);
-        else
-            tempConnectors.put(Side.SOUTH, false);
-
-        if (connectors.get(Side.SOUTH))
-            tempConnectors.put(Side.WEST, true);
-        else
-            tempConnectors.put(Side.WEST, false);
-
-        if (connectors.get(Side.WEST))
-            tempConnectors.put(Side.NORTH, true);
-        else
-            tempConnectors.put(Side.NORTH, false);
-
-        connectors = tempConnectors;
-
-        totalRotations++;
-        rotation = (rotation + 1) % 4;
+    public void turnLeft() {
+        internalTurn(true);
         this.notifyGameObserver();
     }
 
