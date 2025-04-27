@@ -10,6 +10,8 @@
 
 package com.example.game.shared;
 
+import com.example.game.model.common.Position;
+
 /**
  * Game observable interface for observables that need to notify Game about
  * need of connection recheck
@@ -31,6 +33,8 @@ public interface GameObservable {
      * Notify Game observer when connection recalculation is required
      */
     void notifyGameObserver();
+
+    public Position getPosition();
 
     /**
      * Game observer interface for Game that needs to be notified when
