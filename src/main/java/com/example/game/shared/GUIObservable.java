@@ -8,6 +8,6 @@ public interface GUIObservable {
     void notifyGUIObserver();
 
     public interface GUIObserver {
-        void update();
+        void updateGUI();
     }
 }

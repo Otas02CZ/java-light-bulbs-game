@@ -9,6 +9,6 @@ public interface TimerObservable {
     void notifyTimerObserver();
 
     public interface TimerObserver {
-        void update(int time);
+        void updateTimer(int time);
     }
 }
