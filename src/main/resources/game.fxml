@@ -1,14 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.geometry.Insets?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="Game"
-            prefHeight="400.0" prefWidth="600.0">
+<BorderPane prefHeight="600" prefWidth="800" styleClass="background" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.game.gui.GameController">
 
-</AnchorPane>
+    <!-- Top Area -->
+    <top>
+        <VBox spacing="20">
+
+            <!-- Top Buttons Row -->
+            <HBox fx:id="topButtonRow" spacing="10" alignment="CENTER">
+                <!-- Buttons can be added dynamically or declared here -->
+            </HBox>
+
+            <Separator/>
+
+            <!-- Large Centered Text Label -->
+            <Label fx:id="mainLabel" text="Go Go Go !!" styleClass="main-text" alignment="CENTER" maxWidth="Infinity">
+                <VBox.margin>
+                    <Insets top="10" bottom="10"/>
+                </VBox.margin>
+            </Label>
+
+            <!-- Timer Row -->
+            <HBox spacing="10" alignment="CENTER">
+                <ImageView fx:id="timerIcon" fitWidth="24" fitHeight="24" />
+                <Label fx:id="timerLabel" text="00:00" />
+            </HBox>
+
+        </VBox>
+    </top>
+
+    <!-- Center Area -->
+    <center>
+        <StackPane alignment="CENTER">
+            <GridPane fx:id="gameGrid" hgap="5" vgap="5">
+                <!-- Game cells will be created programmatically -->
+            </GridPane>
+        </StackPane>
+    </center>
+
+    <!-- Bottom Area -->
+    <bottom>
+        <BorderPane>
+            <left>
+                <Label fx:id="turnsLabel" text="Turns: 0" />
+            </left>
+            <center>
+                <Label fx:id="difficultyLabel" text="Hard" />
+            </center>
+            <right>
+                <Label fx:id="litUpLabel" text="Lit up: 0/0" />
+            </right>
+        </BorderPane>
+    </bottom>
+
+</BorderPane>

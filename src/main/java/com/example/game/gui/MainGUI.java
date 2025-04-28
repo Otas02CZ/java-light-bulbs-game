@@ -2,7 +2,6 @@ package com.example.game.gui;
 
 import com.example.game.logger.Logger;
 import javafx.application.Application;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -26,10 +25,12 @@ public class MainGUI extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         this.stage = stage;
-        ;
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/intro.fxml"));
-        Parent root = loader.load(); // Now we properly load with controller
+        Parent root = loader.load();
+        IntroController controller = loader.getController();
+        controller.setStage(this.stage);
+
         Scene scene = new Scene(root);
 
         stage.setTitle("Light Bulbs Game");

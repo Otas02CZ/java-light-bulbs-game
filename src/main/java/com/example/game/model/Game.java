@@ -12,6 +12,7 @@ package com.example.game.model;
 import com.example.game.model.common.*;
 import com.example.game.shared.*;
 
+import javafx.application.Platform;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -39,9 +40,7 @@ public class Game implements ToolEnvironment, GameObservable.GameObserver, Timer
 
     private UndoBackLog undoBackLog;
 
-    private final AtomicInteger timeLeft = new AtomicInteger();
-
-    private List<TimerObserver> timeObservers = new ArrayList<>();
+    private final TimerManager timerManager = new TimerManager();
 
     private List<GUIObserver> observers = new ArrayList<>();
 
@@ -97,20 +96,11 @@ public class Game implements ToolEnvironment, GameObservable.GameObserver, Timer
     }
 
     public void startTimer(int timeLeft) {
-        this.timeLeft.set(timeLeft); // or whatever value
+        this.timerManager.startTimer(timeLeft);
+    }
 
-        Thread timerThread = new Thread(() -> {
-            while (this.timeLeft.get() > 0) {
-                try {
-                    Thread.sleep(1000); // Sleep for 1 second
-                } catch (InterruptedException e) {
-                    return; // Exit if interrupted
-                }
-                int updatedTime = this.timeLeft.decrementAndGet(); // Atomic decrement
-                notifyTimerObserver();
-            }
-        });
-        timerThread.start();
+    public void stopTimer() {
+        this.timerManager.stopTimer();
     }
 
 
@@ -148,24 +138,15 @@ public class Game implements ToolEnvironment, GameObservable.GameObserver, Timer
     }
 
     public void setupTimerObserver(TimerObserver timerObserver) {
-        this.timeObservers.add(timerObserver);
+        this.timerManager.setupTimerObserver(timerObserver);
     }
 
     public void removeTimerObserver(TimerObserver observer) {
-        Iterator<TimerObserver> it = timeObservers.iterator();
-        while (it.hasNext()) {
-            TimerObserver o = it.next();
-            if (o == observer) { // same object
-                it.remove();
-                break; // if only one instance, you can break early
-            }
-        }
+        this.timerManager.removeTimerObserver(observer);
     }
 
     public void notifyTimerObserver() {
-        for (TimerObserver observer : timeObservers) {
-            observer.update(timeLeft.decrementAndGet());
-        }
+
     }
 
     public void setupGUIObserver(GUIObserver observer) {
@@ -185,7 +166,7 @@ public class Game implements ToolEnvironment, GameObservable.GameObserver, Timer
 
     public void notifyGUIObserver() {
         for (GUIObserver observer : observers) {
-            observer.update();
+            observer.updateGUI();
         }
     }
 
@@ -298,7 +279,7 @@ public class Game implements ToolEnvironment, GameObservable.GameObserver, Timer
         JSONObject obj = new JSONObject();
         obj.put("rows", this.rows());
         obj.put("cols", this.cols());
-        obj.put("timeleft", this.timeLeft);
+        obj.put("timeleft", this.timeLeft());
         obj.put("won", this.gameWon);
         obj.put("backlog", this.undoBackLog.toJson());
         JSONArray obj2 = new JSONArray();
@@ -418,7 +399,7 @@ public class Game implements ToolEnvironment, GameObservable.GameObserver, Timer
     }
 
     public int timeLeft() {
-        return this.timeLeft.get();
+        return this.timerManager.getTimeLeft();
     }
 
     /**

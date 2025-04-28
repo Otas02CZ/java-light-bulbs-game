@@ -1,0 +1,44 @@
+.root {
+    -fx-font-family: 'Space Mono Regular';
+    -fx-font-size: 18px;
+    -fx-text-fill: black;
+}
+
+.background {
+    -fx-background-image: url('image.jpg');
+    -fx-background-size: cover;
+    -fx-padding: 20px;
+}
+
+.mainTitle {
+    -fx-font-family: 'Press Start 2P Regular';
+    -fx-font-size: 48px;
+}
+
+.button-text {
+    /*-fx-background-image: url('button.jpg');
+    -fx-background-size: cover;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;*/
+    -fx-text-fill: black;
+    -fx-pref-width: 200px;
+    -fx-pref-height: 50px;
+}
+
+.button-text:hover {
+    /*-fx-background-image: url('button-lit.jpg');
+    -fx-background-size: cover;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;*/
+    -fx-text-fill: black;
+    -fx-pref-width: 200px;
+    -fx-pref-height: 50px;
+}
+
+.subtitle {
+    -fx-font-size: 26px;
+}
+
+.combo-box, .spinner {
+    -fx-pref-width: 150px;
+}
