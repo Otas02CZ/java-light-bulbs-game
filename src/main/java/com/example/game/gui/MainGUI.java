@@ -2,11 +2,9 @@ package com.example.game.gui;
 
 import com.example.game.logger.Logger;
 import javafx.application.Application;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
@@ -29,7 +27,7 @@ public class MainGUI extends Application {
         this.stage = stage;
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/intro.fxml"));
-        Parent root = loader.load(); // Now we properly load with controller
+        Parent root = loader.load();
         IntroController controller = loader.getController();
         controller.setStage(this.stage);
 

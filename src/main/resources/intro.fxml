@@ -8,10 +8,11 @@
         styleClass="background"
         prefHeight="600"
         prefWidth="800"
-        stylesheets="@styles-intro.css"
+        stylesheets="@styles.css"
         xmlns="http://javafx.com/javafx/21"
         xmlns:fx="http://javafx.com/fxml/1"
-        fx:controller="com.example.game.gui.IntroController">
+        fx:controller="com.example.game.gui.IntroController"
+>
 
    <!-- Title at the top -->
    <top>
@@ -34,8 +35,8 @@
       <HBox spacing="10" BorderPane.alignment="BOTTOM_CENTER">
          <!-- Authors section on the left -->
          <VBox alignment="BOTTOM_LEFT">
-            <Label styleClass="authorLabel" text="Otakar Kočí" />
-            <Label styleClass="authorLabel" text="Martin Mendl\uD83D\uDFE9" />
+            <Label text="Otakar Kočí" />
+            <Label text="Martin Mendl" />
          </VBox>
 
          <!-- This Region acts as a spacer to push the year label to the far right -->
@@ -43,7 +44,7 @@
 
          <!-- Year label directly at the bottom-right -->
          <VBox alignment="BOTTOM_LEFT">
-            <Label styleClass="yearLabel" text="2025" />
+            <Label text="2025" />
          </VBox>
 
       </HBox>

@@ -19,15 +19,11 @@ public class IntroController {
     @FXML
     private void handleNewGame(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gameSetup.fxml"));
-        Parent root = loader.load(); // Now we properly load with controller
-        /*GameSetupController controller = loader.getController();
-        controller.setStage(stage);*/
-
+        Parent root = loader.load();
+        GameSetupController controller = loader.getController();
+        controller.setStage(stage);
         Scene scene = new Scene(root);
-
-        stage.setTitle("Light Bulbs Game");
         stage.setScene(scene);
-        stage.show();
     }
 
     @FXML
