@@ -4,23 +4,28 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane id="backgroundPane" prefHeight="600" prefWidth="800" stylesheets="@styles-intro.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.game.gui.IntroController">
+<BorderPane
+        styleClass="background"
+        prefHeight="600"
+        prefWidth="800"
+        stylesheets="@styles-intro.css"
+        xmlns="http://javafx.com/javafx/21"
+        xmlns:fx="http://javafx.com/fxml/1"
+        fx:controller="com.example.game.gui.IntroController">
 
    <!-- Title at the top -->
    <top>
-      <Text id="titleText" text="Light Bulbs" BorderPane.alignment="CENTER">
-         <font>
-            <Font name="Droid Sans" size="13.0" />
-         </font></Text>
+      <Text styleClass="mainTitle" text="Light Bulbs" BorderPane.alignment="CENTER" />
    </top>
 
    <!-- Center area with buttons -->
    <center>
       <VBox alignment="CENTER" spacing="20">
-         <Button id="menuButton" onAction="#handleNewGame" text="New Game" textAlignment="CENTER" />
-         <Button id="menuButton" onAction="#handleLoadGame" text="Load Game" />
-         <Button id="menuButton" onAction="#handleHowToPlay" text="How to Play?" />
-         <Button id="menuButton" onAction="#handleCredits" text="Credits" />
+         <Button styleClass="button-text" onAction="#handleNewGame" text="New Game" textAlignment="CENTER" />
+         <Button styleClass="button-text" onAction="#handleLoadGame" text="Load Game" />
+         <Button styleClass="button-text" onAction="#handleHowToPlay" text="How to Play?" />
+         <Button styleClass="button-text" onAction="#handleCredits" text="Credits" />
+         <Button styleClass="button-text" onAction="#handleQuit" text="Quit" />
       </VBox>
    </center>
 
@@ -29,8 +34,8 @@
       <HBox spacing="10" BorderPane.alignment="BOTTOM_CENTER">
          <!-- Authors section on the left -->
          <VBox alignment="BOTTOM_LEFT">
-            <Label id="authorLabel" text="Otakar Kočí" />
-            <Label id="authorLabel" text="Martin Mendl" />
+            <Label styleClass="authorLabel" text="Otakar Kočí" />
+            <Label styleClass="authorLabel" text="Martin Mendl\uD83D\uDFE9" />
          </VBox>
 
          <!-- This Region acts as a spacer to push the year label to the far right -->
@@ -38,7 +43,7 @@
 
          <!-- Year label directly at the bottom-right -->
          <VBox alignment="BOTTOM_LEFT">
-            <Label id="yearLabel" text="2025" />
+            <Label styleClass="yearLabel" text="2025" />
          </VBox>
 
       </HBox>
