@@ -22,6 +22,7 @@ public class MainCLI {
 
         // create a new game
         //Game game = Game.generate(3, 3, 0.1f, 5);
+        //game.startTimer(60*5);
 
         // load game1.json
         Game game = Game.load("./game1.json");
@@ -36,6 +37,7 @@ public class MainCLI {
             game.printMapTerminal();
             System.out.println("Undo: " + (game.canUndo() ? "Yes" : "No"));
             System.out.println("Redo: " + (game.canRedo() ? "Yes" : "No"));
+            System.out.println("Time left: " + game.timeLeft());
 
             if (game.hasWon()) break;
 

@@ -24,6 +24,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Stack;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Represents LightBulb game
@@ -34,11 +35,11 @@ public class Game implements ToolEnvironment, GameObservable.GameObserver {
 
     boolean gameWon = false;
 
-    private int amountOfBulbs;
+    private int amountOfBulbs = 0;
 
     private UndoBackLog undoBackLog;
 
-    private int timeLeft;
+    private AtomicInteger timeLeft = new AtomicInteger();
 
     /**
      * Map storing nodes in game world (2D space)
@@ -90,6 +91,23 @@ public class Game implements ToolEnvironment, GameObservable.GameObserver {
 
         return game;
     }
+
+    public void startTimer(int timeLeft) {
+        this.timeLeft.set(timeLeft); // or whatever value
+
+        Thread timerThread = new Thread(() -> {
+            while (this.timeLeft.get() > 0) {
+                try {
+                    Thread.sleep(1000); // Sleep for 1 second
+                } catch (InterruptedException e) {
+                    return; // Exit if interrupted
+                }
+                int updatedTime = this.timeLeft.decrementAndGet(); // Atomic decrement
+            }
+        });
+        timerThread.start();
+    }
+
 
     public static Game generate(int rows, int cols, float emptyCoef, int shuffleCoef) {
         Game game = Game.create(rows, cols);
@@ -146,8 +164,7 @@ public class Game implements ToolEnvironment, GameObservable.GameObserver {
 
         // game attributes
         game.gameWon = data.getBoolean("won");
-        game.timeLeft = data.getInt("timeleft");
-        game.amountOfBulbs = data.getInt("bulbAmount");
+        int timeLeft = data.getInt("timeleft");
 
         // backlog
         JSONObject backlog = data.getJSONObject("backlog");
@@ -225,6 +242,7 @@ public class Game implements ToolEnvironment, GameObservable.GameObserver {
             node.setTotalRotations(totalRotations);
         }
         game.powerUp();
+        game.startTimer(timeLeft);
         return game;
     }
 
@@ -234,7 +252,6 @@ public class Game implements ToolEnvironment, GameObservable.GameObserver {
         obj.put("rows", this.rows());
         obj.put("cols", this.cols());
         obj.put("timeleft", this.timeLeft);
-        obj.put("bulbAmount", this.amountOfBulbs);
         obj.put("won", this.gameWon);
         obj.put("backlog", this.undoBackLog.toJson());
         JSONArray obj2 = new JSONArray();
@@ -351,6 +368,10 @@ public class Game implements ToolEnvironment, GameObservable.GameObserver {
      */
     public int cols() {
         return this.sizeCols;
+    }
+
+    public int timeLeft() {
+        return this.timeLeft.get();
     }
 
     /**
