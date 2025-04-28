@@ -28,4 +28,6 @@ public interface ToolEnvironment {
     int getBulbsTotal();
 
     void save(String path) throws IOException;
+
+    void solve();
 }

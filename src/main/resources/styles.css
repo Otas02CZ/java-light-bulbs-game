@@ -15,6 +15,11 @@
     -fx-font-size: 48px;
 }
 
+.mainText {
+    -fx-font-family: 'Space Mono Regular';
+    -fx-font-size: 30px;
+}
+
 .button-text {
     /*-fx-background-image: url('button.jpg');
     -fx-background-size: cover;
@@ -36,9 +41,22 @@
 }
 
 .subtitle {
-    -fx-font-size: 26px;
+    -fx-font-size: 30px;
 }
 
 .combo-box, .spinner {
     -fx-pref-width: 150px;
+}
+
+/* GridPane cells */
+.game-cell {
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 5, 0.5, 0.0, 0.0);
+}
+
+#gameGrid {
+    -fx-border-color: black;
+    -fx-border-width: 5px;
+    -fx-border-style: solid;
+    -fx-border-radius: 7px;
 }

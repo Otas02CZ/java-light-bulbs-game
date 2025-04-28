@@ -23,6 +23,12 @@ import java.util.Optional;
 
 public class GameController implements GUIObservable.GUIObserver, TimerObservable.TimerObserver {
 
+    private final int CELL_SIZE = 40;
+    private final int PADD_HEIGHT = 300;
+
+    private final int WIDTH = 900;
+    private final int HEIGHT = 400;
+
     private Stage stage;
 
     private ToolEnvironment game;
@@ -33,10 +39,16 @@ public class GameController implements GUIObservable.GUIObserver, TimerObservabl
 
     private boolean autoSolving = false;
 
-    private boolean finished = false;
+    private boolean locked = false;
 
     @FXML
-    private HBox topButtonRow;
+    private Button undoButton;
+
+    @FXML
+    private Button redoButton;
+
+    @FXML
+    private BorderPane gamePane;
 
     @FXML
     private Label mainLabel;
@@ -69,7 +81,7 @@ public class GameController implements GUIObservable.GUIObserver, TimerObservabl
         game.setupTimerObserver(this);
     }
 
-    public void startup(int time, String difficulty) {
+    public void setup(int time, String difficulty) {
         stage.setOnCloseRequest(event -> {
             game.stopTimer();
         });
@@ -77,12 +89,35 @@ public class GameController implements GUIObservable.GUIObserver, TimerObservabl
         if (time != 0)
             game.startTimer(time);
 
+        setupWindowSize();
         setupTimerIcon();
         updateTurns();
         setDifficulty(difficulty);
         updateLitUp();
         generateGameGrid();
+        updateUndoRedoLocking();
         // todo?
+    }
+
+    private void setupWindowSize() {
+        stage.setWidth(WIDTH);
+        stage.setMinWidth(WIDTH);
+        stage.setMaxWidth(WIDTH);
+        stage.setHeight(HEIGHT);
+        stage.setMinHeight(HEIGHT);
+        stage.setMaxHeight(HEIGHT);
+    }
+
+    private void updateUndoRedoLocking() {
+        if (game.canUndo())
+            undoButton.setDisable(false);
+        else
+            undoButton.setDisable(true);
+
+        if (game.canRedo())
+            redoButton.setDisable(false);
+        else
+            redoButton.setDisable(true);
     }
 
     private void setupTimerIcon() {
@@ -132,8 +167,6 @@ public class GameController implements GUIObservable.GUIObserver, TimerObservabl
                 applyCorrectCellImage(imageGrid[row][col], row, col);
             }
         }
-
-        //TODO: update game field
     }
 
     private void generateGameGrid() {
@@ -147,8 +180,8 @@ public class GameController implements GUIObservable.GUIObserver, TimerObservabl
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < cols; col++) {
                 ImageView cell = new ImageView();
-                cell.setFitWidth(40);
-                cell.setFitHeight(40);
+                cell.setFitWidth(CELL_SIZE);
+                cell.setFitHeight(CELL_SIZE);
                 applyCorrectCellImage(cell, row, col);
                 cell.getStyleClass().add("game-cell");
 
@@ -156,16 +189,26 @@ public class GameController implements GUIObservable.GUIObserver, TimerObservabl
                 final int currentCol = col;
 
                 cell.setOnMouseClicked(event -> {
-                    // handle click
-                    game.fieldAt(currentRow, currentCol).turn();
-                    turns++;
-                    updateTurns();
+                    if (!locked) {
+                        game.fieldAt(currentRow, currentCol).turn();
+                        turns++;
+                        updateTurns();
+                        updateUndoRedoLocking();
+                    }
                 });
 
                 gameGrid.add(cell, col, row);
                 imageGrid[row][col] = cell;
             }
         }
+
+        // Calculate preferred size for the Stage
+        double gridHeight = (CELL_SIZE) * rows;
+        double totalHeight = Math.max(HEIGHT, gridHeight + PADD_HEIGHT); // Extra for toolbar, labels, etc.
+
+        stage.setHeight(totalHeight);
+        stage.setMinHeight(totalHeight);
+        stage.setMaxHeight(totalHeight);
     }
 
     private void applyCorrectCellImage(ImageView cell, int row, int col) {
@@ -215,7 +258,6 @@ public class GameController implements GUIObservable.GUIObserver, TimerObservabl
         imageNameBuilder.append(".png");
         String imageName = imageNameBuilder.toString();
 
-        System.out.println("Applying image: " + imageName);
         URL imageUrl = getClass().getResource(imageName);
 
         if (imageUrl == null) {
@@ -227,27 +269,18 @@ public class GameController implements GUIObservable.GUIObserver, TimerObservabl
         cell.setImage(image);
     }
 
-    private void applyCorrectCellImage() {
-        int rows = game.rows();
-        int cols = game.cols();
-
-        for (int row = 0; row < rows; row++) {
-            for (int col = 0; col < cols; col++) {
-
-            }
-        }
-    }
-
     private void transitionToGameWon() {
-        finished = true;
+        locked = true;
+        game.stopTimer();
+        mainLabel.setText("You won!");
+        //TODO: change background
     }
 
     private void transitionToGameLost() {
-        finished = true;
-    }
-
-    private void transitionGameGridToFinish() {
-        //TODO: change game grid to non-clickable also add remaining turns to tooltips
+        locked = true;
+        game.stopTimer();
+        mainLabel.setText("You lost!");
+        //TODO: change background
     }
 
     private boolean showDialog(Alert.AlertType type, String title, String header, String content) {
@@ -285,6 +318,7 @@ public class GameController implements GUIObservable.GUIObserver, TimerObservabl
         Parent root = loader.load();
         IntroController controller = loader.getController();
         controller.setStage(this.stage);
+        controller.setup();
 
         Scene scene = new Scene(root);
         stage.setScene(scene);
@@ -318,12 +352,24 @@ public class GameController implements GUIObservable.GUIObserver, TimerObservabl
         if (autoSolving) {
             String title = "Already solving";
             String header = "Already solving, button deactivated.";
-            String content = "Please wait until solving is finished.";
+            String content = "Please wait until solving is locked.";
             showDialog(Alert.AlertType.WARNING, title, header, content);
             return;
         }
 
+        if (locked) {
+            String title = "Game already finished";
+            String header = "Cannot solve finished game";
+            String content = "Please start a new game.";
+            showDialog(Alert.AlertType.WARNING, title, header, content);
+            return;
+        }
 
+        locked = true;
+        autoSolving = true;
+        game.stopTimer();
+
+        game.solve();
     }
 
     @FXML
@@ -331,14 +377,14 @@ public class GameController implements GUIObservable.GUIObserver, TimerObservabl
         if (autoSolving) {
             String title = "Auto solving";
             String header = "Cannot save while solving";
-            String content = "Please wait until solving is finished.";
+            String content = "Please wait until solving is locked.";
             showDialog(Alert.AlertType.WARNING, title, header, content);
             return;
         }
 
-        if (finished) {
-            String title = "Game already finished";
-            String header = "Cannot save finished game";
+        if (locked) {
+            String title = "Game already locked";
+            String header = "Cannot save locked game";
             String content = "Please start a new game.";
             showDialog(Alert.AlertType.WARNING, title, header, content);
             return;
@@ -376,4 +422,49 @@ public class GameController implements GUIObservable.GUIObserver, TimerObservabl
         }
 
     }
+
+    @FXML
+    public void handleUndo() {
+        if (autoSolving) {
+            String title = "Auto solving";
+            String header = "Cannot undo while solving";
+            String content = "Please wait until solving is locked.";
+            showDialog(Alert.AlertType.WARNING, title, header, content);
+            return;
+        }
+
+        if (locked) {
+            String title = "Game already locked";
+            String header = "Cannot undo locked game";
+            String content = "Please start a new game.";
+            showDialog(Alert.AlertType.WARNING, title, header, content);
+            return;
+        }
+
+        game.undo();
+        updateUndoRedoLocking();
+    }
+
+    @FXML
+    public void handleRedo() {
+        if (autoSolving) {
+            String title = "Auto solving";
+            String header = "Cannot redo while solving";
+            String content = "Please wait until solving is locked.";
+            showDialog(Alert.AlertType.WARNING, title, header, content);
+            return;
+        }
+
+        if (locked) {
+            String title = "Game already locked";
+            String header = "Cannot redo locked game";
+            String content = "Please start a new game.";
+            showDialog(Alert.AlertType.WARNING, title, header, content);
+            return;
+        }
+
+        game.redo();
+        updateUndoRedoLocking();
+    }
+
 }

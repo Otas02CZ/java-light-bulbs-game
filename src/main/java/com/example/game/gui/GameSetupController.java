@@ -4,7 +4,6 @@ import com.example.game.gui.shared.GameConfig;
 import com.example.game.model.Game;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
@@ -21,13 +20,16 @@ import java.util.ResourceBundle;
 /**
  *
  */
-public class GameSetupController implements Initializable {
+public class GameSetupController {
 
     private final int SIZE_MIN = 5;
     private final int SIZE_MAX = 15;
     private final int TIME_MIN = 1;
     private final int TIME_MAX = 60;
     private final int SHUFFLE_CONST = 1;
+
+    private final int WIDTH = 800;
+    private final int HEIGHT = 600;
 
     private Stage stage;
 
@@ -49,6 +51,15 @@ public class GameSetupController implements Initializable {
     private Spinner<Integer> timeSpinner;
 
     public GameSetupController() {
+        setupConfig();
+    }
+
+    public void setup() {
+        setupWindowSize();
+        initialize();
+    }
+
+    private void setupConfig() {
         this.defaultConfigs = new HashMap<>();
 
         this.defaultConfigs.put("Easy", new GameConfig("Easy", 5, 0.7, 0.3, 10));
@@ -60,8 +71,16 @@ public class GameSetupController implements Initializable {
         this.stage = stage;
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    private void setupWindowSize() {
+        stage.setWidth(WIDTH);
+        stage.setMinWidth(WIDTH);
+        stage.setMaxWidth(WIDTH);
+        stage.setHeight(HEIGHT);
+        stage.setMinHeight(HEIGHT);
+        stage.setMaxHeight(HEIGHT);
+    }
+
+    public void initialize() {
         emptySlider.setMax(1.0);
         emptySlider.setMin(0.0);
 
@@ -128,6 +147,7 @@ public class GameSetupController implements Initializable {
         Parent root = loader.load();
         IntroController controller = loader.getController();
         controller.setStage(this.stage);
+        controller.setup();
         Scene scene = new Scene(root);
         stage.setScene(scene);
     }
@@ -170,6 +190,6 @@ public class GameSetupController implements Initializable {
 
         Scene scene = new Scene(root);
         stage.setScene(scene);
-        controller.startup(time*60, difficulty);
+        controller.setup(time*60, difficulty);
     }
 }

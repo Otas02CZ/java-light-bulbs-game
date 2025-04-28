@@ -333,6 +333,10 @@ public class Game implements ToolEnvironment, GameObservable.GameObserver, Timer
         return amountOfBulbs;
     }
 
+    public void solve() {
+        //TODO:
+    }
+
     /**
      * Creates single Link node at given position
      * @param position Position where to create the node
@@ -474,7 +478,7 @@ public class Game implements ToolEnvironment, GameObservable.GameObserver, Timer
         }
         if (bulbsOn == amountOfBulbs) gameWon = true;
         this.bulbsOn = bulbsOn;
-        notifyGUIObserver();
+        Platform.runLater(this::notifyGUIObserver);
     }
 
     /**

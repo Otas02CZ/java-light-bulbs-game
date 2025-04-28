@@ -5,24 +5,26 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane prefHeight="600" prefWidth="800" styleClass="background" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.game.gui.GameController">
+<BorderPane fx:id="gamePane" prefHeight="600" prefWidth="900" styleClass="background" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.game.gui.GameController">
 
     <!-- Top Area -->
     <top>
-        <VBox spacing="20">
+        <VBox spacing="5">
             <ToolBar prefHeight="40.0" prefWidth="200.0">
-                <Button onAction="#handleToMainMenu" mnemonicParsing="false" text="Main Menu" />
-                <Button onAction="#handleQuit" mnemonicParsing="false" text="Quit" />
-                <Button onAction="#handleShowHowToPlay" mnemonicParsing="false" text="How To Play" />
-                <Button onAction="#handleShowHelpView" mnemonicParsing="false" text="Help View" />
-                <Button onAction="#handleSolve" mnemonicParsing="false" text="Solve" />
-                <Button onAction="#handleSave" mnemonicParsing="false" text="Save" />
+                <Button mnemonicParsing="false" onAction="#handleToMainMenu" text="Main Menu" maxWidth="Infinity" HBox.hgrow="ALWAYS" />
+                <Button mnemonicParsing="false" onAction="#handleQuit" text="Quit" maxWidth="Infinity" HBox.hgrow="ALWAYS" />
+                <Button mnemonicParsing="false" onAction="#handleShowHowToPlay" text="How To Play" maxWidth="Infinity" HBox.hgrow="ALWAYS" />
+                <Button mnemonicParsing="false" onAction="#handleShowHelpView" text="Help View" maxWidth="Infinity" HBox.hgrow="ALWAYS" />
+                <Button mnemonicParsing="false" onAction="#handleSolve" text="Solve" maxWidth="Infinity" HBox.hgrow="ALWAYS" />
+                <Button mnemonicParsing="false" onAction="#handleSave" text="Save" maxWidth="Infinity" HBox.hgrow="ALWAYS" />
+                <Button fx:id="undoButton" mnemonicParsing="false" onAction="#handleUndo" text="Undo" maxWidth="Infinity" HBox.hgrow="ALWAYS" />
+                <Button fx:id="redoButton" mnemonicParsing="false" onAction="#handleRedo" text="Redo" maxWidth="Infinity" HBox.hgrow="ALWAYS" />
             </ToolBar>
 
             <!-- Large Centered Text Label -->
-            <Label fx:id="mainLabel" alignment="CENTER" maxWidth="Infinity" styleClass="main-text" text="Go Go Go !!">
+            <Label fx:id="mainLabel" alignment="CENTER" maxWidth="Infinity" styleClass="mainText" text="Go Go Go !!">
                 <VBox.margin>
-                    <Insets bottom="10" top="10" />
+                    <Insets top="5" />
                 </VBox.margin>
             </Label>
 
@@ -37,11 +39,11 @@
 
     <!-- Center Area -->
     <center>
-        <StackPane alignment="CENTER">
-            <GridPane fx:id="gameGrid" hgap="5" vgap="5">
-                <!-- Game cells will be created programmatically -->
+        <VBox alignment="CENTER" fillWidth="false">
+            <GridPane fx:id="gameGrid">
+                <!-- game cells -->
             </GridPane>
-        </StackPane>
+        </VBox>
     </center>
 
     <!-- Bottom Area -->

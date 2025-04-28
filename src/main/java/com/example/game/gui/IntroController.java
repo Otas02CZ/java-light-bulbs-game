@@ -19,8 +19,24 @@ import java.util.Optional;
 public class IntroController {
     private Stage stage;
 
+    private final int WIDTH = 800;
+    private final int HEIGHT = 600;
+
     public void setStage(Stage stage) {
         this.stage = stage;
+    }
+
+    public void setup() {
+        setupWindowSize();
+    }
+
+    private void setupWindowSize() {
+        stage.setWidth(WIDTH);
+        stage.setMinWidth(WIDTH);
+        stage.setMaxWidth(WIDTH);
+        stage.setHeight(HEIGHT);
+        stage.setMinHeight(HEIGHT);
+        stage.setMaxHeight(HEIGHT);
     }
 
     @FXML
@@ -29,6 +45,7 @@ public class IntroController {
         Parent root = loader.load();
         GameSetupController controller = loader.getController();
         controller.setStage(stage);
+        controller.setup();
         Scene scene = new Scene(root);
         stage.setScene(scene);
     }
@@ -68,7 +85,7 @@ public class IntroController {
 
             Scene scene = new Scene(root);
             stage.setScene(scene);
-            controller.startup(0, "From save");
+            controller.setup(0, "From save");
 
         } catch (JSONException e) {
             String title = "Failed to load game";

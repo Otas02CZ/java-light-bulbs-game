@@ -35,6 +35,8 @@ public class MainGUI extends Application {
 
         stage.setTitle("Light Bulbs Game");
         stage.setScene(scene);
+
+        controller.setup();
         stage.show();
     }
 
