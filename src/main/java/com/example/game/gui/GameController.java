@@ -4,6 +4,7 @@ import com.example.game.model.Game;
 import com.example.game.shared.GUIObservable;
 import com.example.game.shared.TimerObservable;
 import com.example.game.shared.ToolEnvironment;
+import com.example.game.shared.ToolField;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -17,6 +18,7 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.Optional;
 
 public class GameController implements GUIObservable.GUIObserver, TimerObservable.TimerObserver {
@@ -28,6 +30,10 @@ public class GameController implements GUIObservable.GUIObserver, TimerObservabl
     private int turns;
 
     private ImageView[][] imageGrid = null;
+
+    private boolean autoSolving = false;
+
+    private boolean finished = false;
 
     @FXML
     private HBox topButtonRow;
@@ -118,6 +124,15 @@ public class GameController implements GUIObservable.GUIObserver, TimerObservabl
             transitionToGameWon();
         }
 
+        int rows = game.rows();
+        int cols = game.cols();
+
+        for (int row = 0; row < rows; row++) {
+            for (int col = 0; col < cols; col++) {
+                applyCorrectCellImage(imageGrid[row][col], row, col);
+            }
+        }
+
         //TODO: update game field
     }
 
@@ -134,22 +149,85 @@ public class GameController implements GUIObservable.GUIObserver, TimerObservabl
                 ImageView cell = new ImageView();
                 cell.setFitWidth(40);
                 cell.setFitHeight(40);
+                applyCorrectCellImage(cell, row, col);
                 cell.getStyleClass().add("game-cell");
+
+                final int currentRow = row;
+                final int currentCol = col;
 
                 cell.setOnMouseClicked(event -> {
                     // handle click
+                    game.fieldAt(currentRow, currentCol).turn();
                     turns++;
                     updateTurns();
                 });
 
                 gameGrid.add(cell, col, row);
+                imageGrid[row][col] = cell;
             }
         }
-
-        applyCorrectCellImages();
     }
 
-    private void applyCorrectCellImages() {
+    private void applyCorrectCellImage(ImageView cell, int row, int col) {
+        StringBuilder imageNameBuilder = new StringBuilder("/images/icons/");
+
+        // start type decoding
+        ToolField node = game.fieldAt(row, col);
+
+        if (node.isBulb())
+            imageNameBuilder.append("bulb");
+        else if (node.isLink())
+            imageNameBuilder.append("wire");
+        else if (node.isPower())
+            imageNameBuilder.append("power");
+        else
+            imageNameBuilder.append("empty");
+
+        if (node.isLink() || node.isBulb()) {
+            if (node.light())
+                imageNameBuilder.append("_on");
+            else
+                imageNameBuilder.append("_off");
+        }
+
+        if (node.isPower() || node.isBulb() || node.isLink()) {
+            if (node.north())
+                imageNameBuilder.append("_1");
+            else
+                imageNameBuilder.append("_0");
+
+            if (node.east())
+                imageNameBuilder.append("1");
+            else
+                imageNameBuilder.append("0");
+
+            if (node.south())
+                imageNameBuilder.append("1");
+            else
+                imageNameBuilder.append("0");
+
+            if (node.west())
+                imageNameBuilder.append("1");
+            else
+                imageNameBuilder.append("0");
+        }
+
+        imageNameBuilder.append(".png");
+        String imageName = imageNameBuilder.toString();
+
+        System.out.println("Applying image: " + imageName);
+        URL imageUrl = getClass().getResource(imageName);
+
+        if (imageUrl == null) {
+            System.out.println("Image not found: " + imageName);
+            return;
+        }
+
+        Image image = new Image(imageUrl.toExternalForm());
+        cell.setImage(image);
+    }
+
+    private void applyCorrectCellImage() {
         int rows = game.rows();
         int cols = game.cols();
 
@@ -161,11 +239,11 @@ public class GameController implements GUIObservable.GUIObserver, TimerObservabl
     }
 
     private void transitionToGameWon() {
-
+        finished = true;
     }
 
     private void transitionToGameLost() {
-
+        finished = true;
     }
 
     private void transitionGameGridToFinish() {
@@ -237,11 +315,35 @@ public class GameController implements GUIObservable.GUIObserver, TimerObservabl
 
     @FXML
     public void handleSolve() {
+        if (autoSolving) {
+            String title = "Already solving";
+            String header = "Already solving, button deactivated.";
+            String content = "Please wait until solving is finished.";
+            showDialog(Alert.AlertType.WARNING, title, header, content);
+            return;
+        }
+
 
     }
 
     @FXML
     public void handleSave() {
+        if (autoSolving) {
+            String title = "Auto solving";
+            String header = "Cannot save while solving";
+            String content = "Please wait until solving is finished.";
+            showDialog(Alert.AlertType.WARNING, title, header, content);
+            return;
+        }
+
+        if (finished) {
+            String title = "Game already finished";
+            String header = "Cannot save finished game";
+            String content = "Please start a new game.";
+            showDialog(Alert.AlertType.WARNING, title, header, content);
+            return;
+        }
+
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Save game");
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("JSON game save file", "*.json"));

@@ -108,6 +108,7 @@ public class GameSetupController implements Initializable {
 
     @FXML
     private void onDifficultyChange() {
+        System.out.println("Difficulty changed!");
         String difficulty = difficultyComboBox.getValue();
 
         if (difficulty == null || difficulty.equals("Custom"))
@@ -115,10 +116,10 @@ public class GameSetupController implements Initializable {
 
         GameConfig config = this.defaultConfigs.get(difficulty);
 
-        sizeSpinner.getEditor().setText(Integer.toString(config.getSize()));
+        sizeSpinner.getValueFactory().setValue(config.getSize());
         emptySlider.setValue(config.getEmptyCoef());
         shuffleSlider.setValue(config.getShuffleCoef());
-        timeSpinner.getEditor().setText(Integer.toString(config.getMaxTime()));
+        timeSpinner.getValueFactory().setValue(config.getMaxTime());
     }
 
     @FXML
@@ -153,7 +154,7 @@ public class GameSetupController implements Initializable {
     private void startGame() throws IOException {
         String difficulty = difficultyComboBox.getValue();
         int size = sizeSpinner.getValue();
-        double emptyCoef = emptySlider.getValue();
+        double emptyCoef = emptySlider.getValue() / 4;
         double shuffleCoef = shuffleSlider.getValue();
         int time = timeSpinner.getValue();
 
