@@ -21,12 +21,12 @@ public class MainCLI {
         Logger.obtain().log("nadhera");
 
         // create a new game
-        //Game game = Game.generate(3, 3, 0.1f, 5);
-        //game.startTimer(60*5);
+        Game game = Game.generate(10, 10, 0.1f, 5);
+        game.startTimer(60*5);
 
         // load game1.json
-        Game game = Game.load("./game1.json");
-        if (game == null) throw new RuntimeException("Error on loading game");
+        //Game game = Game.load("./game1.json");
+        //if (game == null) throw new RuntimeException("Error on loading game");
 
         Scanner scanner = new Scanner(System.in);
         Pattern pattern = Pattern.compile("\\d+ \\d+"); // regex: number, space, number

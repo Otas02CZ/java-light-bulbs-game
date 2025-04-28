@@ -10,9 +10,7 @@
 package com.example.game.model;
 
 import com.example.game.model.common.*;
-import com.example.game.shared.GameObservable;
-import com.example.game.shared.ToolEnvironment;
-import com.example.game.shared.ToolField;
+import com.example.game.shared.*;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -23,6 +21,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Stack;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -31,7 +31,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * implements ToolEnvironment - for GUI visualisation
  * implements GameObserver - for notifications informing about the need of recalculate connections
  */
-public class Game implements ToolEnvironment, GameObservable.GameObserver {
+public class Game implements ToolEnvironment, GameObservable.GameObserver, TimerObservable, GUIObservable {
 
     boolean gameWon = false;
 
@@ -39,7 +39,11 @@ public class Game implements ToolEnvironment, GameObservable.GameObserver {
 
     private UndoBackLog undoBackLog;
 
-    private AtomicInteger timeLeft = new AtomicInteger();
+    private final AtomicInteger timeLeft = new AtomicInteger();
+
+    private List<TimerObserver> timeObservers = new ArrayList<>();
+
+    private List<GUIObserver> observers = new ArrayList<>();
 
     /**
      * Map storing nodes in game world (2D space)
@@ -103,6 +107,7 @@ public class Game implements ToolEnvironment, GameObservable.GameObserver {
                     return; // Exit if interrupted
                 }
                 int updatedTime = this.timeLeft.decrementAndGet(); // Atomic decrement
+                notifyTimerObserver();
             }
         });
         timerThread.start();
@@ -140,6 +145,48 @@ public class Game implements ToolEnvironment, GameObservable.GameObserver {
 
         game.powerUp();
         return game;
+    }
+
+    public void setupTimerObserver(TimerObserver timerObserver) {
+        this.timeObservers.add(timerObserver);
+    }
+
+    public void removeTimerObserver(TimerObserver observer) {
+        Iterator<TimerObserver> it = timeObservers.iterator();
+        while (it.hasNext()) {
+            TimerObserver o = it.next();
+            if (o == observer) { // same object
+                it.remove();
+                break; // if only one instance, you can break early
+            }
+        }
+    }
+
+    public void notifyTimerObserver() {
+        for (TimerObserver observer : timeObservers) {
+            observer.update(timeLeft.decrementAndGet());
+        }
+    }
+
+    public void setupGUIObserver(GUIObserver observer) {
+        observers.add(observer);
+    }
+
+    public void removeGUIObserver(GUIObserver observer) {
+        Iterator<GUIObserver> it = observers.iterator();
+        while (it.hasNext()) {
+            GUIObserver o = it.next();
+            if (o == observer) {
+                it.remove();
+                break;
+            }
+        }
+    }
+
+    public void notifyGUIObserver() {
+        for (GUIObserver observer : observers) {
+            observer.update();
+        }
     }
 
     private static JSONObject createJSON(String path) throws JSONException {
@@ -438,6 +485,7 @@ public class Game implements ToolEnvironment, GameObservable.GameObserver {
             if (node.isBulb()) bulbsOn++;
         }
         if (bulbsOn == amountOfBulbs) gameWon = true;
+        notifyGUIObserver();
     }
 
     /**
