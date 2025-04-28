@@ -16,8 +16,8 @@ public class MainGUI extends Application {
     @Override
     public void init() throws Exception {
 
-        Font font1 = Font.loadFont(getClass().getResourceAsStream("/SpaceMono-Regular.ttf"), 40);
-        Font font2 = Font.loadFont(getClass().getResourceAsStream("/PressStart2P-Regular.ttf"), 40);
+        Font font1 = Font.loadFont(getClass().getResourceAsStream("/fonts/SpaceMono-Regular.ttf"), 40);
+        Font font2 = Font.loadFont(getClass().getResourceAsStream("/fonts/PressStart2P-Regular.ttf"), 40);
         System.out.println("Fonts loaded, names to be used in CSS: |" + font1.getName() + "| |" + font2.getName() + "|.");
         super.init();
     }

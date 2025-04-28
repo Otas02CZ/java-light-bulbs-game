@@ -38,6 +38,8 @@ public class Game implements ToolEnvironment, GameObservable.GameObserver, Timer
 
     private int amountOfBulbs = 0;
 
+    private int bulbsOn = 0;
+
     private UndoBackLog undoBackLog;
 
     private final TimerManager timerManager = new TimerManager();
@@ -180,7 +182,7 @@ public class Game implements ToolEnvironment, GameObservable.GameObserver, Timer
         }
     }
 
-    public static Game load(String path) {
+    public static Game load(String path) throws JSONException {
 
         JSONObject data = createJSON(path);
         if (data == null) return null;
@@ -274,7 +276,7 @@ public class Game implements ToolEnvironment, GameObservable.GameObserver, Timer
         return game;
     }
 
-    public void save(String path) {
+    public void save(String path) throws IOException {
 
         JSONObject obj = new JSONObject();
         obj.put("rows", this.rows());
@@ -291,12 +293,9 @@ public class Game implements ToolEnvironment, GameObservable.GameObserver, Timer
         }
         obj.put("map", obj2);
 
-        try (FileWriter file = new FileWriter(path)) {
-            file.write(obj.toString(2)); // 2 = pretty print with 2-space indent
-            file.flush();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        FileWriter file = new FileWriter(path);
+        file.write(obj.toString(2)); // 2 = pretty print with 2-space indent
+        file.flush();
     }
 
     public void undo() {
@@ -324,6 +323,14 @@ public class Game implements ToolEnvironment, GameObservable.GameObserver, Timer
 
     public boolean hasWon() {
         return gameWon;
+    }
+
+    public int getBulbsOn() {
+        return bulbsOn;
+    }
+
+    public int getBulbsTotal() {
+        return amountOfBulbs;
     }
 
     /**
@@ -466,6 +473,7 @@ public class Game implements ToolEnvironment, GameObservable.GameObserver, Timer
             if (node.isBulb()) bulbsOn++;
         }
         if (bulbsOn == amountOfBulbs) gameWon = true;
+        this.bulbsOn = bulbsOn;
         notifyGUIObserver();
     }
 

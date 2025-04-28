@@ -48,8 +48,8 @@
 
     <bottom>
         <HBox alignment="CENTER" spacing="30">
-            <Button onAction="#onCancelClicked" text="Cancel" />
-            <Button onAction="#onPlayClicked" text="Play" />
+            <Button onAction="#onBackClicked" text="Back to Main Menu" />
+            <Button onAction="#onPlayClicked" text="Start the Game" />
         </HBox>
     </bottom>
 

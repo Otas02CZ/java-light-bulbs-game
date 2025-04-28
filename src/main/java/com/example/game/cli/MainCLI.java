@@ -56,7 +56,11 @@ public class MainCLI {
             }
 
             if (input.equalsIgnoreCase("/save")) {
-                game.save("./game1.json");
+                try {
+                    game.save("./game1.json");
+                } catch (IOException e) {
+                    System.out.println("ERROR saving game");
+                }
                 continue;
             }
 

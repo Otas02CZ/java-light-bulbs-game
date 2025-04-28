@@ -122,7 +122,7 @@ public class GameSetupController implements Initializable {
     }
 
     @FXML
-    private void onCancelClicked() throws IOException {
+    private void onBackClicked() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/intro.fxml"));
         Parent root = loader.load();
         IntroController controller = loader.getController();
@@ -151,6 +151,7 @@ public class GameSetupController implements Initializable {
     }
 
     private void startGame() throws IOException {
+        String difficulty = difficultyComboBox.getValue();
         int size = sizeSpinner.getValue();
         double emptyCoef = emptySlider.getValue();
         double shuffleCoef = shuffleSlider.getValue();
@@ -168,6 +169,6 @@ public class GameSetupController implements Initializable {
 
         Scene scene = new Scene(root);
         stage.setScene(scene);
-        controller.startup(time);
+        controller.startup(time*60, difficulty);
     }
 }
