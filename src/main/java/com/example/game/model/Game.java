@@ -10,9 +10,7 @@
 package com.example.game.model;
 
 import com.example.game.model.common.*;
-import com.example.game.shared.GameObservable;
-import com.example.game.shared.ToolEnvironment;
-import com.example.game.shared.ToolField;
+import com.example.game.shared.*;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -23,22 +21,29 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Stack;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Represents LightBulb game
  * implements ToolEnvironment - for GUI visualisation
  * implements GameObserver - for notifications informing about the need of recalculate connections
  */
-public class Game implements ToolEnvironment, GameObservable.GameObserver {
+public class Game implements ToolEnvironment, GameObservable.GameObserver, TimerObservable, GUIObservable {
 
     boolean gameWon = false;
 
-    private int amountOfBulbs;
+    private int amountOfBulbs = 0;
 
     private UndoBackLog undoBackLog;
 
-    private int timeLeft;
+    private final AtomicInteger timeLeft = new AtomicInteger();
+
+    private List<TimerObserver> timeObservers = new ArrayList<>();
+
+    private List<GUIObserver> observers = new ArrayList<>();
 
     /**
      * Map storing nodes in game world (2D space)
@@ -91,6 +96,24 @@ public class Game implements ToolEnvironment, GameObservable.GameObserver {
         return game;
     }
 
+    public void startTimer(int timeLeft) {
+        this.timeLeft.set(timeLeft); // or whatever value
+
+        Thread timerThread = new Thread(() -> {
+            while (this.timeLeft.get() > 0) {
+                try {
+                    Thread.sleep(1000); // Sleep for 1 second
+                } catch (InterruptedException e) {
+                    return; // Exit if interrupted
+                }
+                int updatedTime = this.timeLeft.decrementAndGet(); // Atomic decrement
+                notifyTimerObserver();
+            }
+        });
+        timerThread.start();
+    }
+
+
     public static Game generate(int rows, int cols, float emptyCoef, int shuffleCoef) {
         Game game = Game.create(rows, cols);
 
@@ -124,6 +147,48 @@ public class Game implements ToolEnvironment, GameObservable.GameObserver {
         return game;
     }
 
+    public void setupTimerObserver(TimerObserver timerObserver) {
+        this.timeObservers.add(timerObserver);
+    }
+
+    public void removeTimerObserver(TimerObserver observer) {
+        Iterator<TimerObserver> it = timeObservers.iterator();
+        while (it.hasNext()) {
+            TimerObserver o = it.next();
+            if (o == observer) { // same object
+                it.remove();
+                break; // if only one instance, you can break early
+            }
+        }
+    }
+
+    public void notifyTimerObserver() {
+        for (TimerObserver observer : timeObservers) {
+            observer.update(timeLeft.decrementAndGet());
+        }
+    }
+
+    public void setupGUIObserver(GUIObserver observer) {
+        observers.add(observer);
+    }
+
+    public void removeGUIObserver(GUIObserver observer) {
+        Iterator<GUIObserver> it = observers.iterator();
+        while (it.hasNext()) {
+            GUIObserver o = it.next();
+            if (o == observer) {
+                it.remove();
+                break;
+            }
+        }
+    }
+
+    public void notifyGUIObserver() {
+        for (GUIObserver observer : observers) {
+            observer.update();
+        }
+    }
+
     private static JSONObject createJSON(String path) throws JSONException {
         try {
             String content = new String(Files.readAllBytes(Paths.get(path)));
@@ -146,8 +211,7 @@ public class Game implements ToolEnvironment, GameObservable.GameObserver {
 
         // game attributes
         game.gameWon = data.getBoolean("won");
-        game.timeLeft = data.getInt("timeleft");
-        game.amountOfBulbs = data.getInt("bulbAmount");
+        int timeLeft = data.getInt("timeleft");
 
         // backlog
         JSONObject backlog = data.getJSONObject("backlog");
@@ -225,6 +289,7 @@ public class Game implements ToolEnvironment, GameObservable.GameObserver {
             node.setTotalRotations(totalRotations);
         }
         game.powerUp();
+        game.startTimer(timeLeft);
         return game;
     }
 
@@ -234,7 +299,6 @@ public class Game implements ToolEnvironment, GameObservable.GameObserver {
         obj.put("rows", this.rows());
         obj.put("cols", this.cols());
         obj.put("timeleft", this.timeLeft);
-        obj.put("bulbAmount", this.amountOfBulbs);
         obj.put("won", this.gameWon);
         obj.put("backlog", this.undoBackLog.toJson());
         JSONArray obj2 = new JSONArray();
@@ -353,6 +417,10 @@ public class Game implements ToolEnvironment, GameObservable.GameObserver {
         return this.sizeCols;
     }
 
+    public int timeLeft() {
+        return this.timeLeft.get();
+    }
+
     /**
      * Obtains GameNode at given position
      * @param position Position of the node
@@ -417,6 +485,7 @@ public class Game implements ToolEnvironment, GameObservable.GameObserver {
             if (node.isBulb()) bulbsOn++;
         }
         if (bulbsOn == amountOfBulbs) gameWon = true;
+        notifyGUIObserver();
     }
 
     /**

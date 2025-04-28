@@ -16,10 +16,9 @@
     ],
     "currentIndex": 2
   },
-  "bulbAmount": 3,
   "won": false,
   "rows": 3,
-  "timeleft": 0,
+  "timeleft": 300,
   "cols": 3,
   "map": [
     {
