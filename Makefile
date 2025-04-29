@@ -1,12 +1,13 @@
 
-build-gui:
-	mvn clean package -Pgui
+all: clean build
 
-build-cli:
-	mvn clean package -Pcli
+build:
+	mvn package
 
-run-gui:
-	java -jar target/lightbulbgame-gui-jar-with-dependencies.jar
+run:
+	java -jar target/lightbulbgame.jar
 
-run-cli:
-	java -jar target/lightbulbgame-cli-jar-with-dependencies.jar
+clean:
+	mvn clean
+
+.PHONY: build run clean
