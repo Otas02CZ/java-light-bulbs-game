@@ -174,7 +174,7 @@ public class GameSetupController {
     private void startGame() throws IOException {
         String difficulty = difficultyComboBox.getValue();
         int size = sizeSpinner.getValue();
-        double emptyCoef = emptySlider.getValue() / 4;
+        double emptyCoef = emptySlider.getValue() / 3;
         double shuffleCoef = shuffleSlider.getValue();
         int time = timeSpinner.getValue();
 
