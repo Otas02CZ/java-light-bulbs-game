@@ -283,7 +283,7 @@ public class GameNode implements ToolField, GameObservable {
     }
 
     public int remainingTurns() {
-        return -rotation + 4;
+        return (-rotation + 4)%4;
     }
 
     /**
