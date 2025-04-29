@@ -1,5 +1,6 @@
 package com.example.game.gui;
 
+import com.example.game.gui.shared.ImageCache;
 import com.example.game.model.Game;
 import com.example.game.shared.GUIObservable;
 import com.example.game.shared.TimerObservable;
@@ -18,7 +19,6 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 import java.util.Optional;
 
 public class GameController implements GUIObservable.GUIObserver, TimerObservable.TimerObserver {
@@ -35,11 +35,18 @@ public class GameController implements GUIObservable.GUIObserver, TimerObservabl
 
     private int turns;
 
+    private ImageCache imageCache = new ImageCache();
+
     private ImageView[][] imageGrid = null;
+    private Tooltip[][] tooltipGrid = null;
 
     private boolean autoSolving = false;
 
     private boolean locked = false;
+
+    private Stage helpViewStage = null;
+
+    private Stage howToPlayStage = null;
 
     @FXML
     private Button undoButton;
@@ -84,6 +91,13 @@ public class GameController implements GUIObservable.GUIObserver, TimerObservabl
     public void setup(int time, String difficulty) {
         stage.setOnCloseRequest(event -> {
             game.stopTimer();
+            if (helpViewStage != null) {
+                helpViewStage.close();
+            }
+
+            if (howToPlayStage != null) {
+                howToPlayStage.close();
+            }
         });
 
         if (time != 0)
@@ -164,7 +178,11 @@ public class GameController implements GUIObservable.GUIObserver, TimerObservabl
 
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < cols; col++) {
-                applyCorrectCellImage(imageGrid[row][col], row, col);
+                applyCorrectCellImage(row, col);
+                String tooltipText = "Empty";
+                if (!game.fieldAt(row, col).isEmpty())
+                    tooltipText = "Turns: " + game.fieldAt(row, col).usedTurns();
+                updateCellTooltip(row, col, tooltipText);
             }
         }
     }
@@ -174,6 +192,7 @@ public class GameController implements GUIObservable.GUIObserver, TimerObservabl
         int cols = game.cols();
 
         imageGrid = new ImageView[rows][cols];
+        tooltipGrid = new Tooltip[rows][cols];
 
         gameGrid.getChildren().clear();
 
@@ -182,8 +201,17 @@ public class GameController implements GUIObservable.GUIObserver, TimerObservabl
                 ImageView cell = new ImageView();
                 cell.setFitWidth(CELL_SIZE);
                 cell.setFitHeight(CELL_SIZE);
-                applyCorrectCellImage(cell, row, col);
+                applyCorrectCellImage(row, col);
                 cell.getStyleClass().add("game-cell");
+
+                Tooltip tooltip = new Tooltip();
+                if (game.fieldAt(row, col).isEmpty())
+                    tooltip.setText("Empty");
+                else
+                    tooltip.setText("Turns: " + game.fieldAt(row, col).usedTurns());
+
+                Tooltip.install(cell, tooltip);
+                tooltipGrid[row][col] = tooltip;
 
                 final int currentRow = row;
                 final int currentCol = col;
@@ -211,9 +239,22 @@ public class GameController implements GUIObservable.GUIObserver, TimerObservabl
         stage.setMaxHeight(totalHeight);
     }
 
-    private void applyCorrectCellImage(ImageView cell, int row, int col) {
-        StringBuilder imageNameBuilder = new StringBuilder("/images/icons/");
+    private void updateCellTooltip(int row, int col, String text) {
+        Tooltip tooltip = tooltipGrid[row][col];
 
+        if (tooltip == null) {
+            return;
+        }
+
+        tooltip.setText(text);
+    }
+
+    private void applyCorrectCellImage(int row, int col) {
+        StringBuilder imageNameBuilder = new StringBuilder("/images/icons/");
+        ImageView cell = imageGrid[row][col];
+        if (cell == null) {
+            return;
+        }
         // start type decoding
         ToolField node = game.fieldAt(row, col);
 
@@ -256,16 +297,13 @@ public class GameController implements GUIObservable.GUIObserver, TimerObservabl
         }
 
         imageNameBuilder.append(".png");
-        String imageName = imageNameBuilder.toString();
 
-        URL imageUrl = getClass().getResource(imageName);
+        Image image = this.imageCache.getImage(imageNameBuilder.toString());
 
-        if (imageUrl == null) {
-            System.out.println("Image not found: " + imageName);
+        if (image == null) {
             return;
         }
 
-        Image image = new Image(imageUrl.toExternalForm());
         cell.setImage(image);
     }
 
@@ -273,6 +311,10 @@ public class GameController implements GUIObservable.GUIObserver, TimerObservabl
         locked = true;
         game.stopTimer();
         mainLabel.setText("You won!");
+
+        if (helpViewStage != null) {
+            helpViewStage.close();
+        }
         //TODO: change background
     }
 
@@ -280,6 +322,21 @@ public class GameController implements GUIObservable.GUIObserver, TimerObservabl
         locked = true;
         game.stopTimer();
         mainLabel.setText("You lost!");
+
+        if (helpViewStage != null) {
+            helpViewStage.close();
+        }
+
+        for (int row = 0; row < game.rows(); row++) {
+            for (int col = 0; col < game.cols(); col++) {
+                ToolField node = game.fieldAt(row, col);
+                String tooltipText = "Empty";
+                if (!node.isEmpty())
+                    tooltipText = "Turns/Remaining: " + node.usedTurns() + "/" + node.remainingTurns();
+                updateCellTooltip(row, col, tooltipText);
+            }
+        }
+
         //TODO: change background
     }
 
@@ -312,6 +369,14 @@ public class GameController implements GUIObservable.GUIObserver, TimerObservabl
         if (!showDialog(Alert.AlertType.CONFIRMATION, title, header, content))
             return;
 
+        if (helpViewStage != null) {
+            helpViewStage.close();
+        }
+
+        if (howToPlayStage != null) {
+            howToPlayStage.close();
+        }
+
         game.stopTimer();
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/intro.fxml"));
@@ -333,6 +398,14 @@ public class GameController implements GUIObservable.GUIObserver, TimerObservabl
         if (!showDialog(Alert.AlertType.CONFIRMATION, title, header, content))
             return;
 
+        if (helpViewStage != null) {
+            helpViewStage.close();
+        }
+
+        if (howToPlayStage != null) {
+            howToPlayStage.close();
+        }
+
         game.stopTimer();
         stage.close();
     }
@@ -343,8 +416,29 @@ public class GameController implements GUIObservable.GUIObserver, TimerObservabl
     }
 
     @FXML
-    public void handleShowHelpView() {
+    public void handleShowHelpView() throws IOException {
+        if (helpViewStage != null) {
+            return;
+        }
 
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/helpView.fxml"));
+        Parent root = loader.load();
+
+        HelpViewController helpViewController = loader.getController();
+
+        helpViewStage = new Stage();
+
+        helpViewController.setGame((Game)game);
+        helpViewController.setStage(helpViewStage);
+        helpViewController.setup();
+
+        helpViewStage.setTitle("Help View");
+        helpViewStage.setScene(new Scene(root));
+        helpViewStage.show();
+
+        helpViewStage.setOnCloseRequest(event -> {
+            helpViewStage = null;
+        });
     }
 
     @FXML

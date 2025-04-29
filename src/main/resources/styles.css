@@ -4,6 +4,10 @@
     -fx-text-fill: black;
 }
 
+.button {
+    -fx-cursor: hand;
+}
+
 .background {
     -fx-background-image: url('image.jpg');
     -fx-background-size: cover;
@@ -55,9 +59,15 @@
 }
 
 .game-cell:hover {
-    -fx-effect: brightness(1.3);
     -fx-scale-x: 1.05;
     -fx-scale-y: 1.05;
+}
+
+.help-view-cell {
+    -fx-background-image: url('images/icons/empty.png');
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: cover;
+    -fx-background-position: center center;
 }
 
 #gameGrid {

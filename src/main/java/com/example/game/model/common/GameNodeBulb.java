@@ -27,6 +27,11 @@ public class GameNodeBulb extends GameNode {
     }
 
     @Override
+    public boolean isEmpty() {
+        return false;
+    }
+
+    @Override
     public boolean isBulb() {
         return true;
     }

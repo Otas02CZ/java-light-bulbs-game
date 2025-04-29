@@ -16,7 +16,7 @@
 
    <!-- Title at the top -->
    <top>
-      <Text styleClass="mainTitle" text="Light Bulbs" BorderPane.alignment="CENTER" />
+      <Text styleClass="mainTitle" text="Light Bulbs" BorderPane.alignment="CENTER" textAlignment="CENTER" />
    </top>
 
    <!-- Center area with buttons -->
@@ -35,8 +35,8 @@
       <HBox spacing="10" BorderPane.alignment="BOTTOM_CENTER">
          <!-- Authors section on the left -->
          <VBox alignment="BOTTOM_LEFT">
-            <Label text="Otakar Kočí" />
-            <Label text="Martin Mendl" />
+            <Label text="Otakar Kočí" alignment="CENTER" textAlignment="CENTER" />
+            <Label text="Martin Mendl" alignment="CENTER" textAlignment="CENTER" />
          </VBox>
 
          <!-- This Region acts as a spacer to push the year label to the far right -->
@@ -44,7 +44,7 @@
 
          <!-- Year label directly at the bottom-right -->
          <VBox alignment="BOTTOM_LEFT">
-            <Label text="2025" />
+            <Label text="2025" alignment="CENTER" textAlignment="CENTER" />
          </VBox>
 
       </HBox>

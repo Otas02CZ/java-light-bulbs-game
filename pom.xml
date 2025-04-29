@@ -64,8 +64,22 @@
     <plugins>
 
       <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>3.6.3</version> <!-- Or latest version -->
+        <configuration>
+          <encoding>UTF-8</encoding>
+          <show>private</show> <!-- Optional: include private members -->
+          <author>true</author>
+          <version>true</version>
+          <reportOutputDirectory>${project.basedir}/docs</reportOutputDirectory>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-shade-plugin</artifactId>
-        <version>3.2.1</version>
+        <version>3.6.0</version>
         <executions>
           <execution>
               <phase>package</phase>

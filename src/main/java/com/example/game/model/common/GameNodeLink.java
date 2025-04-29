@@ -29,6 +29,11 @@ public class GameNodeLink extends GameNode {
     }
 
     @Override
+    public boolean isEmpty() {
+        return false;
+    }
+
+    @Override
     public boolean isLink() {
         return true;
     }

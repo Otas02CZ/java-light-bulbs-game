@@ -9,12 +9,12 @@
 <BorderPane prefHeight="600" prefWidth="800" styleClass="background" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.game.gui.GameSetupController">
 
     <top>
-        <Text styleClass="mainTitle" text="Light Bulbs" BorderPane.alignment="CENTER" />
+        <Text styleClass="mainTitle" text="Light Bulbs" BorderPane.alignment="CENTER"  textAlignment="CENTER" />
     </top>
 
     <center>
         <VBox alignment="CENTER" spacing="20">
-            <Label styleClass="subtitle" text="New Game" />
+            <Label styleClass="subtitle" text="New Game" alignment="CENTER" textAlignment="CENTER" />
 
             <GridPane alignment="CENTER" hgap="10" vgap="15">
 
@@ -30,16 +30,16 @@
                     </items>
                 </ComboBox>
 
-                <Label text="Size:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                <Label text="Size:" GridPane.columnIndex="0" GridPane.rowIndex="1" alignment="CENTER" textAlignment="CENTER" />
                 <Spinner fx:id="sizeSpinner" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 
-                <Label text="Empty cells:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                <Label text="Empty cells:" GridPane.columnIndex="0" GridPane.rowIndex="2" alignment="CENTER" textAlignment="CENTER" />
                 <Slider fx:id="emptySlider" showTickLabels="true" showTickMarks="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
 
-                <Label text="Shuffle strength:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                <Label text="Shuffle strength:" GridPane.columnIndex="0" GridPane.rowIndex="3" alignment="CENTER" textAlignment="CENTER" />
                 <Slider fx:id="shuffleSlider" showTickLabels="true" showTickMarks="true" GridPane.columnIndex="1" GridPane.rowIndex="3" />
 
-                <Label text="Max time (mins):" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+                <Label text="Max time (mins):" GridPane.columnIndex="0" GridPane.rowIndex="4" alignment="CENTER" textAlignment="CENTER" />
                 <Spinner fx:id="timeSpinner" GridPane.columnIndex="1" GridPane.rowIndex="4" />
 
             </GridPane>

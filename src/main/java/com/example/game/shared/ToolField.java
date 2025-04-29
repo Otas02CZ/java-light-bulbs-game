@@ -14,6 +14,8 @@ public interface ToolField {
 
     boolean light();
 
+    boolean isEmpty();
+
     boolean isLink();
 
     boolean isBulb();

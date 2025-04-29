@@ -128,6 +128,10 @@ public class GameNode implements ToolField, GameObservable {
         this.notifyGameObserver();
     }
 
+    public boolean isEmpty() {
+        return true;
+    }
+
     /**
      * @return boolean is node a link ?
      */

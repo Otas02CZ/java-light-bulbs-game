@@ -28,6 +28,11 @@ public class GameNodePower extends GameNode {
     }
 
     @Override
+    public boolean isEmpty() {
+        return false;
+    }
+
+    @Override
     public boolean isPower() {
         return true;
     }

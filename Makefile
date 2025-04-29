@@ -1,6 +1,8 @@
 
 all: clean build
 
+try: clean build run
+
 build:
 	mvn package
 
@@ -9,5 +11,13 @@ run:
 
 clean:
 	mvn clean
+	rm -rf docs
 
-.PHONY: build run clean
+pack:
+	zip xkocio00.zip -r src data lib Makefile pom.xml readme.txt requirements.pdf
+
+docs:
+	mkdir -p docs
+	mvn javadoc:javadoc
+
+.PHONY: build run clean try all pack docs
