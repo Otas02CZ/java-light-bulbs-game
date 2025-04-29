@@ -5,10 +5,12 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.io.InputStream;
 
 public class MainGUI extends Application {
     private Stage stage;
@@ -31,6 +33,20 @@ public class MainGUI extends Application {
         IntroController controller = loader.getController();
         controller.setStage(this.stage);
 
+        InputStream iconStream = getClass().getResourceAsStream("/images/icons/app/icon_16.png");
+        if (iconStream != null) {
+            stage.getIcons().add(new Image(iconStream));
+        } else {
+            System.out.println("Could not load app icon.");
+        }
+
+        loadAppIcon("/images/icons/app/icon_16.png");
+        loadAppIcon("/images/icons/app/icon_32.png");
+        loadAppIcon("/images/icons/app/icon_64.png");
+        loadAppIcon("/images/icons/app/icon_128.png");
+        loadAppIcon("/images/icons/power_1111.png");
+
+
         Scene scene = new Scene(root);
 
         stage.setTitle("Light Bulbs Game");
@@ -38,6 +54,15 @@ public class MainGUI extends Application {
 
         controller.setup();
         stage.show();
+    }
+
+    private void loadAppIcon(String path) {
+        InputStream iconStream = getClass().getResourceAsStream(path);
+        if (iconStream != null) {
+            stage.getIcons().add(new Image(iconStream));
+        } else {
+            System.out.println("Could not load app icon from path: " + path);
+        }
     }
 
     public static void main(String[] args) {
