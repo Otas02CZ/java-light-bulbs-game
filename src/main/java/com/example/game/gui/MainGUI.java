@@ -32,6 +32,7 @@ public class MainGUI extends Application {
         Parent root = loader.load();
         IntroController controller = loader.getController();
         controller.setStage(this.stage);
+        controller.setHostServices(getHostServices());
 
         InputStream iconStream = getClass().getResourceAsStream("/images/icons/app/icon_16.png");
         if (iconStream != null) {

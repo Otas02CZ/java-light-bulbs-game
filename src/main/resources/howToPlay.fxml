@@ -1,11 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.TextFlow?>
+
+<ScrollPane
+        xmlns="http://javafx.com/javafx/21"
+        xmlns:fx="http://javafx.com/fxml/1"
+        fx:controller="com.example.game.gui.HowToPlayController"
+        fitToWidth="true"
+>
 
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="HowToPlay">
-   <children>
-      <Slider blockIncrement="0.1" layoutX="47.0" max="1.0" showTickLabels="true" />
-   </children>
-</AnchorPane>
+   <VBox spacing="10">
+      <TextFlow>
+         <Text style="-fx-font-size: 24px; -fx-font-weight: bold;">Game Manual</Text>
+      </TextFlow>
+
+      <TextFlow>
+         <Text>
+            Welcome to the built-in manual of game Light Bulbs. Here you can find all necessary
+            information about the game, how to play and about some hidden features.
+         </Text>
+      </TextFlow>
+
+      <TextFlow>
+         <Text style="-fx-font-size: 18px; -fx-font-weight: bold;">Basic Principles</Text>
+      </TextFlow>
+      <TextFlow>
+         <Text>
+            The game is about rotating power source, light bulbs and wires cells until all
+            light bulbs are powered on. You can either load your save and continue or generate
+            a new game. Difficulty can be modified by setting the size of game map, changing timer,
+            amount of empty cells and shuffling strength.
+         </Text>
+      </TextFlow>
+
+      <TextFlow>
+         <Text style="-fx-font-size: 18px; -fx-font-weight: bold;">Controls</Text>
+      </TextFlow>
+      <TextFlow>
+         <Text>
+            The game is controlled by clicking on the game cells, which rotates them. Empty cells
+            can not
+         </Text>
+      </TextFlow>
+
+      <TextFlow>
+         <Text style="-fx-font-size: 18px; -fx-font-weight: bold;">Gameplay Tips</Text>
+      </TextFlow>
+      <TextFlow>
+         <Text>
+            Look for hidden items in the environment. Use your resources wisely and
+            save your progress often!
+         </Text>
+      </TextFlow>
+
+      <TextFlow>
+         <Text style="-fx-font-size: 18px; -fx-font-weight: bold;">Troubleshooting</Text>
+      </TextFlow>
+      <TextFlow>
+         <Text>
+            If you encounter any issues, try restarting the game. Make sure your Java
+            version is up-to-date and compatible with JavaFX 21.
+         </Text>
+      </TextFlow>
+   </VBox>
+</ScrollPane>

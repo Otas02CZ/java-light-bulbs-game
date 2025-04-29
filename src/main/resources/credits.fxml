@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Pos?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.TextFlow?>
+<?import javafx.scene.text.TextAlignment?>
+
+<ScrollPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.game.gui.CreditsController" fitToWidth="true" fitToHeight="true">
+    <VBox alignment="CENTER" spacing="20" styleClass="credits-container">
+        <!-- Game Title -->
+        <Text text="Light Bulbs" styleClass="game-title" />
+
+        <!-- Authors Label -->
+        <Text text="Authors" styleClass="authors-label" />
+
+        <!-- Author Names (each on its own line) -->
+        <VBox alignment="CENTER" spacing="5" styleClass="authors-list">
+            <Text text="Otakar Kočí" styleClass="author-name" />
+            <Text text="Martin Mendl" styleClass="author-name" />
+            <!-- Add more authors as needed -->
+        </VBox>
+
+        <!-- Year -->
+        <Text text="2025" styleClass="year-text" />
+
+        <!-- Block of Justified Text (Using TextFlow for wrapping) -->
+        <TextFlow styleClass="credits-text-flow">
+            <Text text="A simple light bulbs game clone. Rotate power source, bulbs and wires so that everything is powered on!" />
+        </TextFlow>
+
+        <!-- Used Assets / Licenses -->
+        <Text text="Licenses" styleClass="assets-title" />
+
+        <VBox alignment="CENTER" spacing="5" styleClass="assets-list">
+            <Text text="Font PressStart2P" styleClass="asset-item" />
+            <Text text="Font SpaceMono" styleClass="asset-item" />
+            <Text text="Alarm clock icon from icons8.com" styleClass="asset-item" />
+            <Hyperlink text="Alarm clock icon from icons8.com" onAction="#handleAlarmClockLink"/>
+            <!-- Add more assets/licenses as needed -->
+        </VBox>
+    </VBox>
+</ScrollPane>

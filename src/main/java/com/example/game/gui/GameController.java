@@ -90,13 +90,22 @@ public class GameController implements GUIObservable.GUIObserver, TimerObservabl
 
     public void setup(int time, String difficulty) {
         stage.setOnCloseRequest(event -> {
+            String title = "Quitting the Game";
+            String header = "Are you sure you want to quit the game?";
+            String content = "All unsaved progress will be lost!";
+
+            if (!showDialog(Alert.AlertType.CONFIRMATION, title, header, content))
+                event.consume();
+
             game.stopTimer();
             if (helpViewStage != null) {
                 helpViewStage.close();
+                helpViewStage = null;
             }
 
             if (howToPlayStage != null) {
                 howToPlayStage.close();
+                howToPlayStage = null;
             }
         });
 
@@ -120,6 +129,7 @@ public class GameController implements GUIObservable.GUIObserver, TimerObservabl
         stage.setHeight(HEIGHT);
         stage.setMinHeight(HEIGHT);
         stage.setMaxHeight(HEIGHT);
+        stage.setResizable(false);
     }
 
     private void updateUndoRedoLocking() {
@@ -218,7 +228,10 @@ public class GameController implements GUIObservable.GUIObserver, TimerObservabl
 
                 cell.setOnMouseClicked(event -> {
                     if (!locked) {
-                        game.fieldAt(currentRow, currentCol).turn();
+                        ToolField node = game.fieldAt(currentRow, currentCol);
+                        if (node.isEmpty())
+                            return;
+                        node.turn();
                         turns++;
                         updateTurns();
                         updateUndoRedoLocking();
@@ -314,6 +327,7 @@ public class GameController implements GUIObservable.GUIObserver, TimerObservabl
 
         if (helpViewStage != null) {
             helpViewStage.close();
+            helpViewStage = null;
         }
         //TODO: change background
     }
@@ -325,6 +339,7 @@ public class GameController implements GUIObservable.GUIObserver, TimerObservabl
 
         if (helpViewStage != null) {
             helpViewStage.close();
+            helpViewStage = null;
         }
 
         for (int row = 0; row < game.rows(); row++) {
@@ -371,10 +386,12 @@ public class GameController implements GUIObservable.GUIObserver, TimerObservabl
 
         if (helpViewStage != null) {
             helpViewStage.close();
+            helpViewStage = null;
         }
 
         if (howToPlayStage != null) {
             howToPlayStage.close();
+            howToPlayStage = null;
         }
 
         game.stopTimer();
@@ -400,10 +417,12 @@ public class GameController implements GUIObservable.GUIObserver, TimerObservabl
 
         if (helpViewStage != null) {
             helpViewStage.close();
+            helpViewStage = null;
         }
 
         if (howToPlayStage != null) {
             howToPlayStage.close();
+            howToPlayStage = null;
         }
 
         game.stopTimer();
@@ -411,7 +430,28 @@ public class GameController implements GUIObservable.GUIObserver, TimerObservabl
     }
 
     @FXML
-    public void handleShowHowToPlay() {
+    public void handleShowHowToPlay() throws IOException {
+        if (howToPlayStage != null) {
+            return;
+        }
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/howToPlay.fxml"));
+        Parent root = loader.load();
+
+        HowToPlayController howToPlayController = loader.getController();
+
+        howToPlayStage = new Stage();
+
+        howToPlayController.setStage(howToPlayStage);
+        howToPlayController.setup();
+
+        howToPlayStage.setTitle("How To Play");
+        howToPlayStage.setScene(new Scene(root));
+        howToPlayStage.show();
+
+        howToPlayStage.setOnCloseRequest(event -> {
+            howToPlayStage = null;
+        });
 
     }
 

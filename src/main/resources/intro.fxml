@@ -6,8 +6,6 @@
 
 <BorderPane
         styleClass="background"
-        prefHeight="600"
-        prefWidth="800"
         stylesheets="@styles.css"
         xmlns="http://javafx.com/javafx/21"
         xmlns:fx="http://javafx.com/fxml/1"

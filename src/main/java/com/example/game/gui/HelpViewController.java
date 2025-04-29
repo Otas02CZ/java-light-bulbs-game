@@ -53,6 +53,7 @@ public class HelpViewController implements GUIObservable.GUIObserver {
         stage.setHeight(HEIGHT);
         stage.setMinHeight(HEIGHT);
         stage.setMaxHeight(HEIGHT);
+        stage.setResizable(false);
     }
 
     private void generateHelpViewGrid() {

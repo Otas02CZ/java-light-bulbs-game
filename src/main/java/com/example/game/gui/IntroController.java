@@ -1,20 +1,18 @@
 package com.example.game.gui;
 
 import com.example.game.model.Game;
-import javafx.event.ActionEvent;
+import javafx.application.HostServices;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.json.JSONException;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Optional;
 
 public class IntroController {
     private Stage stage;
@@ -22,12 +20,30 @@ public class IntroController {
     private final int WIDTH = 800;
     private final int HEIGHT = 600;
 
+    private Stage howToPlayStage = null;
+    private Stage creditsStage = null;
+
+    private HostServices hostServices = null;
+
     public void setStage(Stage stage) {
         this.stage = stage;
     }
 
+    public void setHostServices(HostServices hostServices) {
+        this.hostServices = hostServices;
+    }
+
     public void setup() {
         setupWindowSize();
+        stage.setOnCloseRequest(event -> {
+            if (howToPlayStage != null) {
+                howToPlayStage.close();
+            }
+
+            if (creditsStage != null) {
+                creditsStage.close();
+            }
+        });
     }
 
     private void setupWindowSize() {
@@ -37,10 +53,21 @@ public class IntroController {
         stage.setHeight(HEIGHT);
         stage.setMinHeight(HEIGHT);
         stage.setMaxHeight(HEIGHT);
+        stage.setResizable(false);
     }
 
     @FXML
-    private void handleNewGame(ActionEvent event) throws IOException {
+    private void handleNewGame() throws IOException {
+        if (howToPlayStage != null) {
+            howToPlayStage.close();
+            howToPlayStage = null;
+        }
+
+        if (creditsStage != null) {
+            creditsStage.close();
+            creditsStage = null;
+        }
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gameSetup.fxml"));
         Parent root = loader.load();
         GameSetupController controller = loader.getController();
@@ -51,7 +78,7 @@ public class IntroController {
     }
 
     @FXML
-    private void handleLoadGame(ActionEvent event) throws IOException {
+    private void handleLoadGame() throws IOException {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Load game");
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("JSON game save file", "*.json"));
@@ -76,6 +103,15 @@ public class IntroController {
                 showInfoDialog(title, header, content);
                 return;
             }
+            if (howToPlayStage != null) {
+                howToPlayStage.close();
+                howToPlayStage = null;
+            }
+
+            if (creditsStage != null) {
+                creditsStage.close();
+                creditsStage = null;
+            }
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/game.fxml"));
             Parent root = loader.load();
@@ -97,17 +133,68 @@ public class IntroController {
     }
 
     @FXML
-    private void handleHowToPlay(ActionEvent event) {
-        // TODO: Show instructions
+    private void handleHowToPlay() throws IOException {
+        if (howToPlayStage != null) {
+            return;
+        }
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/howToPlay.fxml"));
+        Parent root = loader.load();
+
+        HowToPlayController howToPlayController = loader.getController();
+
+        howToPlayStage = new Stage();
+
+        howToPlayController.setStage(howToPlayStage);
+        howToPlayController.setup();
+
+        howToPlayStage.setTitle("How To Play");
+        howToPlayStage.setScene(new Scene(root));
+        howToPlayStage.show();
+
+        howToPlayStage.setOnCloseRequest(event -> {
+            howToPlayStage = null;
+        });
     }
 
     @FXML
-    private void handleCredits(ActionEvent event) {
-        // TODO: Show credits
+    private void handleCredits() throws IOException {
+        if (creditsStage != null) {
+            return;
+        }
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/credits.fxml"));
+        Parent root = loader.load();
+
+        CreditsController creditsController = loader.getController();
+
+        creditsStage = new Stage();
+
+        creditsController.setStage(creditsStage);
+        creditsController.setHostServices(hostServices);
+        creditsController.setup();
+
+        creditsStage.setTitle("Credits");
+        creditsStage.setScene(new Scene(root));
+        creditsStage.show();
+
+        creditsStage.setOnCloseRequest(event -> {
+            creditsStage = null;
+        });
     }
 
     @FXML
-    private void handleQuit(ActionEvent event) {
+    private void handleQuit() {
+        if (howToPlayStage != null) {
+            howToPlayStage.close();
+            howToPlayStage = null;
+        }
+
+        if (creditsStage != null) {
+            creditsStage.close();
+            creditsStage = null;
+        }
+
         stage.close();
     }
 

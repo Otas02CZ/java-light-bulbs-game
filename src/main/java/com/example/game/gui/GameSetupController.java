@@ -76,6 +76,7 @@ public class GameSetupController {
         stage.setHeight(HEIGHT);
         stage.setMinHeight(HEIGHT);
         stage.setMaxHeight(HEIGHT);
+        stage.setResizable(false);
     }
 
     public void initialize() {
