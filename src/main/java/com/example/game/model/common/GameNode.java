@@ -104,8 +104,6 @@ public class GameNode implements ToolField, GameObservable {
 
         connectors = tempConnectors;
 
-
-
         boolean isXshape = north() && west() && south() && east();
         boolean isIShape = (north() && south() && !west() && !east()) ||
                 (east() && west() && !north() && !south());
@@ -302,7 +300,10 @@ public class GameNode implements ToolField, GameObservable {
                 (east() && west() && !north() && !south());
 
         if (north() && south() && east() && west()) return 0;
-        return (!isIShape) ? (-rotation + 4)%4 : (-rotation + 4)%2;
+        int result = (!isIShape) ? (-rotation + 4)%4 : (-rotation + 4)%2;
+
+        return (result + 4)%4;
+
     }
 
     /**
