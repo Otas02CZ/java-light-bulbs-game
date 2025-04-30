@@ -25,6 +25,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Stack;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -45,6 +48,8 @@ public class Game implements ToolEnvironment, GameObservable.GameObserver, Timer
     private final TimerManager timerManager = new TimerManager();
 
     private List<GUIObserver> observers = new ArrayList<>();
+
+    private ScheduledExecutorService solverExecutor = null;
 
     /**
      * Map storing nodes in game world (2D space)
@@ -333,46 +338,38 @@ public class Game implements ToolEnvironment, GameObservable.GameObserver, Timer
         return amountOfBulbs;
     }
 
-    /*
 
-    probebly needs to be run something like this ->
-    private final ExecutorService executor = Executors.newSingleThreadExecutor();
+//    probebly needs to be run something like this ->
 
-    public void solveAsync() {
-        executor.submit(() -> {
-            for (int i = 0; i < rows(); i++) {
-                for (int j = 0; j < cols(); j++) {
-                    GameNode node = map[i][j];
-                    int remainingTurns = node.remainingTurns();
-                    if (remainingTurns == 0) continue;
-                    for (int k = 0; k < remainingTurns; k++) {
-                        node.turn();
-                        notifyGUIObserver(); // Make sure this is thread-safe!
-                    }
-                }
-            }
-        });
-    }
+    public void solve(int timeout) {
+        if (solverExecutor != null) return;
 
-    // Ensure you shut down the executor when done (e.g., on app exit)
-    public void shutdown() {
-        executor.shutdown();
-    }
+        ArrayList<GameNode> nodes = new ArrayList<>();
 
-    */
-
-    public void solve() {
-        // first get all the nodes, that have a bigger than 0 turns to solve
         for (int i = 0; i < rows(); i++) {
             for (int j = 0; j < cols(); j++) {
                 GameNode node = map[i][j];
-                int remainingTurns = node.remainingTurns();
-                if (remainingTurns == 0) continue;
-                for (int k = 0; k < remainingTurns; k++) {
-                    node.turn();
-                    notifyGUIObserver();
+                if (node.remainingTurns() > 0) {
+                    nodes.add(node);
                 }
             }
+        }
+
+        solverExecutor = Executors.newSingleThreadScheduledExecutor();
+        solverExecutor.scheduleAtFixedRate(() -> {
+            GameNode node = nodes.getFirst();
+            node.turn();
+            if (node.remainingTurns() == 0) {
+                nodes.remove(node);
+            }
+        }, 0, timeout, TimeUnit.MILLISECONDS);
+    }
+
+    // Ensure you shut down the executor when done (e.g., on app exit)
+    public void stopSolver() {
+        if (solverExecutor != null) {
+            solverExecutor.shutdownNow();
+            solverExecutor = null;
         }
     }
 

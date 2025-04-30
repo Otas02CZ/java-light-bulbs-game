@@ -29,6 +29,8 @@ public class GameController implements GUIObservable.GUIObserver, TimerObservabl
     private final int WIDTH = 950;
     private final int HEIGHT = 400;
 
+    private final int SOLVE_DELAY = 250;
+
     private Stage stage;
 
     private ToolEnvironment game;
@@ -98,6 +100,7 @@ public class GameController implements GUIObservable.GUIObserver, TimerObservabl
                 event.consume();
 
             game.stopTimer();
+            game.stopSolver();
             if (helpViewStage != null) {
                 helpViewStage.close();
                 helpViewStage = null;
@@ -322,6 +325,7 @@ public class GameController implements GUIObservable.GUIObserver, TimerObservabl
     private void transitionToGameWon() {
         locked = true;
         game.stopTimer();
+        game.stopSolver();
         mainLabel.setText("You won!");
 
         if (helpViewStage != null) {
@@ -334,6 +338,7 @@ public class GameController implements GUIObservable.GUIObserver, TimerObservabl
     private void transitionToGameLost() {
         locked = true;
         game.stopTimer();
+        game.stopSolver();
         mainLabel.setText("You lost!");
 
         if (helpViewStage != null) {
@@ -394,6 +399,7 @@ public class GameController implements GUIObservable.GUIObserver, TimerObservabl
         }
 
         game.stopTimer();
+        game.stopSolver();
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/intro.fxml"));
         Parent root = loader.load();
@@ -425,6 +431,7 @@ public class GameController implements GUIObservable.GUIObserver, TimerObservabl
         }
 
         game.stopTimer();
+        game.stopSolver();
         stage.close();
     }
 
@@ -502,7 +509,7 @@ public class GameController implements GUIObservable.GUIObserver, TimerObservabl
         autoSolving = true;
         game.stopTimer();
 
-        game.solve();
+        game.solve(SOLVE_DELAY);
     }
 
     @FXML

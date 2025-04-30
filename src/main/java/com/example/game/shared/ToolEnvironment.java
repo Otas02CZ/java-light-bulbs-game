@@ -29,5 +29,7 @@ public interface ToolEnvironment {
 
     void save(String path) throws IOException;
 
-    void solve();
+    void solve(int seconds);
+
+    void stopSolver();
 }
