@@ -301,6 +301,7 @@ public class GameNode implements ToolField, GameObservable {
         boolean isIShape = (north() && south() && !west() && !east()) ||
                 (east() && west() && !north() && !south());
 
+        if (north() && south() && east() && west()) return 0;
         return (!isIShape) ? (-rotation + 4)%4 : (-rotation + 4)%2;
     }
 
