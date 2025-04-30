@@ -104,15 +104,30 @@ public class GameNode implements ToolField, GameObservable {
 
         connectors = tempConnectors;
 
+
+
+        boolean isXshape = north() && west() && south() && east();
+        boolean isIShape = (north() && south() && !west() && !east()) ||
+                (east() && west() && !north() && !south());
+
         if (!left) {
             totalRotations++;
+            if (isXshape) return;
+            if (isIShape) {
+                rotation = (rotation + 1) % 2;
+                return;
+            }
             rotation = (rotation + 1) % 4;
             return;
         }
 
         totalRotations--;
+        if (isXshape) return;
+        if (isIShape) {
+            rotation = (rotation + 3) % 2;
+            return;
+        }
         rotation = (rotation + 3)%4;
-
     }
 
     /**
@@ -283,7 +298,10 @@ public class GameNode implements ToolField, GameObservable {
     }
 
     public int remainingTurns() {
-        return (-rotation + 4)%4;
+        boolean isIShape = (north() && south() && !west() && !east()) ||
+                (east() && west() && !north() && !south());
+
+        return (!isIShape) ? (-rotation + 4)%4 : (-rotation + 4)%2;
     }
 
     /**

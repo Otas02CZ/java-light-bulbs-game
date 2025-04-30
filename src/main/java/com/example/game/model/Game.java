@@ -333,8 +333,47 @@ public class Game implements ToolEnvironment, GameObservable.GameObserver, Timer
         return amountOfBulbs;
     }
 
+    /*
+
+    probebly needs to be run something like this ->
+    private final ExecutorService executor = Executors.newSingleThreadExecutor();
+
+    public void solveAsync() {
+        executor.submit(() -> {
+            for (int i = 0; i < rows(); i++) {
+                for (int j = 0; j < cols(); j++) {
+                    GameNode node = map[i][j];
+                    int remainingTurns = node.remainingTurns();
+                    if (remainingTurns == 0) continue;
+                    for (int k = 0; k < remainingTurns; k++) {
+                        node.turn();
+                        notifyGUIObserver(); // Make sure this is thread-safe!
+                    }
+                }
+            }
+        });
+    }
+
+    // Ensure you shut down the executor when done (e.g., on app exit)
+    public void shutdown() {
+        executor.shutdown();
+    }
+
+    */
+
     public void solve() {
-        //TODO:
+        // first get all the nodes, that have a bigger than 0 turns to solve
+        for (int i = 0; i < rows(); i++) {
+            for (int j = 0; j < cols(); j++) {
+                GameNode node = map[i][j];
+                int remainingTurns = node.remainingTurns();
+                if (remainingTurns == 0) continue;
+                for (int k = 0; k < remainingTurns; k++) {
+                    node.turn();
+                    notifyGUIObserver();
+                }
+            }
+        }
     }
 
     /**

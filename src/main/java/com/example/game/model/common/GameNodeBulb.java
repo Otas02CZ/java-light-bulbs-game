@@ -39,7 +39,6 @@ public class GameNodeBulb extends GameNode {
     @Override
     public String toString() {
         return getToString("B");
-
     }
 
     @Override
