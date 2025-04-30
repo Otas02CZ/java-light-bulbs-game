@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.geometry.Pos?>
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
-<?import javafx.scene.text.TextAlignment?>
 
-<ScrollPane xmlns="http://javafx.com/javafx/21"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.example.game.gui.CreditsController" fitToWidth="true" fitToHeight="true">
+<ScrollPane
+        xmlns="http://javafx.com/javafx/21"
+        xmlns:fx="http://javafx.com/fxml/1"
+        fx:controller="com.example.game.gui.CreditsController"
+        stylesheets="styles.css"
+        fitToWidth="true"
+>
     <VBox alignment="CENTER" spacing="20" styleClass="credits-container">
         <!-- Game Title -->
         <Text text="Light Bulbs" styleClass="game-title" />
@@ -20,7 +23,6 @@
         <VBox alignment="CENTER" spacing="5" styleClass="authors-list">
             <Text text="Otakar Kočí" styleClass="author-name" />
             <Text text="Martin Mendl" styleClass="author-name" />
-            <!-- Add more authors as needed -->
         </VBox>
 
         <!-- Year -->
@@ -35,11 +37,16 @@
         <Text text="Licenses" styleClass="assets-title" />
 
         <VBox alignment="CENTER" spacing="5" styleClass="assets-list">
-            <Text text="Font PressStart2P" styleClass="asset-item" />
-            <Text text="Font SpaceMono" styleClass="asset-item" />
-            <Text text="Alarm clock icon from icons8.com" styleClass="asset-item" />
-            <Hyperlink text="Alarm clock icon from icons8.com" onAction="#handleAlarmClockLink"/>
-            <!-- Add more assets/licenses as needed -->
+            <Hyperlink text="Font Space Mono" onAction="#handleSpaceMonoLink"/>
+            <Hyperlink text="Font Press Start 2P" onAction="#handlePressStartLink"/>
+            <Hyperlink text="Alarm clock icon" onAction="#handleAlarmClockLink"/>
+
+            <TextFlow styleClass="credits-text-flow">
+                <Text>
+                    Other icons and backgrounds were created manually or with slight help
+                    from generative AIs for image creation or editing.
+                </Text>
+            </TextFlow>
         </VBox>
     </VBox>
 </ScrollPane>

@@ -12,111 +12,112 @@
         xmlns="http://javafx.com/javafx/21"
         xmlns:fx="http://javafx.com/fxml/1"
         fx:controller="com.example.game.gui.HowToPlayController"
+        stylesheets="styles.css"
         fitToWidth="true"
 >
 
-
-   <VBox spacing="10">
+   <VBox styleClass="howToPlayContainer">
       <TextFlow>
-         <Text style="-fx-font-size: 24px; -fx-font-weight: bold;">Game Manual</Text>
+         <Text styleClass="howToPlayHeading">Game Manual</Text>
       </TextFlow>
 
-      <TextFlow>
+      <TextFlow styleClass="textJustify">
          <Text>
             Welcome to the built-in manual of game Light Bulbs. Here you can find all necessary
-            information about the game, how to play and about some hidden features.
+            information about the game, how to play it aw well as information about some hidden features.
          </Text>
       </TextFlow>
 
       <TextFlow>
-         <Text style="-fx-font-size: 18px; -fx-font-weight: bold;">Basic Principles</Text>
+         <Text styleClass="howToPlayChapter">Basic Principles</Text>
       </TextFlow>
-      <TextFlow>
+      <TextFlow styleClass="textJustify">
          <Text>
             The game is about rotating power source, light bulb and wire cells until all
-            light bulbs are powered on. You can either load your save and continue or generate
-            a new game. Difficulty can be modified by setting the size of game map, changing timer,
-            amount of empty cells and shuffling strength.
+            light bulbs are powered on. So the main goal is to connect all light bulbs to the power source.
+            You can either load your save and continue playing it or generate a new game.
+            Difficulty can be modified by setting the size of a game map, changing timer duration,
+            changing count of empty cells and setting shuffling strength.
          </Text>
       </TextFlow>
 
       <TextFlow>
-         <Text style="-fx-font-size: 18px; -fx-font-weight: bold;">Cell Types</Text>
+         <Text styleClass="howToPlayChapter">Cell Types</Text>
       </TextFlow>
 
       <HBox spacing="10" alignment="CENTER_LEFT">
          <ImageView fx:id="powerSourceImage" fitHeight="50.0" fitWidth="50.0" />
-         <Label text="power source" />
+         <Label text="Power Source" />
       </HBox>
 
       <HBox spacing="10" alignment="CENTER_LEFT">
          <ImageView fx:id="lightBulbImage" fitHeight="50.0" fitWidth="50.0" />
-         <Label text="light bulb" />
+         <Label text="Light Bulb" />
       </HBox>
 
       <HBox spacing="10" alignment="CENTER_LEFT">
          <ImageView fx:id="wireImage" fitHeight="50.0" fitWidth="50.0" />
-         <Label text="wire connector" />
+         <Label text="Wire" />
       </HBox>
 
-      <TextFlow>
+      <TextFlow styleClass="textJustify">
          <Text>
-            These cells come in different configurations which denote connectable sides and whether
-            they are powered on or off.
+            These cell types come in different configurations. The configurations denote which of their
+            sides can be connected and whether they are powered or not. Power source is always powered on.
          </Text>
       </TextFlow>
 
       <TextFlow>
-         <Text style="-fx-font-size: 16px; -fx-font-weight: bold;">Basic Controls</Text>
+         <Text styleClass="howToPlayChapter">Basic Controls</Text>
       </TextFlow>
-      <TextFlow>
+      <TextFlow styleClass="textJustify">
          <Text>
-            The game is controlled by clicking on the game cells, which rotates them. Empty cells
-            can not be rotated. When all light bulbs are lit up, the game is won. You lose the game
-            when the timer timeouts. After the game is finished, the game cells become inactive to your
-            clicks.
+            The game is controlled by clicking on the game cells, which rotates them by 90 degrees. Empty cells
+            cannot be rotated. You win the game when all light bulbs are powered. If you fail to light them before the timer
+            ends, then you lose the game. After the game is finished (won or lost), the game cells become inactive to your clicks.
          </Text>
       </TextFlow>
 
       <TextFlow>
-         <Text style="-fx-font-size: 18px; -fx-font-weight: bold;">Help View</Text>
+         <Text styleClass="howToPlayChapter">Help View</Text>
       </TextFlow>
-      <TextFlow>
+      <TextFlow styleClass="textJustify">
          <Text>
-            Help View can be opened by clicking on the Help View button in the top menu. It opens
-            a new window which shows how many rotations are needed on each cell so that the game is won.
+            Help View shows you how many rotations each game cell needs to be in the right position.
+            It can be opened by pressing its button in the game menu. Finishing the game automatically
+            closes the Help View window. Do not use it too much. That would be cheating!!
          </Text>
       </TextFlow>
 
       <TextFlow>
-         <Text style="-fx-font-size: 18px; -fx-font-weight: bold;">Undo and Redo</Text>
+         <Text styleClass="howToPlayChapter">Undo and Redo</Text>
       </TextFlow>
-      <TextFlow>
+      <TextFlow styleClass="textJustify">
          <Text>
-            If you wish to go back then you can. You can use the Undo button in the top menu. But beware
-            that going back will not decrease your turn count. Redo is also supported and behaves how you would
-            expect.
+            The game allows you to undo and redo your clicks. To use this feature, you can press the buttons
+            with the same names in the game menu. Undo of a turn does not decrease your turn count. This feature
+            disables when the game finishes.
          </Text>
       </TextFlow>
 
       <TextFlow>
-         <Text style="-fx-font-size: 18px; -fx-font-weight: bold;">Auto Solving</Text>
+         <Text styleClass="howToPlayChapter">Auto Solving</Text>
       </TextFlow>
-      <TextFlow>
-         <Text>
+      <TextFlow styleClass="textJustify">
+         <Text styleClass="textJustify">
             If you feel tired, then you can use the built-in auto solver, which will lock the game
             and solve the game step by step. Once turned on, it cannot be disabled
          </Text>
       </TextFlow>
 
       <TextFlow>
-         <Text style="-fx-font-size: 18px; -fx-font-weight: bold;">Gameplay Tips</Text>
+         <Text styleClass="howToPlayChapter">Gameplay Tips</Text>
       </TextFlow>
-      <TextFlow>
-         <Text>
+      <TextFlow styleClass="textJustify">
+         <Text styleClass="textJustify">
             Hovering over a cell shows tooltip with the count of total rotations so far. If you
-            do that after the game finishes information about the remaining amount of turns is
-            also displayed.
+            do that after the game finishes, information about the remaining count of turns is
+            also displayed. State of unfinished game can be also saved and loaded later on.
          </Text>
       </TextFlow>
    </VBox>

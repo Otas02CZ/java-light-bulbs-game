@@ -153,24 +153,6 @@ public class GameSetupController {
 
     @FXML
     private void onPlayClicked() throws IOException {
-        System.out.println("Play clicked!");
-        // Read form values
-        String difficulty = difficultyComboBox.getValue();
-        int size = sizeSpinner.getValue();
-        double emptyCoef = emptySlider.getValue();
-        double shuffleCoef = shuffleSlider.getValue();
-        int time = timeSpinner.getValue();
-
-        System.out.println("Difficulty: " + difficulty);
-        System.out.println("Size: " + size);
-        System.out.println("Empty cells: " + emptyCoef);
-        System.out.println("Shuffle coefficient: " + shuffleCoef);
-        System.out.println("Time: " + time);
-
-        this.startGame();
-    }
-
-    private void startGame() throws IOException {
         String difficulty = difficultyComboBox.getValue();
         int size = sizeSpinner.getValue();
         double emptyCoef = emptySlider.getValue() / 3;

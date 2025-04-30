@@ -5,14 +5,18 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane fx:id="helpViewPane" xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.game.gui.HelpViewController"
-            prefWidth="800.0" prefHeight="600.0" stylesheets="@styles.css"
-            styleClass="background">
+<BorderPane
+        fx:id="helpViewPane"
+        xmlns:fx="http://javafx.com/fxml"
+        fx:controller="com.example.game.gui.HelpViewController"
+        stylesheets="@styles.css"
+        styleClass="background"
+>
 
     <!-- Top: Heading -->
     <top>
         <VBox alignment="CENTER" spacing="5">
-            <Label text="Help View" styleClass="mainText" alignment="CENTER" textAlignment="CENTER"/>
+            <Label styleClass="subtitle" text="Help View" alignment="CENTER" textAlignment="CENTER"/>
         </VBox>
     </top>
 

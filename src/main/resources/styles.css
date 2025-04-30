@@ -1,11 +1,14 @@
 .root {
     -fx-font-family: 'Space Mono Regular';
-    -fx-font-size: 18px;
+    -fx-font-size: 16px;
     -fx-text-fill: black;
 }
 
 .button {
     -fx-cursor: hand;
+    -fx-font-scale: 1.2;
+    -fx-font-size: 20px;
+    -fx-text-fill: black;
 }
 
 .background {
@@ -14,14 +17,19 @@
     -fx-padding: 20px;
 }
 
+.infoLabel {
+    -fx-font-size: 20px;
+    -fx-text-fill: black;
+}
+
 .mainTitle {
     -fx-font-family: 'Press Start 2P Regular';
     -fx-font-size: 48px;
 }
 
-.mainText {
-    -fx-font-family: 'Space Mono Regular';
-    -fx-font-size: 30px;
+.subtitle {
+    -fx-font-size: 36px;
+    -fx-text-fill: black;
 }
 
 .button-text {
@@ -77,7 +85,15 @@
     -fx-border-radius: 7px;
 }
 
+.howToPlayHeading {
+    -fx-font-size: 28px;
+    -fx-text-fill: black;
+}
 
+.howToPlayChapter {
+    -fx-font-size: 22px;
+    -fx-text-fill: black;
+}
 
 /* General container styling for credits */
 .credits-container {
@@ -88,14 +104,12 @@
 /* Styling for the game title */
 .game-title {
     -fx-font-size: 24px;
-    -fx-font-weight: bold;
     -fx-text-alignment: center;
 }
 
 /* Styling for the authors label */
 .authors-label {
     -fx-font-size: 18px;
-    -fx-font-weight: bold;
     -fx-text-alignment: center;
 }
 
@@ -122,7 +136,6 @@
 /* Styling for the assets title */
 .assets-title {
     -fx-font-size: 18px;
-    -fx-font-weight: bold;
     -fx-text-alignment: center;
 }
 
@@ -136,4 +149,16 @@
 .assets-list {
     -fx-alignment: center;
     -fx-spacing: 5;
+}
+
+.textJustify {
+    -fx-font-size: 14px;
+    -fx-text-alignment: justify;
+    -fx-wrap-text: true;
+    -fx-pref-width: 400px; /* Adjust the preferred width for wrapping */
+    -fx-padding: 0 0 15 0;
+}
+
+.howToPlayContainer {
+    -fx-padding: 20;
 }

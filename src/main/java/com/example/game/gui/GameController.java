@@ -26,7 +26,7 @@ public class GameController implements GUIObservable.GUIObserver, TimerObservabl
     private final int CELL_SIZE = 40;
     private final int PADD_HEIGHT = 300;
 
-    private final int WIDTH = 900;
+    private final int WIDTH = 950;
     private final int HEIGHT = 400;
 
     private Stage stage;
@@ -167,7 +167,6 @@ public class GameController implements GUIObservable.GUIObserver, TimerObservabl
     }
 
     public void updateTimer(int seconds) {
-        System.out.println("Timer update: " + seconds);
         String timeLeft = String.format("%02d:%02d", seconds / 60, seconds % 60);
         timerLabel.setText(timeLeft);
 

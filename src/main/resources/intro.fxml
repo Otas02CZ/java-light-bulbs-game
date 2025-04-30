@@ -22,7 +22,7 @@
       <VBox alignment="CENTER" spacing="20">
          <Button styleClass="button-text" onAction="#handleNewGame" text="New Game" textAlignment="CENTER" />
          <Button styleClass="button-text" onAction="#handleLoadGame" text="Load Game" />
-         <Button styleClass="button-text" onAction="#handleHowToPlay" text="How to Play?" />
+         <Button styleClass="button-text" onAction="#handleHowToPlay" text="How to Play" />
          <Button styleClass="button-text" onAction="#handleCredits" text="Credits" />
          <Button styleClass="button-text" onAction="#handleQuit" text="Quit" />
       </VBox>
@@ -33,8 +33,8 @@
       <HBox spacing="10" BorderPane.alignment="BOTTOM_CENTER">
          <!-- Authors section on the left -->
          <VBox alignment="BOTTOM_LEFT">
-            <Label text="Otakar Kočí" alignment="CENTER" textAlignment="CENTER" />
-            <Label text="Martin Mendl" alignment="CENTER" textAlignment="CENTER" />
+            <Label styleClass="infoLabel" text="Otakar Kočí" alignment="CENTER" textAlignment="CENTER" />
+            <Label styleClass="infoLabel" text="Martin Mendl" alignment="CENTER" textAlignment="CENTER" />
          </VBox>
 
          <!-- This Region acts as a spacer to push the year label to the far right -->
@@ -42,7 +42,7 @@
 
          <!-- Year label directly at the bottom-right -->
          <VBox alignment="BOTTOM_LEFT">
-            <Label text="2025" alignment="CENTER" textAlignment="CENTER" />
+            <Label styleClass="infoLabel" text="2025" alignment="CENTER" textAlignment="CENTER" />
          </VBox>
 
       </HBox>
