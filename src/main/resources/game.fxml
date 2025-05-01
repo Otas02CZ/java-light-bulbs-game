@@ -14,9 +14,9 @@
                 <Button mnemonicParsing="false" onAction="#handleToMainMenu" text="Main Menu" maxWidth="Infinity" HBox.hgrow="ALWAYS" />
                 <Button mnemonicParsing="false" onAction="#handleQuit" text="Quit" maxWidth="Infinity" HBox.hgrow="ALWAYS" />
                 <Button mnemonicParsing="false" onAction="#handleShowHowToPlay" text="How To Play" maxWidth="Infinity" HBox.hgrow="ALWAYS" />
-                <Button mnemonicParsing="false" onAction="#handleShowHelpView" text="Help View" maxWidth="Infinity" HBox.hgrow="ALWAYS" />
-                <Button mnemonicParsing="false" onAction="#handleSolve" text="Solve" maxWidth="Infinity" HBox.hgrow="ALWAYS" />
-                <Button mnemonicParsing="false" onAction="#handleSave" text="Save" maxWidth="Infinity" HBox.hgrow="ALWAYS" />
+                <Button fx:id="helpViewButton" mnemonicParsing="false" onAction="#handleShowHelpView" text="Help View" maxWidth="Infinity" HBox.hgrow="ALWAYS" />
+                <Button fx:id="solveButton" mnemonicParsing="false" onAction="#handleSolve" text="Auto Solving" maxWidth="Infinity" HBox.hgrow="ALWAYS" />
+                <Button fx:id="saveButton" mnemonicParsing="false" onAction="#handleSave" text="Save" maxWidth="Infinity" HBox.hgrow="ALWAYS" />
                 <Button fx:id="undoButton" mnemonicParsing="false" onAction="#handleUndo" text="Undo" maxWidth="Infinity" HBox.hgrow="ALWAYS" />
                 <Button fx:id="redoButton" mnemonicParsing="false" onAction="#handleRedo" text="Redo" maxWidth="Infinity" HBox.hgrow="ALWAYS" />
             </ToolBar>
