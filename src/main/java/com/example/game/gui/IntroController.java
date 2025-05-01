@@ -1,7 +1,6 @@
 package com.example.game.gui;
 
 import com.example.game.model.Game;
-import javafx.application.HostServices;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,28 +12,17 @@ import org.json.JSONException;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
+import java.util.logging.Level;
 
-public class IntroController {
-    private Stage stage;
-
-    private final int WIDTH = 800;
-    private final int HEIGHT = 600;
+public class IntroController extends Controller {
 
     private Stage howToPlayStage = null;
     private Stage creditsStage = null;
 
-    private HostServices hostServices = null;
-
-    public void setStage(Stage stage) {
-        this.stage = stage;
-    }
-
-    public void setHostServices(HostServices hostServices) {
-        this.hostServices = hostServices;
-    }
-
     public void setup() {
-        setupWindowSize();
+        super.setup();
+
         stage.setOnCloseRequest(event -> {
             if (howToPlayStage != null) {
                 howToPlayStage.close();
@@ -43,17 +31,9 @@ public class IntroController {
             if (creditsStage != null) {
                 creditsStage.close();
             }
-        });
-    }
 
-    private void setupWindowSize() {
-        stage.setWidth(WIDTH);
-        stage.setMinWidth(WIDTH);
-        stage.setMaxWidth(WIDTH);
-        stage.setHeight(HEIGHT);
-        stage.setMinHeight(HEIGHT);
-        stage.setMaxHeight(HEIGHT);
-        stage.setResizable(false);
+            logger.log(Level.INFO, "Closing GUI from Intro scene.");
+        });
     }
 
     @FXML
@@ -68,13 +48,24 @@ public class IntroController {
             creditsStage = null;
         }
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gameSetup.fxml"));
+        URL gameSetupFXML = getClass().getResource("/gameSetup.fxml");
+        if (gameSetupFXML == null) {
+            logger.log(Level.SEVERE, "Failed to load gameSetup.fxml file.");
+            String title = "Failed to load gameSetup";
+            String header = "Failed to load gameSetup";
+            String content = "Please try again.";
+            showDialog(Alert.AlertType.WARNING, title, header, content);
+            return;
+        }
+
+        FXMLLoader loader = new FXMLLoader(gameSetupFXML);
         Parent root = loader.load();
         GameSetupController controller = loader.getController();
         controller.setStage(stage);
         controller.setup();
         Scene scene = new Scene(root);
         stage.setScene(scene);
+        logger.log(Level.INFO, "Switched to Game Setup scene.");
     }
 
     @FXML
@@ -84,23 +75,25 @@ public class IntroController {
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("JSON game save file", "*.json"));
         File selectedFile = fileChooser.showOpenDialog(stage);
         if (selectedFile == null) {
+            logger.log(Level.INFO, "No file selected.");
             String title = "File not selected";
             String header = "No file selected";
             String content = "Please try again.";
-            showInfoDialog(title, header, content);
+            showDialog(Alert.AlertType.WARNING, title, header, content);
             return;
         }
 
         String path = selectedFile.getAbsolutePath();
-        System.out.println("Loading game from file: " + path);
+        logger.log(Level.INFO, "Loading game save from file: " + path);
 
         try {
             Game game = Game.load(path);
             if (game == null) {
+                logger.log(Level.INFO, "Failed to load game save from file: " + path);
                 String title = "Failed to load game";
                 String header = "File is not a valid game save file";
                 String content = "Please try again.";
-                showInfoDialog(title, header, content);
+                showDialog(Alert.AlertType.WARNING, title, header, content);
                 return;
             }
             if (howToPlayStage != null) {
@@ -113,7 +106,17 @@ public class IntroController {
                 creditsStage = null;
             }
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/game.fxml"));
+            URL gameFXML = getClass().getResource("/game.fxml");
+            if (gameFXML == null) {
+                logger.log(Level.SEVERE, "Failed to load game.fxml file.");
+                String title = "Failed to load game";
+                String header = "Failed to load game";
+                String content = "Please try again.";
+                showDialog(Alert.AlertType.WARNING, title, header, content);
+                return;
+            }
+
+            FXMLLoader loader = new FXMLLoader(gameFXML);
             Parent root = loader.load();
             GameController controller = loader.getController();
             controller.setStage(this.stage);
@@ -122,12 +125,15 @@ public class IntroController {
             Scene scene = new Scene(root);
             stage.setScene(scene);
             controller.setup(0, "From save");
+            logger.log(Level.INFO, "Switched to Game scene.");
 
         } catch (JSONException e) {
+            logger.log(Level.WARNING, "Failed to load game save from file: " + path);
             String title = "Failed to load game";
             String header = "File is not a valid game save file";
             String content = "Please try again.";
-            showInfoDialog(title, header, content);
+            showDialog(Alert.AlertType.WARNING, title, header, content);
+            logger.log(Level.WARNING, "Failed to load game save from file: " + path, e);
         }
 
     }
@@ -138,9 +144,17 @@ public class IntroController {
             return;
         }
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/howToPlay.fxml"));
-        Parent root = loader.load();
+        URL howToPlayFXML = getClass().getResource("/howToPlay.fxml");
+        if (howToPlayFXML == null) {
+            logger.log(Level.SEVERE, "Failed to load howToPlay.fxml file.");
+            String title = "Failed to load howToPlay";
+            String header = "Failed to load howToPlay";
+            String content = "Please try again.";
+            showDialog(Alert.AlertType.WARNING, title, header, content);
+        }
 
+        FXMLLoader loader = new FXMLLoader(howToPlayFXML);
+        Parent root = loader.load();
         HowToPlayController howToPlayController = loader.getController();
 
         howToPlayStage = new Stage();
@@ -151,9 +165,11 @@ public class IntroController {
         howToPlayStage.setTitle("How To Play");
         howToPlayStage.setScene(new Scene(root));
         howToPlayStage.show();
+        logger.log(Level.INFO, "Opened How To Play stage.");
 
         howToPlayStage.setOnCloseRequest(event -> {
             howToPlayStage = null;
+            logger.log(Level.INFO, "Closing How To Play stage.");
         });
     }
 
@@ -163,9 +179,18 @@ public class IntroController {
             return;
         }
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/credits.fxml"));
-        Parent root = loader.load();
+        URL creditsFXML = getClass().getResource("/credits.fxml");
+        if (creditsFXML == null) {
+            logger.log(Level.SEVERE, "Failed to load credits.fxml file.");
+            String title = "Failed to load credits";
+            String header = "Failed to load credits";
+            String content = "Please try again.";
+            showDialog(Alert.AlertType.WARNING, title, header, content);
+            return;
+        }
 
+        FXMLLoader loader = new FXMLLoader(creditsFXML);
+        Parent root = loader.load();
         CreditsController creditsController = loader.getController();
 
         creditsStage = new Stage();
@@ -177,9 +202,11 @@ public class IntroController {
         creditsStage.setTitle("Credits");
         creditsStage.setScene(new Scene(root));
         creditsStage.show();
+        logger.log(Level.INFO, "Opened Credits stage.");
 
         creditsStage.setOnCloseRequest(event -> {
             creditsStage = null;
+            logger.log(Level.INFO, "Closing Credits stage.");
         });
     }
 
@@ -196,15 +223,6 @@ public class IntroController {
         }
 
         stage.close();
-    }
-
-    private void showInfoDialog(String title, String header, String content) {
-        // Create a confirmation alert
-        Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.setTitle(title);
-        alert.setHeaderText(header);
-        alert.setContentText(content);
-
-        alert.show();
+        logger.log(Level.INFO, "Closing GUI from Intro scene.");
     }
 }

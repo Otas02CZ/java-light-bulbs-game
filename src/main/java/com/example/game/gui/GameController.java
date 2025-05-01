@@ -19,25 +19,20 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Optional;
+import java.io.InputStream;
+import java.net.URL;
+import java.util.logging.Level;
 
-public class GameController implements GUIObservable.GUIObserver, TimerObservable.TimerObserver {
+public class GameController extends Controller implements GUIObservable.GUIObserver, TimerObservable.TimerObserver {
 
     private final int CELL_SIZE = 40;
     private final int PADD_HEIGHT = 300;
 
-    private final int WIDTH = 1000;
-    private final int HEIGHT = 400;
-
     private final int SOLVE_DELAY = 250;
-
-    private Stage stage;
 
     private ToolEnvironment game;
 
     private int turns;
-
-    private ImageCache imageCache = new ImageCache();
 
     private ImageView[][] imageGrid = null;
     private Tooltip[][] tooltipGrid = null;
@@ -91,10 +86,6 @@ public class GameController implements GUIObservable.GUIObserver, TimerObservabl
     @FXML
     private Label litUpLabel;
 
-    public void setStage(Stage stage) {
-        this.stage = stage;
-    }
-
     public void setGameModel(Game game) {
         this.game = game;
         game.setupGUIObserver(this);
@@ -102,13 +93,19 @@ public class GameController implements GUIObservable.GUIObserver, TimerObservabl
     }
 
     public void setup(int time, String difficulty) {
-        stage.setOnCloseRequest(event -> {
-            String title = "Quitting the Game";
-            String header = "Are you sure you want to quit the game?";
-            String content = "All unsaved progress will be lost!";
+        WIDTH = 1100;
+        HEIGHT = 400;
+        super.setup();
 
-            if (!showDialog(Alert.AlertType.CONFIRMATION, title, header, content))
-                event.consume();
+        stage.setOnCloseRequest(event -> {
+            if (!game.hasWon()) {
+                String title = "Quitting the Game";
+                String header = "Are you sure you want to quit the game?";
+                String content = "All unsaved progress will be lost!";
+
+                if (!showDialog(Alert.AlertType.CONFIRMATION, title, header, content))
+                    event.consume();
+            }
 
             game.stopTimer();
             game.stopSolver();
@@ -126,24 +123,12 @@ public class GameController implements GUIObservable.GUIObserver, TimerObservabl
         if (time != 0)
             game.startTimer(time);
 
-        setupWindowSize();
         setupTimerIcon();
         updateTurns();
         setDifficulty(difficulty);
         updateLitUp();
         generateGameGrid();
         updateUndoRedoLocking();
-        // todo?
-    }
-
-    private void setupWindowSize() {
-        stage.setWidth(WIDTH);
-        stage.setMinWidth(WIDTH);
-        stage.setMaxWidth(WIDTH);
-        stage.setHeight(HEIGHT);
-        stage.setMinHeight(HEIGHT);
-        stage.setMaxHeight(HEIGHT);
-        stage.setResizable(false);
     }
 
     private void updateUndoRedoLocking() {
@@ -159,11 +144,22 @@ public class GameController implements GUIObservable.GUIObserver, TimerObservabl
     }
 
     private void setupTimerIcon() {
-        Image image = new Image(getClass().getResource("/images/icons/alarm_icon.png").toExternalForm());
-
-        timerIcon.setImage(image);
         timerIcon.setFitWidth(40);
         timerIcon.setFitHeight(40);
+
+        InputStream alarmIconStream = getClass().getResourceAsStream("/images/icons/alarm_icon.png");
+        if (alarmIconStream == null) {
+            logger.log(Level.SEVERE, "Failed to load alarm_icon.png");
+            String title = "Failed to load alarm_icon.png";
+            String header = "Failed to load alarm_icon.png";
+            String content = "Please try again.";
+            showDialog(Alert.AlertType.WARNING, title, header, content);
+            return;
+        }
+
+        Image image = new Image(alarmIconStream);
+
+        timerIcon.setImage(image);
     }
 
     private void updateTurns() {
@@ -256,6 +252,7 @@ public class GameController implements GUIObservable.GUIObserver, TimerObservabl
                 imageGrid[row][col] = cell;
             }
         }
+        logger.log(Level.INFO, "Generated game grid.");
 
         // Calculate preferred size for the Stage
         double gridHeight = (CELL_SIZE) * rows;
@@ -264,6 +261,7 @@ public class GameController implements GUIObservable.GUIObserver, TimerObservabl
         stage.setHeight(totalHeight);
         stage.setMinHeight(totalHeight);
         stage.setMaxHeight(totalHeight);
+        logger.log(Level.INFO, "Game Scene size adjusted.");
     }
 
     private void updateCellTooltip(int row, int col, String text) {
@@ -323,9 +321,9 @@ public class GameController implements GUIObservable.GUIObserver, TimerObservabl
                 imageNameBuilder.append("0");
         }
 
-        imageNameBuilder.append(".png");
+        imageNameBuilder.append(".jpg");
 
-        Image image = this.imageCache.getImage(imageNameBuilder.toString());
+        Image image = ImageCache.getInstance().getImage(imageNameBuilder.toString());
 
         if (image == null) {
             return;
@@ -384,34 +382,18 @@ public class GameController implements GUIObservable.GUIObserver, TimerObservabl
         //TODO: change background
     }
 
-    private boolean showDialog(Alert.AlertType type, String title, String header, String content) {
-        // Create a confirmation alert
-        Alert alert = new Alert(type);
-        alert.setTitle(title);
-        alert.setHeaderText(header);
-        alert.setContentText(content);
 
-        if (type == Alert.AlertType.CONFIRMATION) {
-            // Show the dialog and wait for user interaction
-            Optional<ButtonType> result = alert.showAndWait();
-
-            // Check the result
-            return result.isPresent() && result.get() == ButtonType.OK;
-        }
-
-        alert.show();
-
-        return false;
-    }
 
 
     @FXML
     public void handleToMainMenu() throws IOException {
-        String title = "Going back to Main Menu";
-        String header = "Are you sure you want to go back to Main Menu?";
-        String content = "All unsaved progress will be lost!";
-        if (!showDialog(Alert.AlertType.CONFIRMATION, title, header, content))
-            return;
+        if (!game.hasWon()) {
+            String title = "Going back to Main Menu";
+            String header = "Are you sure you want to go back to Main Menu?";
+            String content = "All unsaved progress will be lost!";
+            if (!showDialog(Alert.AlertType.CONFIRMATION, title, header, content))
+                return;
+        }
 
         if (helpViewStage != null) {
             helpViewStage.close();
@@ -426,7 +408,17 @@ public class GameController implements GUIObservable.GUIObserver, TimerObservabl
         game.stopTimer();
         game.stopSolver();
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/intro.fxml"));
+        URL introFXML = getClass().getResource("/intro.fxml");
+        if (introFXML == null) {
+            logger.log(Level.SEVERE, "Failed to load intro.fxml");
+            String title = "Failed to load intro.fxml";
+            String header = "Failed to load intro.fxml";
+            String content = "Please try again.";
+            showDialog(Alert.AlertType.WARNING, title, header, content);
+            return;
+        }
+
+        FXMLLoader loader = new FXMLLoader(introFXML);
         Parent root = loader.load();
         IntroController controller = loader.getController();
         controller.setStage(this.stage);
@@ -434,15 +426,18 @@ public class GameController implements GUIObservable.GUIObserver, TimerObservabl
 
         Scene scene = new Scene(root);
         stage.setScene(scene);
+        logger.log(Level.INFO, "Switched to Main Menu scene.");
     }
 
     @FXML
     public void handleQuit() {
-        String title = "Quitting the Game";
-        String header = "Are you sure you want to quit the game?";
-        String content = "All unsaved progress will be lost!";
-        if (!showDialog(Alert.AlertType.CONFIRMATION, title, header, content))
-            return;
+        if (!game.hasWon()) {
+            String title = "Quitting the Game";
+            String header = "Are you sure you want to quit the game?";
+            String content = "All unsaved progress will be lost!";
+            if (!showDialog(Alert.AlertType.CONFIRMATION, title, header, content))
+                return;
+        }
 
         if (helpViewStage != null) {
             helpViewStage.close();
@@ -457,6 +452,7 @@ public class GameController implements GUIObservable.GUIObserver, TimerObservabl
         game.stopTimer();
         game.stopSolver();
         stage.close();
+        logger.log(Level.INFO, "Quitting game.");
     }
 
     @FXML
@@ -465,7 +461,17 @@ public class GameController implements GUIObservable.GUIObserver, TimerObservabl
             return;
         }
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/howToPlay.fxml"));
+        URL howToPlayFXML = getClass().getResource("/howToPlay.fxml");
+        if (howToPlayFXML == null) {
+            logger.log(Level.SEVERE, "Failed to load howToPlay.fxml");
+            String title = "Failed to load howToPlay.fxml";
+            String header = "Failed to load howToPlay.fxml";
+            String content = "Please try again.";
+            showDialog(Alert.AlertType.WARNING, title, header, content);
+            return;
+        }
+
+        FXMLLoader loader = new FXMLLoader(howToPlayFXML);
         Parent root = loader.load();
 
         HowToPlayController howToPlayController = loader.getController();
@@ -478,9 +484,11 @@ public class GameController implements GUIObservable.GUIObserver, TimerObservabl
         howToPlayStage.setTitle("How To Play");
         howToPlayStage.setScene(new Scene(root));
         howToPlayStage.show();
+        logger.log(Level.INFO, "Opened How To Play stage.");
 
         howToPlayStage.setOnCloseRequest(event -> {
             howToPlayStage = null;
+            logger.log(Level.INFO, "Closed How To Play stage.");
         });
 
     }
@@ -491,9 +499,18 @@ public class GameController implements GUIObservable.GUIObserver, TimerObservabl
             return;
         }
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/helpView.fxml"));
-        Parent root = loader.load();
+        URL helpViewFXML = getClass().getResource("/helpView.fxml");
+        if (helpViewFXML == null) {
+            logger.log(Level.SEVERE, "Failed to load helpView.fxml");
+            String title = "Failed to load helpView.fxml";
+            String header = "Failed to load helpView.fxml";
+            String content = "Please try again.";
+            showDialog(Alert.AlertType.WARNING, title, header, content);
+            return;
+        }
 
+        FXMLLoader loader = new FXMLLoader(helpViewFXML);
+        Parent root = loader.load();
         HelpViewController helpViewController = loader.getController();
 
         helpViewStage = new Stage();
@@ -505,9 +522,11 @@ public class GameController implements GUIObservable.GUIObserver, TimerObservabl
         helpViewStage.setTitle("Help View");
         helpViewStage.setScene(new Scene(root));
         helpViewStage.show();
+        logger.log(Level.INFO, "Opened Help View stage.");
 
         helpViewStage.setOnCloseRequest(event -> {
             helpViewStage = null;
+            logger.log(Level.INFO, "Closed Help View stage.");
         });
     }
 
@@ -547,6 +566,7 @@ public class GameController implements GUIObservable.GUIObserver, TimerObservabl
         File file = fileChooser.showSaveDialog(stage);
 
         if (file == null) {
+            logger.log(Level.INFO, "No file selected.");
             String title = "Save file error";
             String header = "No file selected";
             String content = "Please try again.";
@@ -555,7 +575,7 @@ public class GameController implements GUIObservable.GUIObserver, TimerObservabl
         }
 
         String path = file.getAbsolutePath();
-        System.out.println("Saving game to file: " + path);
+        logger.log(Level.INFO, "Saving game to file: " + path);
 
         try {
             game.save(path);
@@ -566,6 +586,7 @@ public class GameController implements GUIObservable.GUIObserver, TimerObservabl
             showDialog(Alert.AlertType.INFORMATION, title, header, content);
 
         } catch (IOException e) {
+            logger.log(Level.WARNING, "Failed to save game to file: " + path, e);
             String title = "Failed to save game";
             String header = "File is not a valid game save file";
             String content = "Please try again.";

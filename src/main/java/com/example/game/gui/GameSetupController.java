@@ -6,19 +6,17 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Slider;
-import javafx.scene.control.Spinner;
-import javafx.scene.control.SpinnerValueFactory;
-import javafx.stage.Stage;
+import javafx.scene.control.*;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.HashMap;
+import java.util.logging.Level;
 
 /**
  *
  */
-public class GameSetupController {
+public class GameSetupController extends Controller {
 
     private final int SIZE_MIN = 5;
     private final int SIZE_MAX = 15;
@@ -26,12 +24,9 @@ public class GameSetupController {
     private final int TIME_MAX = 60;
     private final int SHUFFLE_CONST = 1;
 
-    private final int WIDTH = 800;
-    private final int HEIGHT = 600;
-
-    private Stage stage;
-
     private HashMap<String, GameConfig> defaultConfigs;
+
+    private boolean disableConfigChecks = false;
 
     @FXML
     private ComboBox<String> difficultyComboBox;
@@ -53,7 +48,7 @@ public class GameSetupController {
     }
 
     public void setup() {
-        setupWindowSize();
+        super.setup();
         initialize();
     }
 
@@ -63,20 +58,6 @@ public class GameSetupController {
         this.defaultConfigs.put("Easy", new GameConfig("Easy", 5, 0.7, 0.3, 10));
         this.defaultConfigs.put("Medium", new GameConfig("Medium", 10, 0.25, 0.6, 10));
         this.defaultConfigs.put("Hard", new GameConfig("Hard", 15, 0.1, 1, 15));
-    }
-
-    public void setStage(Stage stage) {
-        this.stage = stage;
-    }
-
-    private void setupWindowSize() {
-        stage.setWidth(WIDTH);
-        stage.setMinWidth(WIDTH);
-        stage.setMaxWidth(WIDTH);
-        stage.setHeight(HEIGHT);
-        stage.setMinHeight(HEIGHT);
-        stage.setMaxHeight(HEIGHT);
-        stage.setResizable(false);
     }
 
     public void initialize() {
@@ -89,11 +70,14 @@ public class GameSetupController {
         GameConfig defaultConfig = this.defaultConfigs.get("Medium");
         difficultyComboBox.setValue(defaultConfig.getName());
 
-        emptySlider.setValue(defaultConfig.getEmptyCoef());
-        shuffleSlider.setValue(defaultConfig.getShuffleCoef());
+        emptySlider.setValue(defaultConfig.getEmptyCoefficient());
+        shuffleSlider.setValue(defaultConfig.getShuffleCoefficient());
 
         setupSpinner(sizeSpinner, SIZE_MIN, SIZE_MAX, defaultConfig.getSize());
         setupSpinner(timeSpinner, TIME_MIN, TIME_MAX, defaultConfig.getMaxTime());
+
+        setupConfigListeners();
+        logger.log(java.util.logging.Level.INFO, "Game Setup initialized.");
     }
 
     private void setupSpinner(Spinner<Integer> spinner, int min, int max, int initialValue) {
@@ -110,6 +94,64 @@ public class GameSetupController {
         });
     }
 
+    private void setupConfigListeners() {
+        sizeSpinner.valueProperty().addListener((obs, oldValue, newValue) -> {
+            if (disableConfigChecks) return;
+
+            String difficulty = difficultyComboBox.getValue();
+
+            if (difficulty == null || difficulty.equals("Custom"))
+                return;
+
+            int curDiffSize = defaultConfigs.get(difficultyComboBox.getValue()).getSize();
+            if (newValue != curDiffSize) {
+                difficultyComboBox.setValue("Custom");
+            }
+        });
+
+        timeSpinner.valueProperty().addListener((obs, oldValue, newValue) -> {
+            if (disableConfigChecks) return;
+
+            String difficulty = difficultyComboBox.getValue();
+
+            if (difficulty == null || difficulty.equals("Custom"))
+                return;
+
+            int curDiffTime = defaultConfigs.get(difficultyComboBox.getValue()).getMaxTime();
+            if (newValue != curDiffTime) {
+                difficultyComboBox.setValue("Custom");
+            }
+        });
+
+        emptySlider.valueProperty().addListener((obs, oldValue, newValue) -> {
+            if (disableConfigChecks) return;
+
+            String difficulty = difficultyComboBox.getValue();
+
+            if (difficulty == null || difficulty.equals("Custom"))
+                return;
+
+            double curDiffEmpty = defaultConfigs.get(difficultyComboBox.getValue()).getEmptyCoefficient();
+            if (newValue.doubleValue() != curDiffEmpty) {
+                difficultyComboBox.setValue("Custom");
+            }
+        });
+
+        shuffleSlider.valueProperty().addListener((obs, oldValue, newValue) -> {
+            if (disableConfigChecks) return;
+
+            String difficulty = difficultyComboBox.getValue();
+
+            if (difficulty == null || difficulty.equals("Custom"))
+                return;
+
+            double curDiffShuffle = defaultConfigs.get(difficultyComboBox.getValue()).getEmptyCoefficient();
+            if (newValue.doubleValue() != curDiffShuffle) {
+                difficultyComboBox.setValue("Custom");
+            }
+        });
+    }
+
     private void commitEditorText(Spinner<Integer> spinner, int min, int max) {
         String text = spinner.getEditor().getText();
         try {
@@ -117,7 +159,9 @@ public class GameSetupController {
             // Clamp value into allowed range
             if (entered < min) entered = min;
             if (entered > max) entered = max;
+            disableConfigChecks = true;
             spinner.getValueFactory().setValue(entered);
+            disableConfigChecks = false;
         } catch (NumberFormatException e) {
             // Reset to current spinner value if invalid input
             spinner.getEditor().setText(spinner.getValue().toString());
@@ -133,21 +177,34 @@ public class GameSetupController {
 
         GameConfig config = this.defaultConfigs.get(difficulty);
 
+        disableConfigChecks = true;
         sizeSpinner.getValueFactory().setValue(config.getSize());
-        emptySlider.setValue(config.getEmptyCoef());
-        shuffleSlider.setValue(config.getShuffleCoef());
+        emptySlider.setValue(config.getEmptyCoefficient());
+        shuffleSlider.setValue(config.getShuffleCoefficient());
         timeSpinner.getValueFactory().setValue(config.getMaxTime());
+        disableConfigChecks = false;
     }
 
     @FXML
     private void onBackClicked() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/intro.fxml"));
+        URL introFXML = getClass().getResource("/intro.fxml");
+        if (introFXML == null) {
+            logger.log(Level.SEVERE, "Failed to load intro.fxml file.");
+            String title = "Failed to load intro";
+            String header = "Failed to load intro";
+            String content = "Try again or restart.";
+            showDialog(Alert.AlertType.WARNING, title, header, content);
+            return;
+        }
+
+        FXMLLoader loader = new FXMLLoader(introFXML);
         Parent root = loader.load();
         IntroController controller = loader.getController();
         controller.setStage(this.stage);
         controller.setup();
         Scene scene = new Scene(root);
         stage.setScene(scene);
+        logger.log(java.util.logging.Level.INFO, "Switched to Intro scene.");
     }
 
     @FXML
@@ -162,7 +219,17 @@ public class GameSetupController {
 
         Game game = Game.generate(size, size, (float) emptyCoef, shuffles);
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/game.fxml"));
+        URL gameFXML = getClass().getResource("/game.fxml");
+        if (gameFXML == null) {
+            logger.log(Level.SEVERE, "Failed to load game.fxml file.");
+            String title = "Failed to load game";
+            String header = "Failed to load game";
+            String content = "Try again or restart.";
+            showDialog(Alert.AlertType.WARNING, title, header, content);
+            return;
+        }
+
+        FXMLLoader loader = new FXMLLoader(gameFXML);
         Parent root = loader.load();
         GameController controller = loader.getController();
         controller.setStage(this.stage);
@@ -171,5 +238,6 @@ public class GameSetupController {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         controller.setup(time*60, difficulty);
+        logger.log(java.util.logging.Level.INFO, "Switched to Game scene.");
     }
 }

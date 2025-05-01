@@ -9,17 +9,14 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.TextAlignment;
-import javafx.stage.Stage;
 
-public class HelpViewController implements GUIObservable.GUIObserver {
+import java.util.logging.Level;
 
-    private final int WIDTH = 260;
-    private final int HEIGHT = 300;
+public class HelpViewController extends Controller implements GUIObservable.GUIObserver {
+
     private final int CELL_SIZE = 40;
     private final int PADD_HEIGHT = 150;
     private final int PADD_WIDTH = 80;
-
-    private Stage stage = null;
 
     private ToolEnvironment game = null;
 
@@ -31,28 +28,16 @@ public class HelpViewController implements GUIObservable.GUIObserver {
     @FXML
     private BorderPane helpViewPane;
 
-    public void setStage(Stage stage) {
-        this.stage = stage;
-    }
-
     public void setGame(Game game) {
         this.game = game;
         game.setupGUIObserver(this);
     }
 
     public void setup() {
-        setupWindowSize();
+        WIDTH = 260;
+        HEIGHT = 300;
+        super.setup();
         generateHelpViewGrid();
-    }
-
-    private void setupWindowSize() {
-        stage.setWidth(WIDTH);
-        stage.setMinWidth(WIDTH);
-        stage.setMaxWidth(WIDTH);
-        stage.setHeight(HEIGHT);
-        stage.setMinHeight(HEIGHT);
-        stage.setMaxHeight(HEIGHT);
-        stage.setResizable(false);
     }
 
     private void generateHelpViewGrid() {
@@ -80,6 +65,7 @@ public class HelpViewController implements GUIObservable.GUIObserver {
                 helpViewGrid.add(label, col, row);
             }
         }
+        logger.log(Level.INFO, "Help View grid generated.");
 
         // Calculate preferred size for the Stage
         double gridHeight = (CELL_SIZE) * rows;
@@ -95,6 +81,7 @@ public class HelpViewController implements GUIObservable.GUIObserver {
         stage.setMinWidth(totalWidth);
         stage.setMaxWidth(totalWidth);
 
+        logger.log(Level.INFO, "Help View stage size adjusted.");
     }
 
     public void updateGUI() {
@@ -104,8 +91,5 @@ public class HelpViewController implements GUIObservable.GUIObserver {
             }
         }
     }
-
-
-
 
 }

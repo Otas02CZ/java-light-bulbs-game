@@ -3,14 +3,11 @@ package com.example.game.gui;
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.stage.Stage;
 
-public class HowToPlayController {
+import java.io.InputStream;
+import java.util.logging.Level;
 
-    private final int WIDTH = 400;
-    private final int HEIGHT = 600;
-
-    private Stage stage = null;
+public class HowToPlayController extends Controller {
 
     @FXML
     public ImageView powerSourceImage;
@@ -21,33 +18,22 @@ public class HowToPlayController {
     @FXML
     public ImageView wireImage;
 
-    public void setStage(Stage stage) {
-        this.stage = stage;
-    }
-
     public void setup() {
-        setupWindowSize();
-        setupImages();
+        WIDTH = 400;
+        super.setup();
+        setupImage(powerSourceImage, "/images/icons/power_0001.jpg");
+        setupImage(lightBulbImage, "/images/icons/bulb_on_1000.jpg");
+        setupImage(wireImage, "/images/icons/wire_on_1100.jpg");
     }
 
-    private void setupWindowSize() {
-        stage.setWidth(WIDTH);
-        stage.setMinWidth(WIDTH);
-        stage.setMaxWidth(WIDTH);
-        stage.setHeight(HEIGHT);
-        stage.setMinHeight(HEIGHT);
-        stage.setMaxHeight(HEIGHT);
-        stage.setResizable(false);
-    }
-
-    private void setupImages() {
-        Image image = new Image(getClass().getResourceAsStream("/images/icons/power_0001.png"));
-        powerSourceImage.setImage(image);
-
-        image = new Image(getClass().getResourceAsStream("/images/icons/bulb_on_1000.png"));
-        lightBulbImage.setImage(image);
-
-        image = new Image(getClass().getResourceAsStream("/images/icons/wire_on_1100.png"));
-        wireImage.setImage(image);
+    private void setupImage(ImageView imageView, String path) {
+        InputStream imageURL = getClass().getResourceAsStream(path);
+        if (imageURL == null) {
+            logger.log(Level.WARNING, "Could not find image: " + path);
+            return;
+        }
+        Image image = new Image(imageURL);
+        imageView.setImage(image);
+        logger.log(Level.INFO, "Loaded image: " + path);
     }
 }

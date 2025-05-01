@@ -1,17 +1,17 @@
 package com.example.game.gui.shared;
 
 public class GameConfig {
-    private String name;
-    private int size;
-    private double emptyCoef;
-    private double shuffleCoef;
-    private int maxTime;
+    private final String name;
+    private final int size;
+    private final double emptyCoefficient;
+    private final double shuffleCoefficient;
+    private final int maxTime;
 
-    public GameConfig(String name, int size, double emptyCoef, double shuffleCoef, int maxTime) {
+    public GameConfig(String name, int size, double emptyCoefficient, double shuffleCoefficient, int maxTime) {
         this.name = name;
         this.size = size;
-        this.emptyCoef = emptyCoef;
-        this.shuffleCoef = shuffleCoef;
+        this.emptyCoefficient = emptyCoefficient;
+        this.shuffleCoefficient = shuffleCoefficient;
         this.maxTime = maxTime;
     }
 
@@ -19,12 +19,12 @@ public class GameConfig {
         return name;
     }
 
-    public double getEmptyCoef() {
-        return emptyCoef;
+    public double getEmptyCoefficient() {
+        return emptyCoefficient;
     }
 
-    public double getShuffleCoef() {
-        return shuffleCoef;
+    public double getShuffleCoefficient() {
+        return shuffleCoefficient;
     }
 
     public int getSize() {

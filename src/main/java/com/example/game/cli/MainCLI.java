@@ -2,7 +2,6 @@ package com.example.game.cli;
 
 import java.io.IOException;
 
-import com.example.game.logger.Logger;
 import com.example.game.model.Game;
 import com.example.game.model.common.GameNode;
 import com.example.game.model.common.Position;
@@ -13,12 +12,6 @@ import java.util.regex.Pattern;
 
 public class MainCLI {
     public static void main(String[] args) {
-        try {
-            Logger.init();
-        } catch (IOException e) {
-            System.out.println("ERROR");
-        }
-        Logger.obtain().log("nadhera");
 
         // create a new game
         Game game = Game.generate(10, 10, 0.1f, 5);
