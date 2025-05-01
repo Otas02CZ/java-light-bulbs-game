@@ -126,7 +126,6 @@ public class GameSetupController {
 
     @FXML
     private void onDifficultyChange() {
-        System.out.println("Difficulty changed!");
         String difficulty = difficultyComboBox.getValue();
 
         if (difficulty == null || difficulty.equals("Custom"))

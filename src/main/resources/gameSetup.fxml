@@ -6,7 +6,13 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane prefHeight="600" prefWidth="800" styleClass="background" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.game.gui.GameSetupController">
+<BorderPane
+        styleClass="background"
+        stylesheets="@styles.css"
+        xmlns="http://javafx.com/javafx/21"
+        xmlns:fx="http://javafx.com/fxml/1"
+        fx:controller="com.example.game.gui.GameSetupController"
+>
 
     <top>
         <Text styleClass="mainTitle" text="Light Bulbs" BorderPane.alignment="CENTER"  textAlignment="CENTER" />
