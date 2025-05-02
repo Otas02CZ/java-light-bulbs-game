@@ -11,12 +11,10 @@ public class MapGenerator {
     final private PriorityQueue queue;
     final private Random random;
     private int powerConnections;
-    final private float emptyPercentage;
 
     public MapGenerator(int rows, int cols, float emptyPercentage) {
         this.rows = rows;
         this.cols = cols;
-        this.emptyPercentage = emptyPercentage;
         map = new MapElement[rows][cols];
         random = new Random();
 
