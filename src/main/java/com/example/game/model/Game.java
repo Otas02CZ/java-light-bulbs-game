@@ -353,8 +353,6 @@ public class Game implements ToolEnvironment, GameObservable.GameObserver, Timer
     }
 
 
-//    probebly needs to be run something like this ->
-
     public void solve(int timeout) {
         if (solverExecutor != null) return;
 

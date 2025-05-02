@@ -10,16 +10,34 @@ public class MapGenerator {
     private Position rootPosition;
     final private PriorityQueue queue;
     final private Random random;
+    private int powerConnections;
+    final private float emptyPercentage;
 
     public MapGenerator(int rows, int cols, float emptyPercentage) {
         this.rows = rows;
         this.cols = cols;
+        this.emptyPercentage = emptyPercentage;
         map = new MapElement[rows][cols];
         random = new Random();
+
+        // create the root
+        int rx = random.nextInt(rows);
+        int ry = random.nextInt(cols);
+        MapElement root =  new MapElement(new Position(ry, rx));
+        root.setRoot();
+        map[ry][rx] = root;
+
+        // create the root neighbours
+        for (Side side : Side.values()) {
+            Position newPos = root.getPos().getNeighbourPos(side);
+            if (isOutOfBounds(newPos)) continue;
+            map[newPos.getRow()][newPos.getCol()] = new MapElement(new Position(newPos.getRow(), newPos.getCol()));
+        }
 
         // fill in blank elements
         for (int y = 0; y < rows; y++) {
             for (int x = 0; x < cols; x++) {
+                if (map[y][x] != null) continue;
                 if (Math.random() < emptyPercentage) {
                     map[y][x] = null;
                 } else {
@@ -30,17 +48,8 @@ public class MapGenerator {
 
         // create the queue
         queue = new PriorityQueue(random);
-        MapElement root = null;
 
-        while (root == null) {
-            int x = random.nextInt(rows);
-            int y = random.nextInt(cols);
-
-            // add the initial moves for the root element
-            root = map[y][x];
-            if (root != null) map[y][x].setRoot();
-        }
-
+        // add the initial moves for the root element
         AddAvailableMoves(root);
         removeInvalidMoves();
     }
@@ -62,12 +71,19 @@ public class MapGenerator {
         }
     }
 
+    private boolean isOutOfBounds(Position pos) {
+        int x = pos.getCol();
+        int y = pos.getRow();
+        // out of bounds check
+        return x < 0 || x >= cols || y < 0 || y >= rows;
+    }
+
     public MapElement getMapElement(Position pos) {
 
         int x = pos.getCol();
         int y = pos.getRow();
         // out of bounds check
-        if (x < 0 || x >= cols || y < 0 || y >= rows) return null;
+        if (isOutOfBounds(pos)) return null;
         return map[y][x];
     }
 
@@ -89,7 +105,6 @@ public class MapGenerator {
 
         // add the available moves
         for (Side side : Side.values()) {
-
             Position newPos = targetPos.getNeighbourPos(side);
             MapElement elm = getMapElement(newPos);
             if (elm == null) continue; // out of bounds
