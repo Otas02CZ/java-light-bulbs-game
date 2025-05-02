@@ -52,5 +52,10 @@
                 </Text>
             </TextFlow>
         </VBox>
+        
+        <VBox alignment="CENTER" spacing="5" styleClass="assets-list">
+            <Hyperlink text="Project Motivation" onAction="#handleMotivationLink"/>
+        </VBox>
+
     </VBox>
 </ScrollPane>

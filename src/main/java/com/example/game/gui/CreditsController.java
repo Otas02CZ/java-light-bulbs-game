@@ -24,4 +24,9 @@ public class CreditsController extends Controller {
     public void handlePressStartLink() {
         hostServices.showDocument("https://fonts.google.com/specimen/Press+Start+2P");
     }
+    
+    @FXML
+    public void handleMotivationLink() {
+        hostServices.showDocument("https://www.youtube.com/watch?v=G1IbRujko-A");
+    }
 }
