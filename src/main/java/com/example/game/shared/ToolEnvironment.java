@@ -32,4 +32,8 @@ public interface ToolEnvironment {
     void solve(int seconds);
 
     void stopSolver();
+
+    boolean usedSolver();
+
+    int getUsedTurnsTotal();
 }

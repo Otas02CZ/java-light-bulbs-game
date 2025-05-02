@@ -201,6 +201,7 @@ public class GameSetupController extends Controller {
         Parent root = loader.load();
         IntroController controller = loader.getController();
         controller.setStage(this.stage);
+        controller.setHostServices(hostServices);
         controller.setup();
         Scene scene = new Scene(root);
         stage.setScene(scene);
@@ -233,6 +234,7 @@ public class GameSetupController extends Controller {
         Parent root = loader.load();
         GameController controller = loader.getController();
         controller.setStage(this.stage);
+        controller.setHostServices(hostServices);
         controller.setGameModel(game);
 
         Scene scene = new Scene(root);

@@ -32,14 +32,10 @@ public class GameController extends Controller implements GUIObservable.GUIObser
 
     private ToolEnvironment game;
 
-    private int turns;
-
     private ImageView[][] imageGrid = null;
     private Tooltip[][] tooltipGrid = null;
 
     private boolean autoSolving = false;
-
-    private boolean usedAutoSolve = false;
 
     private boolean locked = false;
 
@@ -167,7 +163,7 @@ public class GameController extends Controller implements GUIObservable.GUIObser
     }
 
     private void updateTurns() {
-        turnsLabel.setText("Turns: " + turns);
+        turnsLabel.setText("Turns: " + game.getUsedTurnsTotal());
     }
 
     private void setDifficulty(String difficulty) {
@@ -192,6 +188,7 @@ public class GameController extends Controller implements GUIObservable.GUIObser
 
     public void updateGUI() {
         updateLitUp();
+        updateTurns();
 
         if (game.hasWon()) {
             transitionToGameWon();
@@ -246,8 +243,6 @@ public class GameController extends Controller implements GUIObservable.GUIObser
                         if (node.isEmpty())
                             return;
                         node.turn();
-                        turns++;
-                        updateTurns();
                         updateUndoRedoLocking();
                     }
                 });
@@ -342,7 +337,7 @@ public class GameController extends Controller implements GUIObservable.GUIObser
         game.stopTimer();
         game.stopSolver();
         autoSolving = false;
-        if (usedAutoSolve)
+        if (game.usedSolver())
             mainLabel.setText("You won the game, but with a solver ...");
         else
             mainLabel.setText("Congratulations, you won the game!");
@@ -367,7 +362,7 @@ public class GameController extends Controller implements GUIObservable.GUIObser
         finished = true;
         game.stopTimer();
         game.stopSolver();
-        if (usedAutoSolve)
+        if (game.usedSolver())
             mainLabel.setText("You failed even with the solver?");
         else
             mainLabel.setText("Oh no you lost the game!");
@@ -437,6 +432,7 @@ public class GameController extends Controller implements GUIObservable.GUIObser
         Parent root = loader.load();
         IntroController controller = loader.getController();
         controller.setStage(this.stage);
+        controller.setHostServices(hostServices);
         controller.setup();
 
         Scene scene = new Scene(root);
@@ -561,7 +557,6 @@ public class GameController extends Controller implements GUIObservable.GUIObser
 
         locked = true;
         autoSolving = true;
-        usedAutoSolve = true;
 
         undoButton.setDisable(true);
         redoButton.setDisable(true);
@@ -591,6 +586,8 @@ public class GameController extends Controller implements GUIObservable.GUIObser
         }
 
         String path = file.getAbsolutePath();
+        if (!path.endsWith(".json"))
+            path += ".json";
         logger.log(Level.INFO, "Saving game to file: " + path);
 
         try {

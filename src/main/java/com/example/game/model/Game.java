@@ -51,6 +51,10 @@ public class Game implements ToolEnvironment, GameObservable.GameObserver, Timer
 
     private ScheduledExecutorService solverExecutor = null;
 
+    private boolean usedSolver = false;
+
+    private int amountOfTurns = 0;
+
     /**
      * Map storing nodes in game world (2D space)
      */
@@ -198,8 +202,9 @@ public class Game implements ToolEnvironment, GameObservable.GameObserver, Timer
         Game game = Game.create(rows, cols);
 
         // game attributes
-        game.gameWon = data.getBoolean("won");
-        int timeLeft = data.getInt("timeleft");
+        game.usedSolver = data.getBoolean("usedSolver");
+        game.amountOfTurns = data.getInt("turnsTotal");
+        int timeLeft = data.getInt("timeLeft");
 
         // backlog
         JSONObject backlog = data.getJSONObject("backlog");
@@ -286,8 +291,9 @@ public class Game implements ToolEnvironment, GameObservable.GameObserver, Timer
         JSONObject obj = new JSONObject();
         obj.put("rows", this.rows());
         obj.put("cols", this.cols());
-        obj.put("timeleft", this.timeLeft());
-        obj.put("won", this.gameWon);
+        obj.put("timeLeft", this.timeLeft());
+        obj.put("usedSolver", this.usedSolver());
+        obj.put("turnsTotal", this.amountOfTurns);
         obj.put("backlog", this.undoBackLog.toJson());
         JSONArray obj2 = new JSONArray();
         for (int i = 0; i < rows(); i++) {
@@ -338,6 +344,14 @@ public class Game implements ToolEnvironment, GameObservable.GameObserver, Timer
         return amountOfBulbs;
     }
 
+    public int getUsedTurnsTotal() {
+        return amountOfTurns;
+    }
+
+    public boolean usedSolver() {
+        return this.usedSolver;
+    }
+
 
 //    probebly needs to be run something like this ->
 
@@ -362,6 +376,7 @@ public class Game implements ToolEnvironment, GameObservable.GameObserver, Timer
             if (node.remainingTurns() == 0) {
                 nodes.remove(node);
             }
+            usedSolver = true;
         }, 0, timeout, TimeUnit.MILLISECONDS);
     }
 
@@ -484,6 +499,7 @@ public class Game implements ToolEnvironment, GameObservable.GameObserver, Timer
      */
     public void update(GameObservable observable) {
         undoBackLog.AddMove(observable.getPosition());
+        amountOfTurns += 1;
         this.powerUp();
     }
 
@@ -597,23 +613,5 @@ public class Game implements ToolEnvironment, GameObservable.GameObserver, Timer
         }
 
         return neighbours;
-    }
-
-    public void printMapTerminal() {
-
-        StringBuilder bfr1, bfr2, bfr3;
-
-        for (int i = 0; i < this.sizeRows; i++) {
-            bfr1 = new StringBuilder();
-            bfr2 = new StringBuilder();
-            bfr3 = new StringBuilder();
-
-            for (int j = 0; j < this.sizeCols; j++) {
-                this.map[i][j].represent(bfr1, bfr2, bfr3);
-            }
-            System.out.println(bfr1.toString());
-            System.out.println(bfr2.toString());
-            System.out.println(bfr3.toString());
-        }
     }
 }
