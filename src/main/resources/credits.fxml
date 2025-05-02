@@ -10,31 +10,35 @@
         xmlns:fx="http://javafx.com/fxml/1"
         fx:controller="com.example.game.gui.CreditsController"
         stylesheets="styles.css"
+        styleClass="blackBackground"
         fitToWidth="true"
 >
     <VBox alignment="CENTER" spacing="20" styleClass="credits-container">
         <!-- Game Title -->
-        <Text text="Light Bulbs" styleClass="game-title" />
+        <Text text="Light Bulbs" styleClass="game-title,whiteText" />
 
         <!-- Authors Label -->
-        <Text text="Authors" styleClass="authors-label" />
+        <Text text="Authors" styleClass="authors-label,whiteText" />
 
         <!-- Author Names (each on its own line) -->
         <VBox alignment="CENTER" spacing="5" styleClass="authors-list">
-            <Text text="Otakar Kočí" styleClass="author-name" />
-            <Text text="Martin Mendl" styleClass="author-name" />
+            <Text text="Otakar Kočí" styleClass="author-name,whiteText" />
+            <Text text="Martin Mendl" styleClass="author-name,whiteText" />
         </VBox>
 
         <!-- Year -->
-        <Text text="2025" styleClass="year-text" />
+        <Text text="2025" styleClass="year-text,whiteText"/>
 
         <!-- Block of Justified Text (Using TextFlow for wrapping) -->
         <TextFlow styleClass="credits-text-flow">
-            <Text text="A simple light bulbs game clone. Rotate power source, bulbs and wires so that everything is powered on!" />
+            <Text styleClass="whiteText">
+                A simple light bulbs game clone. Rotate power source,
+                bulbs and wires so that everything is powered on!
+            </Text>
         </TextFlow>
 
         <!-- Used Assets / Licenses -->
-        <Text text="Licenses" styleClass="assets-title" />
+        <Text text="Licenses" styleClass="assets-title,whiteText" />
 
         <VBox alignment="CENTER" spacing="5" styleClass="assets-list">
             <Hyperlink text="Font Space Mono" onAction="#handleSpaceMonoLink"/>
@@ -42,7 +46,7 @@
             <Hyperlink text="Alarm clock icon" onAction="#handleAlarmClockLink"/>
 
             <TextFlow styleClass="credits-text-flow">
-                <Text>
+                <Text styleClass="whiteText">
                     Other icons and backgrounds were created manually or with slight help
                     from generative AIs for image creation or editing.
                 </Text>

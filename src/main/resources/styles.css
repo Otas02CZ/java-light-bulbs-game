@@ -1,7 +1,7 @@
 .root {
     -fx-font-family: 'Space Mono Regular';
     -fx-font-size: 16px;
-    -fx-text-fill: black;
+    -fx-text-fill: white;
 }
 
 .button {
@@ -12,24 +12,41 @@
 }
 
 .background {
-    -fx-background-image: url('image.jpg');
+    -fx-background-image: url('images/backgrounds/background_half.jpg');
+    -fx-background-size: cover;
+    -fx-padding: 20px;
+}
+
+.backgroundLost {
+    -fx-background-image: url('images/backgrounds/background_none.jpg');
+    -fx-background-size: cover;
+    -fx-padding: 20px;
+}
+
+.backgroundWon {
+    -fx-background-image: url('images/backgrounds/background_all.jpg');
     -fx-background-size: cover;
     -fx-padding: 20px;
 }
 
 .infoLabel {
     -fx-font-size: 20px;
-    -fx-text-fill: black;
+    -fx-text-fill: white;
 }
 
 .mainTitle {
     -fx-font-family: 'Press Start 2P Regular';
     -fx-font-size: 48px;
+    -fx-text-fill: white;
 }
 
 .subtitle {
     -fx-font-size: 36px;
     -fx-text-fill: black;
+}
+
+.gameMenu {
+    -fx-background-color: transparent;
 }
 
 .button-text {
@@ -44,8 +61,14 @@
     -fx-pref-height: 50px;
 }
 
+.button:hover {
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}
+
 .subtitle {
     -fx-font-size: 30px;
+    -fx-text-fill: white;
 }
 
 .combo-box, .spinner {
@@ -72,25 +95,35 @@
 
 #gameGrid {
     -fx-border-color: black;
-    -fx-border-width: 5px;
+    -fx-border-width: 10px;
     -fx-border-style: solid;
     -fx-border-radius: 7px;
 }
 
 .howToPlayHeading {
     -fx-font-size: 28px;
-    -fx-text-fill: black;
+    -fx-fill: white;
 }
 
 .howToPlayChapter {
     -fx-font-size: 22px;
-    -fx-text-fill: black;
+    -fx-fill: white;
+}
+
+.whiteText {
+    -fx-fill: white;
+}
+
+.whiteLabel {
+    -fx-text-fill: white;
 }
 
 /* General container styling for credits */
 .credits-container {
     -fx-padding: 20;
     -fx-alignment: center;
+    -fx-background-image: url('images/backgrounds/background_none.jpg');
+    -fx-background-size: cover;
 }
 
 /* Styling for the game title */
@@ -152,5 +185,11 @@
 }
 
 .howToPlayContainer {
+    -fx-background-image: url('images/backgrounds/background_none.jpg');
+    -fx-background-size: cover;
     -fx-padding: 20;
+}
+
+.blackBackground {
+    -fx-background-color: black;
 }

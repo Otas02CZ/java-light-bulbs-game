@@ -17,7 +17,7 @@
     <!-- Top Area -->
     <top>
         <VBox spacing="5">
-            <ToolBar prefHeight="40.0" prefWidth="200.0">
+            <ToolBar prefHeight="40.0" prefWidth="200.0" styleClass="gameMenu">
                 <Button mnemonicParsing="false" onAction="#handleToMainMenu" text="Main Menu" maxWidth="Infinity" HBox.hgrow="ALWAYS" />
                 <Button mnemonicParsing="false" onAction="#handleQuit" text="Quit" maxWidth="Infinity" HBox.hgrow="ALWAYS" />
                 <Button mnemonicParsing="false" onAction="#handleShowHowToPlay" text="How To Play" maxWidth="Infinity" HBox.hgrow="ALWAYS" />

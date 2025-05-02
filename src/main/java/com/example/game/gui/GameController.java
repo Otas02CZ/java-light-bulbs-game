@@ -39,7 +39,11 @@ public class GameController extends Controller implements GUIObservable.GUIObser
 
     private boolean autoSolving = false;
 
+    private boolean usedAutoSolve = false;
+
     private boolean locked = false;
+
+    private boolean finished = false;
 
     private Stage helpViewStage = null;
 
@@ -98,7 +102,7 @@ public class GameController extends Controller implements GUIObservable.GUIObser
         super.setup();
 
         stage.setOnCloseRequest(event -> {
-            if (!game.hasWon()) {
+            if (!finished) {
                 String title = "Quitting the Game";
                 String header = "Are you sure you want to quit the game?";
                 String content = "All unsaved progress will be lost!";
@@ -334,10 +338,14 @@ public class GameController extends Controller implements GUIObservable.GUIObser
 
     private void transitionToGameWon() {
         locked = true;
+        finished = true;
         game.stopTimer();
         game.stopSolver();
         autoSolving = false;
-        mainLabel.setText("You won!");
+        if (usedAutoSolve)
+            mainLabel.setText("You won the game, but with a solver ...");
+        else
+            mainLabel.setText("Congratulations, you won the game!");
 
         helpViewButton.setDisable(true);
         saveButton.setDisable(true);
@@ -349,14 +357,20 @@ public class GameController extends Controller implements GUIObservable.GUIObser
             helpViewStage.close();
             helpViewStage = null;
         }
-        //TODO: change background
+
+        gamePane.getStyleClass().remove("background");
+        gamePane.getStyleClass().add("backgroundWon");
     }
 
     private void transitionToGameLost() {
         locked = true;
+        finished = true;
         game.stopTimer();
         game.stopSolver();
-        mainLabel.setText("You lost!");
+        if (usedAutoSolve)
+            mainLabel.setText("You failed even with the solver?");
+        else
+            mainLabel.setText("Oh no you lost the game!");
 
         if (helpViewStage != null) {
             helpViewStage.close();
@@ -379,7 +393,8 @@ public class GameController extends Controller implements GUIObservable.GUIObser
             }
         }
 
-        //TODO: change background
+        gamePane.getStyleClass().remove("background");
+        gamePane.getStyleClass().add("backgroundLost");
     }
 
 
@@ -387,7 +402,7 @@ public class GameController extends Controller implements GUIObservable.GUIObser
 
     @FXML
     public void handleToMainMenu() throws IOException {
-        if (!game.hasWon()) {
+        if (!finished) {
             String title = "Going back to Main Menu";
             String header = "Are you sure you want to go back to Main Menu?";
             String content = "All unsaved progress will be lost!";
@@ -431,7 +446,7 @@ public class GameController extends Controller implements GUIObservable.GUIObser
 
     @FXML
     public void handleQuit() {
-        if (!game.hasWon()) {
+        if (!finished) {
             String title = "Quitting the Game";
             String header = "Are you sure you want to quit the game?";
             String content = "All unsaved progress will be lost!";
@@ -546,6 +561,7 @@ public class GameController extends Controller implements GUIObservable.GUIObser
 
         locked = true;
         autoSolving = true;
+        usedAutoSolve = true;
 
         undoButton.setDisable(true);
         redoButton.setDisable(true);

@@ -14,7 +14,7 @@
 
    <!-- Title at the top -->
    <top>
-      <Text styleClass="mainTitle" text="Light Bulbs" BorderPane.alignment="CENTER" textAlignment="CENTER" />
+      <Label styleClass="mainTitle" text="Light Bulbs" BorderPane.alignment="CENTER" textAlignment="CENTER" />
    </top>
 
    <!-- Center area with buttons -->
