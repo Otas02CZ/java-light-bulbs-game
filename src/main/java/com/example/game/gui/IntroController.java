@@ -8,14 +8,12 @@
 
 package com.example.game.gui;
 
-import com.example.game.gui.shared.MusicManager;
 import com.example.game.model.Game;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.json.JSONException;
@@ -39,11 +37,6 @@ public class IntroController extends Controller {
      * Stores instance of Credits stage if it is opened.
      */
     private Stage creditsStage = null;
-
-    private MusicManager musicManager = null;
-
-    @FXML
-    private Button musicButton;
 
     /**
      * Setups Intro controller
@@ -283,17 +276,5 @@ public class IntroController extends Controller {
         // quit the app
         stage.close();
         logger.log(Level.INFO, "Closing GUI from Intro scene.");
-    }
-
-    @FXML
-    private void handleMusicControls() {
-        musicManager.toggleMusic();
-
-        if (musicManager.isMusicPlaying()) {
-            musicButton.setText("Music: ON");
-        } else {
-            musicButton.setText("Music: OFF");
-        }
-
     }
 }

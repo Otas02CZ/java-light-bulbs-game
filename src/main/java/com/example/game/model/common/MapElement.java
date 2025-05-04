@@ -92,6 +92,7 @@ public class MapElement {
 
     /**
      * Gets the position of the element.
+     * @return position of the element
     */
     public Position getPos() {return pos;}
 
@@ -168,6 +169,7 @@ public class MapElement {
 
     /**
      * Checks if the element is the root element.
+     * @return true if it is, false otherwise
     */
     public boolean isPower() {
         return isRoot;

@@ -18,7 +18,6 @@ DESC: HelpView scene definition
         fx:controller="com.example.game.gui.HelpViewController"
         styleClass="background"
         stylesheets="@styles.css"
-        fx:id="helpViewPane"
 >
 
     <!-- Top Heading -->

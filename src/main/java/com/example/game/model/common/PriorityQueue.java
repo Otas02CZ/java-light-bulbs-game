@@ -32,6 +32,7 @@ public class PriorityQueue {
     /**
      * Constructor for the PriorityQueue class.
      * Initializes the queue and random number generator.
+     * @param random number generator
      */
     public PriorityQueue(Random random) {
         queue = new ArrayList<>();
