@@ -6,7 +6,7 @@
   <groupId>com.example.game</groupId>
   <artifactId>lightbulbgame</artifactId>
   <packaging>jar</packaging>
-  <version>0.0.1</version>
+  <version>1.0.0</version>
   <name>Light Bulb Game</name>
   <url>https://maven.apache.org</url>
 
@@ -17,7 +17,7 @@
   </properties>
 
   <dependencies>
-    <!-- JavaFX (for GUI only) -->
+
     <dependency>
       <groupId>org.openjfx</groupId>
       <artifactId>javafx-controls</artifactId>
@@ -54,7 +54,7 @@
     <dependency>
       <groupId>org.json</groupId>
       <artifactId>json</artifactId>
-      <version>20240303</version> <!-- (or latest) -->
+      <version>20240303</version>
     </dependency>
 
   </dependencies>
@@ -66,10 +66,10 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
-        <version>3.6.3</version> <!-- Or latest version -->
+        <version>3.6.3</version>
         <configuration>
           <encoding>UTF-8</encoding>
-          <show>private</show> <!-- Optional: include private members -->
+          <show>private</show>
           <author>true</author>
           <version>true</version>
           <reportOutputDirectory>${project.basedir}/docs</reportOutputDirectory>
