@@ -1,18 +1,331 @@
 {
   "backlog": {
-    "buffer": [],
-    "currentIndex": -1
+    "buffer": [
+      {
+        "col": 7,
+        "row": 2
+      },
+      {
+        "col": 7,
+        "row": 2
+      },
+      {
+        "col": 7,
+        "row": 2
+      },
+      {
+        "col": 5,
+        "row": 1
+      },
+      {
+        "col": 5,
+        "row": 1
+      },
+      {
+        "col": 9,
+        "row": 8
+      },
+      {
+        "col": 9,
+        "row": 8
+      },
+      {
+        "col": 9,
+        "row": 8
+      },
+      {
+        "col": 4,
+        "row": 9
+      },
+      {
+        "col": 4,
+        "row": 9
+      },
+      {
+        "col": 4,
+        "row": 9
+      },
+      {
+        "col": 3,
+        "row": 8
+      },
+      {
+        "col": 3,
+        "row": 8
+      },
+      {
+        "col": 6,
+        "row": 6
+      },
+      {
+        "col": 6,
+        "row": 6
+      },
+      {
+        "col": 6,
+        "row": 6
+      },
+      {
+        "col": 8,
+        "row": 0
+      },
+      {
+        "col": 8,
+        "row": 0
+      },
+      {
+        "col": 5,
+        "row": 9
+      },
+      {
+        "col": 4,
+        "row": 2
+      },
+      {
+        "col": 4,
+        "row": 2
+      },
+      {
+        "col": 4,
+        "row": 2
+      },
+      {
+        "col": 2,
+        "row": 6
+      },
+      {
+        "col": 2,
+        "row": 6
+      },
+      {
+        "col": 2,
+        "row": 6
+      },
+      {
+        "col": 6,
+        "row": 7
+      },
+      {
+        "col": 6,
+        "row": 7
+      },
+      {
+        "col": 6,
+        "row": 7
+      },
+      {
+        "col": 1,
+        "row": 5
+      },
+      {
+        "col": 1,
+        "row": 5
+      },
+      {
+        "col": 2,
+        "row": 4
+      },
+      {
+        "col": 5,
+        "row": 3
+      },
+      {
+        "col": 1,
+        "row": 3
+      },
+      {
+        "col": 1,
+        "row": 3
+      },
+      {
+        "col": 1,
+        "row": 3
+      },
+      {
+        "col": 7,
+        "row": 9
+      },
+      {
+        "col": 8,
+        "row": 8
+      },
+      {
+        "col": 8,
+        "row": 8
+      },
+      {
+        "col": 8,
+        "row": 8
+      },
+      {
+        "col": 4,
+        "row": 7
+      },
+      {
+        "col": 4,
+        "row": 7
+      },
+      {
+        "col": 4,
+        "row": 7
+      },
+      {
+        "col": 8,
+        "row": 5
+      },
+      {
+        "col": 8,
+        "row": 5
+      },
+      {
+        "col": 1,
+        "row": 2
+      },
+      {
+        "col": 1,
+        "row": 2
+      },
+      {
+        "col": 1,
+        "row": 1
+      },
+      {
+        "col": 1,
+        "row": 2
+      },
+      {
+        "col": 1,
+        "row": 1
+      },
+      {
+        "col": 1,
+        "row": 1
+      },
+      {
+        "col": 1,
+        "row": 1
+      },
+      {
+        "col": 1,
+        "row": 1
+      },
+      {
+        "col": 1,
+        "row": 1
+      },
+      {
+        "col": 1,
+        "row": 1
+      },
+      {
+        "col": 0,
+        "row": 3
+      },
+      {
+        "col": 0,
+        "row": 3
+      },
+      {
+        "col": 0,
+        "row": 3
+      },
+      {
+        "col": 0,
+        "row": 3
+      },
+      {
+        "col": 0,
+        "row": 3
+      },
+      {
+        "col": 0,
+        "row": 3
+      },
+      {
+        "col": 0,
+        "row": 4
+      },
+      {
+        "col": 0,
+        "row": 4
+      },
+      {
+        "col": 0,
+        "row": 4
+      },
+      {
+        "col": 0,
+        "row": 7
+      },
+      {
+        "col": 0,
+        "row": 7
+      },
+      {
+        "col": 0,
+        "row": 7
+      },
+      {
+        "col": 1,
+        "row": 7
+      },
+      {
+        "col": 4,
+        "row": 7
+      },
+      {
+        "col": 4,
+        "row": 7
+      },
+      {
+        "col": 4,
+        "row": 7
+      },
+      {
+        "col": 4,
+        "row": 8
+      },
+      {
+        "col": 4,
+        "row": 8
+      },
+      {
+        "col": 4,
+        "row": 8
+      },
+      {
+        "col": 6,
+        "row": 9
+      },
+      {
+        "col": 6,
+        "row": 8
+      },
+      {
+        "col": 6,
+        "row": 8
+      },
+      {
+        "col": 6,
+        "row": 8
+      },
+      {
+        "col": 8,
+        "row": 9
+      }
+    ],
+    "currentIndex": 77
   },
-  "usedSolver": false,
-  "rows": 15,
-  "turnsTotal": 0,
-  "cols": 15,
+  "usedSolver": true,
+  "rows": 10,
+  "turnsTotal": 78,
+  "cols": 10,
   "map": [
     {
-      "rotation": 1,
+      "rotation": 0,
       "sides": [
         {"side": "SOUTH"},
-        {"side": "WEST"}
+        {"side": "EAST"}
       ],
       "type": "link",
       "totalRotations": 0
@@ -20,45 +333,19 @@
     {
       "rotation": 0,
       "sides": [
-        {"side": "SOUTH"},
-        {"side": "WEST"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 1,
-      "sides": [
-        {"side": "SOUTH"},
-        {"side": "WEST"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 0,
-      "sides": [
-        {"side": "EAST"},
-        {"side": "SOUTH"},
-        {"side": "WEST"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 1,
-      "sides": [
-        {"side": "SOUTH"},
         {"side": "WEST"},
-        {"side": "NORTH"}
+        {"side": "EAST"}
       ],
       "type": "link",
       "totalRotations": 0
     },
     {
       "rotation": 0,
-      "sides": [{"side": "WEST"}],
-      "type": "bulb",
+      "sides": [
+        {"side": "SOUTH"},
+        {"side": "WEST"}
+      ],
+      "type": "link",
       "totalRotations": 0
     },
     {
@@ -74,974 +361,171 @@
       "totalRotations": 0
     },
     {
-      "rotation": 1,
+      "rotation": 0,
+      "sides": [{"side": "EAST"}],
+      "type": "bulb",
+      "totalRotations": 0
+    },
+    {
+      "rotation": 2,
+      "sides": [
+        {"side": "WEST"},
+        {"side": "EAST"}
+      ],
+      "type": "link",
+      "totalRotations": 0
+    },
+    {
+      "rotation": 0,
       "sides": [
         {"side": "SOUTH"},
         {"side": "WEST"}
       ],
+      "type": "link",
+      "totalRotations": 0
+    },
+    {
+      "rotation": 0,
+      "sides": [{"side": "EAST"}],
+      "type": "bulb",
+      "totalRotations": 2
+    },
+    {
+      "rotation": 3,
+      "sides": [
+        {"side": "SOUTH"},
+        {"side": "EAST"}
+      ],
+      "type": "link",
+      "totalRotations": 0
+    },
+    {
+      "rotation": 0,
+      "sides": [{"side": "NORTH"}],
+      "type": "bulb",
+      "totalRotations": 0
+    },
+    {
+      "rotation": 0,
+      "sides": [
+        {"side": "SOUTH"},
+        {"side": "EAST"}
+      ],
+      "type": "link",
+      "totalRotations": 7
+    },
+    {
+      "rotation": 0,
+      "sides": [
+        {"side": "NORTH"},
+        {"side": "WEST"},
+        {"side": "EAST"}
+      ],
+      "type": "link",
+      "totalRotations": 0
+    },
+    {
+      "rotation": 2,
+      "sides": [
+        {"side": "NORTH"},
+        {"side": "SOUTH"},
+        {"side": "WEST"},
+        {"side": "EAST"}
+      ],
+      "type": "link",
+      "totalRotations": 0
+    },
+    {
+      "rotation": 2,
+      "sides": [
+        {"side": "NORTH"},
+        {"side": "WEST"},
+        {"side": "EAST"}
+      ],
+      "type": "link",
+      "totalRotations": 0
+    },
+    {
+      "rotation": 0,
+      "sides": [
+        {"side": "SOUTH"},
+        {"side": "WEST"},
+        {"side": "EAST"}
+      ],
+      "type": "link",
+      "totalRotations": 2
+    },
+    {
+      "rotation": 1,
+      "sides": [
+        {"side": "NORTH"},
+        {"side": "SOUTH"},
+        {"side": "WEST"}
+      ],
+      "type": "link",
+      "totalRotations": 0
+    },
+    {
+      "rotation": 1,
+      "sides": [
+        {"side": "NORTH"},
+        {"side": "SOUTH"},
+        {"side": "EAST"}
+      ],
+      "type": "link",
+      "totalRotations": 0
+    },
+    {
+      "rotation": 0,
+      "sides": [
+        {"side": "WEST"},
+        {"side": "EAST"}
+      ],
+      "type": "link",
+      "totalRotations": 0
+    },
+    {
+      "rotation": 0,
+      "sides": [
+        {"side": "NORTH"},
+        {"side": "SOUTH"},
+        {"side": "WEST"}
+      ],
+      "type": "link",
+      "totalRotations": 0
+    },
+    {
+      "rotation": 0,
+      "sides": [],
+      "type": "None",
+      "totalRotations": 0
+    },
+    {
+      "rotation": 0,
+      "sides": [{"side": "NORTH"}],
+      "type": "bulb",
+      "totalRotations": 3
+    },
+    {
+      "rotation": 0,
+      "sides": [],
+      "type": "None",
+      "totalRotations": 0
+    },
+    {
+      "rotation": 0,
+      "sides": [{"side": "NORTH"}],
+      "type": "bulb",
+      "totalRotations": 0
+    },
+    {
+      "rotation": 0,
+      "sides": [{"side": "NORTH"}],
       "type": "power",
-      "totalRotations": 0
+      "totalRotations": 3
     },
     {
       "rotation": 0,
-      "sides": [{"side": "WEST"}],
-      "type": "bulb",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 0,
-      "sides": [],
-      "type": "None",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 2,
-      "sides": [
-        {"side": "WEST"},
-        {"side": "NORTH"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 0,
-      "sides": [{"side": "WEST"}],
-      "type": "bulb",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 1,
-      "sides": [{"side": "SOUTH"}],
-      "type": "bulb",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 0,
-      "sides": [
-        {"side": "SOUTH"},
-        {"side": "WEST"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 1,
-      "sides": [
-        {"side": "EAST"},
-        {"side": "WEST"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 2,
-      "sides": [
-        {"side": "SOUTH"},
-        {"side": "NORTH"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 0,
-      "sides": [
-        {"side": "SOUTH"},
-        {"side": "NORTH"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 2,
-      "sides": [{"side": "SOUTH"}],
-      "type": "bulb",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 2,
-      "sides": [
-        {"side": "SOUTH"},
-        {"side": "WEST"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 1,
-      "sides": [{"side": "NORTH"}],
-      "type": "bulb",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 2,
-      "sides": [
-        {"side": "SOUTH"},
-        {"side": "WEST"},
-        {"side": "NORTH"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 3,
-      "sides": [{"side": "SOUTH"}],
-      "type": "bulb",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 3,
-      "sides": [
-        {"side": "WEST"},
-        {"side": "NORTH"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 1,
-      "sides": [
-        {"side": "SOUTH"},
-        {"side": "WEST"},
-        {"side": "NORTH"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 2,
-      "sides": [
-        {"side": "EAST"},
-        {"side": "WEST"},
-        {"side": "NORTH"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 1,
-      "sides": [
-        {"side": "EAST"},
-        {"side": "SOUTH"},
-        {"side": "NORTH"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 0,
-      "sides": [
-        {"side": "EAST"},
-        {"side": "WEST"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 1,
-      "sides": [
-        {"side": "SOUTH"},
-        {"side": "NORTH"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 1,
-      "sides": [
-        {"side": "EAST"},
-        {"side": "NORTH"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 1,
-      "sides": [
-        {"side": "EAST"},
-        {"side": "WEST"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 1,
-      "sides": [
-        {"side": "EAST"},
-        {"side": "SOUTH"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 1,
-      "sides": [
-        {"side": "EAST"},
-        {"side": "NORTH"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 0,
-      "sides": [
-        {"side": "EAST"},
-        {"side": "SOUTH"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 1,
-      "sides": [
-        {"side": "SOUTH"},
-        {"side": "NORTH"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 0,
-      "sides": [
-        {"side": "EAST"},
-        {"side": "SOUTH"},
-        {"side": "WEST"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 2,
-      "sides": [
-        {"side": "EAST"},
-        {"side": "SOUTH"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 1,
-      "sides": [{"side": "SOUTH"}],
-      "type": "bulb",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 1,
-      "sides": [
-        {"side": "SOUTH"},
-        {"side": "NORTH"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 0,
-      "sides": [
-        {"side": "SOUTH"},
-        {"side": "WEST"},
-        {"side": "NORTH"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 1,
-      "sides": [
-        {"side": "EAST"},
-        {"side": "SOUTH"},
-        {"side": "WEST"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 3,
-      "sides": [
-        {"side": "SOUTH"},
-        {"side": "NORTH"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 2,
-      "sides": [
-        {"side": "EAST"},
-        {"side": "WEST"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 0,
-      "sides": [{"side": "WEST"}],
-      "type": "bulb",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 0,
-      "sides": [{"side": "SOUTH"}],
-      "type": "bulb",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 0,
-      "sides": [
-        {"side": "SOUTH"},
-        {"side": "NORTH"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 0,
-      "sides": [],
-      "type": "None",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 2,
-      "sides": [{"side": "WEST"}],
-      "type": "bulb",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 0,
-      "sides": [
-        {"side": "WEST"},
-        {"side": "NORTH"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 0,
-      "sides": [
-        {"side": "EAST"},
-        {"side": "SOUTH"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 2,
-      "sides": [
-        {"side": "EAST"},
-        {"side": "SOUTH"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 2,
-      "sides": [{"side": "NORTH"}],
-      "type": "bulb",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 0,
-      "sides": [{"side": "SOUTH"}],
-      "type": "bulb",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 1,
-      "sides": [
-        {"side": "SOUTH"},
-        {"side": "WEST"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 0,
-      "sides": [
-        {"side": "WEST"},
-        {"side": "NORTH"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 0,
-      "sides": [
-        {"side": "EAST"},
-        {"side": "SOUTH"},
-        {"side": "NORTH"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 0,
-      "sides": [
-        {"side": "EAST"},
-        {"side": "SOUTH"},
-        {"side": "WEST"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 1,
-      "sides": [
-        {"side": "SOUTH"},
-        {"side": "WEST"},
-        {"side": "NORTH"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 0,
-      "sides": [
-        {"side": "EAST"},
-        {"side": "WEST"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 0,
-      "sides": [
-        {"side": "SOUTH"},
-        {"side": "WEST"},
-        {"side": "NORTH"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 1,
-      "sides": [
-        {"side": "EAST"},
-        {"side": "SOUTH"},
-        {"side": "WEST"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 0,
-      "sides": [
-        {"side": "EAST"},
-        {"side": "WEST"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 3,
-      "sides": [
-        {"side": "EAST"},
-        {"side": "SOUTH"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 0,
-      "sides": [],
-      "type": "None",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 2,
-      "sides": [
-        {"side": "SOUTH"},
-        {"side": "NORTH"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 1,
-      "sides": [{"side": "WEST"}],
-      "type": "bulb",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 0,
-      "sides": [
-        {"side": "EAST"},
-        {"side": "NORTH"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 0,
-      "sides": [
-        {"side": "EAST"},
-        {"side": "WEST"},
-        {"side": "NORTH"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 0,
-      "sides": [
-        {"side": "SOUTH"},
-        {"side": "WEST"},
-        {"side": "NORTH"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 0,
-      "sides": [],
-      "type": "None",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 0,
-      "sides": [
-        {"side": "SOUTH"},
-        {"side": "NORTH"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 1,
-      "sides": [{"side": "EAST"}],
-      "type": "bulb",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 1,
-      "sides": [
-        {"side": "EAST"},
-        {"side": "WEST"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 0,
-      "sides": [],
-      "type": "None",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 1,
-      "sides": [
-        {"side": "EAST"},
-        {"side": "WEST"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 3,
-      "sides": [{"side": "WEST"}],
-      "type": "bulb",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 1,
-      "sides": [
-        {"side": "SOUTH"},
-        {"side": "WEST"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 3,
-      "sides": [
-        {"side": "SOUTH"},
-        {"side": "WEST"},
-        {"side": "NORTH"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 1,
-      "sides": [
-        {"side": "WEST"},
-        {"side": "NORTH"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 1,
-      "sides": [
-        {"side": "EAST"},
-        {"side": "SOUTH"},
-        {"side": "WEST"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 2,
-      "sides": [
-        {"side": "EAST"},
-        {"side": "SOUTH"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 1,
-      "sides": [{"side": "WEST"}],
-      "type": "bulb",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 4,
-      "sides": [{"side": "EAST"}],
-      "type": "bulb",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 2,
-      "sides": [
-        {"side": "EAST"},
-        {"side": "SOUTH"},
-        {"side": "WEST"},
-        {"side": "NORTH"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 1,
-      "sides": [{"side": "NORTH"}],
-      "type": "bulb",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 2,
-      "sides": [
-        {"side": "SOUTH"},
-        {"side": "WEST"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 0,
-      "sides": [{"side": "WEST"}],
-      "type": "bulb",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 1,
-      "sides": [
-        {"side": "EAST"},
-        {"side": "WEST"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 0,
-      "sides": [{"side": "EAST"}],
-      "type": "bulb",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 1,
-      "sides": [
-        {"side": "EAST"},
-        {"side": "WEST"},
-        {"side": "NORTH"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 0,
-      "sides": [
-        {"side": "EAST"},
-        {"side": "SOUTH"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 0,
-      "sides": [
-        {"side": "EAST"},
-        {"side": "WEST"},
-        {"side": "NORTH"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 0,
-      "sides": [{"side": "WEST"}],
-      "type": "bulb",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 1,
-      "sides": [
-        {"side": "EAST"},
-        {"side": "SOUTH"},
-        {"side": "WEST"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 0,
-      "sides": [
-        {"side": "EAST"},
-        {"side": "WEST"},
-        {"side": "NORTH"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 1,
-      "sides": [
-        {"side": "SOUTH"},
-        {"side": "NORTH"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 1,
-      "sides": [
-        {"side": "EAST"},
-        {"side": "SOUTH"},
-        {"side": "WEST"},
-        {"side": "NORTH"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 1,
-      "sides": [
-        {"side": "SOUTH"},
-        {"side": "NORTH"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 2,
-      "sides": [
-        {"side": "EAST"},
-        {"side": "SOUTH"},
-        {"side": "WEST"},
-        {"side": "NORTH"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 0,
-      "sides": [
-        {"side": "SOUTH"},
-        {"side": "WEST"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 0,
-      "sides": [],
-      "type": "None",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 4,
-      "sides": [{"side": "EAST"}],
-      "type": "bulb",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 2,
-      "sides": [
-        {"side": "EAST"},
-        {"side": "SOUTH"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 1,
-      "sides": [{"side": "WEST"}],
-      "type": "bulb",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 2,
-      "sides": [
-        {"side": "SOUTH"},
-        {"side": "NORTH"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 2,
-      "sides": [
-        {"side": "SOUTH"},
-        {"side": "NORTH"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 0,
-      "sides": [],
-      "type": "None",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 1,
-      "sides": [{"side": "WEST"}],
-      "type": "bulb",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 3,
-      "sides": [{"side": "WEST"}],
-      "type": "bulb",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 2,
-      "sides": [{"side": "NORTH"}],
-      "type": "bulb",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 0,
-      "sides": [],
-      "type": "None",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 2,
-      "sides": [
-        {"side": "SOUTH"},
-        {"side": "NORTH"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 2,
-      "sides": [
-        {"side": "WEST"},
-        {"side": "NORTH"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 1,
-      "sides": [
-        {"side": "EAST"},
-        {"side": "NORTH"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 1,
-      "sides": [{"side": "EAST"}],
-      "type": "bulb",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 0,
-      "sides": [{"side": "EAST"}],
-      "type": "bulb",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 2,
-      "sides": [
-        {"side": "EAST"},
-        {"side": "NORTH"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 0,
-      "sides": [{"side": "EAST"}],
-      "type": "bulb",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 3,
-      "sides": [
-        {"side": "EAST"},
-        {"side": "SOUTH"},
-        {"side": "WEST"},
-        {"side": "NORTH"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 1,
-      "sides": [
-        {"side": "EAST"},
-        {"side": "WEST"},
-        {"side": "NORTH"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 3,
-      "sides": [
-        {"side": "EAST"},
-        {"side": "WEST"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 0,
-      "sides": [{"side": "SOUTH"}],
-      "type": "bulb",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 2,
-      "sides": [
-        {"side": "SOUTH"},
-        {"side": "WEST"},
-        {"side": "NORTH"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 2,
-      "sides": [{"side": "EAST"}],
-      "type": "bulb",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 1,
-      "sides": [
-        {"side": "EAST"},
-        {"side": "SOUTH"},
-        {"side": "WEST"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 1,
       "sides": [{"side": "NORTH"}],
       "type": "bulb",
       "totalRotations": 0
@@ -1049,32 +533,51 @@
     {
       "rotation": 0,
       "sides": [
-        {"side": "SOUTH"},
-        {"side": "NORTH"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 1,
-      "sides": [
-        {"side": "EAST"},
+        {"side": "NORTH"},
         {"side": "SOUTH"}
       ],
       "type": "link",
       "totalRotations": 0
     },
     {
-      "rotation": 2,
+      "rotation": 0,
       "sides": [{"side": "EAST"}],
       "type": "bulb",
+      "totalRotations": 3
+    },
+    {
+      "rotation": 0,
+      "sides": [
+        {"side": "WEST"},
+        {"side": "EAST"}
+      ],
+      "type": "link",
       "totalRotations": 0
     },
     {
       "rotation": 0,
-      "sides": [],
-      "type": "None",
+      "sides": [
+        {"side": "NORTH"},
+        {"side": "SOUTH"},
+        {"side": "WEST"}
+      ],
+      "type": "link",
       "totalRotations": 0
+    },
+    {
+      "rotation": 0,
+      "sides": [{"side": "EAST"}],
+      "type": "bulb",
+      "totalRotations": 6
+    },
+    {
+      "rotation": 0,
+      "sides": [
+        {"side": "SOUTH"},
+        {"side": "WEST"}
+      ],
+      "type": "link",
+      "totalRotations": 3
     },
     {
       "rotation": 0,
@@ -1083,20 +586,16 @@
       "totalRotations": 0
     },
     {
+      "rotation": 0,
+      "sides": [],
+      "type": "None",
+      "totalRotations": 0
+    },
+    {
       "rotation": 2,
       "sides": [
-        {"side": "SOUTH"},
-        {"side": "WEST"},
-        {"side": "NORTH"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 1,
-      "sides": [
-        {"side": "SOUTH"},
-        {"side": "NORTH"}
+        {"side": "NORTH"},
+        {"side": "WEST"}
       ],
       "type": "link",
       "totalRotations": 0
@@ -1105,56 +604,15 @@
       "rotation": 0,
       "sides": [
         {"side": "WEST"},
-        {"side": "NORTH"}
+        {"side": "EAST"}
       ],
       "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 1,
-      "sides": [{"side": "EAST"}],
-      "type": "bulb",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 1,
-      "sides": [{"side": "EAST"}],
-      "type": "bulb",
-      "totalRotations": 0
+      "totalRotations": 1
     },
     {
       "rotation": 0,
       "sides": [
-        {"side": "EAST"},
-        {"side": "SOUTH"},
-        {"side": "NORTH"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 0,
-      "sides": [
-        {"side": "EAST"},
-        {"side": "WEST"},
-        {"side": "NORTH"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 1,
-      "sides": [
-        {"side": "SOUTH"},
-        {"side": "NORTH"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 3,
-      "sides": [
-        {"side": "SOUTH"},
+        {"side": "NORTH"},
         {"side": "WEST"}
       ],
       "type": "link",
@@ -1167,7 +625,7 @@
       "totalRotations": 0
     },
     {
-      "rotation": 3,
+      "rotation": 1,
       "sides": [{"side": "WEST"}],
       "type": "bulb",
       "totalRotations": 0
@@ -1175,7 +633,7 @@
     {
       "rotation": 0,
       "sides": [
-        {"side": "EAST"},
+        {"side": "NORTH"},
         {"side": "SOUTH"}
       ],
       "type": "link",
@@ -1184,53 +642,50 @@
     {
       "rotation": 0,
       "sides": [
-        {"side": "EAST"},
+        {"side": "SOUTH"},
+        {"side": "EAST"}
+      ],
+      "type": "link",
+      "totalRotations": 3
+    },
+    {
+      "rotation": 0,
+      "sides": [
+        {"side": "NORTH"},
+        {"side": "SOUTH"},
         {"side": "WEST"}
       ],
       "type": "link",
       "totalRotations": 0
     },
     {
-      "rotation": 1,
+      "rotation": 0,
       "sides": [
-        {"side": "SOUTH"},
-        {"side": "NORTH"}
+        {"side": "NORTH"},
+        {"side": "SOUTH"}
       ],
       "type": "link",
-      "totalRotations": 0
+      "totalRotations": 1
     },
     {
       "rotation": 0,
-      "sides": [
-        {"side": "WEST"},
-        {"side": "NORTH"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 0,
-      "sides": [
-        {"side": "EAST"},
-        {"side": "SOUTH"},
-        {"side": "NORTH"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 0,
-      "sides": [{"side": "WEST"}],
+      "sides": [{"side": "SOUTH"}],
       "type": "bulb",
       "totalRotations": 0
     },
     {
-      "rotation": 0,
+      "rotation": 1,
       "sides": [
-        {"side": "EAST"},
-        {"side": "SOUTH"}
+        {"side": "WEST"},
+        {"side": "EAST"}
       ],
       "type": "link",
+      "totalRotations": 0
+    },
+    {
+      "rotation": 0,
+      "sides": [{"side": "EAST"}],
+      "type": "bulb",
       "totalRotations": 0
     },
     {
@@ -1249,70 +704,9 @@
       "totalRotations": 0
     },
     {
-      "rotation": 3,
-      "sides": [
-        {"side": "EAST"},
-        {"side": "WEST"},
-        {"side": "NORTH"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 3,
-      "sides": [
-        {"side": "SOUTH"},
-        {"side": "NORTH"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
       "rotation": 0,
       "sides": [
-        {"side": "EAST"},
-        {"side": "WEST"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 0,
-      "sides": [{"side": "WEST"}],
-      "type": "bulb",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 1,
-      "sides": [
-        {"side": "SOUTH"},
-        {"side": "WEST"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 0,
-      "sides": [
-        {"side": "EAST"},
-        {"side": "WEST"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 5,
-      "sides": [
-        {"side": "EAST"},
-        {"side": "NORTH"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 0,
-      "sides": [
-        {"side": "EAST"},
+        {"side": "NORTH"},
         {"side": "SOUTH"}
       ],
       "type": "link",
@@ -1320,34 +714,133 @@
     },
     {
       "rotation": 0,
-      "sides": [{"side": "WEST"}],
-      "type": "bulb",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 2,
       "sides": [
-        {"side": "WEST"},
-        {"side": "NORTH"}
+        {"side": "NORTH"},
+        {"side": "SOUTH"}
       ],
       "type": "link",
       "totalRotations": 0
     },
     {
-      "rotation": 3,
-      "sides": [
-        {"side": "EAST"},
-        {"side": "SOUTH"},
-        {"side": "WEST"},
-        {"side": "NORTH"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 5,
+      "rotation": 0,
       "sides": [{"side": "NORTH"}],
       "type": "bulb",
+      "totalRotations": 0
+    },
+    {
+      "rotation": 0,
+      "sides": [
+        {"side": "NORTH"},
+        {"side": "EAST"}
+      ],
+      "type": "link",
+      "totalRotations": 2
+    },
+    {
+      "rotation": 3,
+      "sides": [
+        {"side": "NORTH"},
+        {"side": "SOUTH"},
+        {"side": "WEST"}
+      ],
+      "type": "link",
+      "totalRotations": 0
+    },
+    {
+      "rotation": 0,
+      "sides": [
+        {"side": "NORTH"},
+        {"side": "SOUTH"},
+        {"side": "WEST"},
+        {"side": "EAST"}
+      ],
+      "type": "link",
+      "totalRotations": 0
+    },
+    {
+      "rotation": 1,
+      "sides": [
+        {"side": "NORTH"},
+        {"side": "SOUTH"},
+        {"side": "WEST"},
+        {"side": "EAST"}
+      ],
+      "type": "link",
+      "totalRotations": 0
+    },
+    {
+      "rotation": 0,
+      "sides": [
+        {"side": "SOUTH"},
+        {"side": "WEST"}
+      ],
+      "type": "link",
+      "totalRotations": 0
+    },
+    {
+      "rotation": 0,
+      "sides": [
+        {"side": "NORTH"},
+        {"side": "SOUTH"}
+      ],
+      "type": "link",
+      "totalRotations": 0
+    },
+    {
+      "rotation": 1,
+      "sides": [
+        {"side": "SOUTH"},
+        {"side": "WEST"},
+        {"side": "EAST"}
+      ],
+      "type": "link",
+      "totalRotations": 0
+    },
+    {
+      "rotation": 0,
+      "sides": [
+        {"side": "NORTH"},
+        {"side": "WEST"},
+        {"side": "EAST"}
+      ],
+      "type": "link",
+      "totalRotations": 2
+    },
+    {
+      "rotation": 0,
+      "sides": [
+        {"side": "NORTH"},
+        {"side": "WEST"}
+      ],
+      "type": "link",
+      "totalRotations": 0
+    },
+    {
+      "rotation": 0,
+      "sides": [],
+      "type": "None",
+      "totalRotations": 0
+    },
+    {
+      "rotation": 0,
+      "sides": [],
+      "type": "None",
+      "totalRotations": 0
+    },
+    {
+      "rotation": 0,
+      "sides": [{"side": "EAST"}],
+      "type": "bulb",
+      "totalRotations": 3
+    },
+    {
+      "rotation": 0,
+      "sides": [
+        {"side": "NORTH"},
+        {"side": "SOUTH"},
+        {"side": "WEST"}
+      ],
+      "type": "link",
       "totalRotations": 0
     },
     {
@@ -1359,154 +852,27 @@
     {
       "rotation": 1,
       "sides": [
-        {"side": "EAST"},
-        {"side": "WEST"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 0,
-      "sides": [
-        {"side": "EAST"},
-        {"side": "SOUTH"},
-        {"side": "NORTH"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 0,
-      "sides": [
-        {"side": "EAST"},
-        {"side": "SOUTH"},
         {"side": "WEST"},
-        {"side": "NORTH"}
+        {"side": "EAST"}
       ],
       "type": "link",
       "totalRotations": 0
     },
     {
       "rotation": 0,
-      "sides": [{"side": "WEST"}],
-      "type": "bulb",
-      "totalRotations": 0
+      "sides": [
+        {"side": "NORTH"},
+        {"side": "EAST"}
+      ],
+      "type": "link",
+      "totalRotations": 3
     },
     {
-      "rotation": 2,
+      "rotation": 0,
       "sides": [
+        {"side": "NORTH"},
         {"side": "WEST"},
-        {"side": "NORTH"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 0,
-      "sides": [
-        {"side": "EAST"},
-        {"side": "WEST"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 1,
-      "sides": [
-        {"side": "EAST"},
-        {"side": "SOUTH"},
-        {"side": "WEST"},
-        {"side": "NORTH"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 0,
-      "sides": [
-        {"side": "SOUTH"},
-        {"side": "WEST"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 2,
-      "sides": [
-        {"side": "WEST"},
-        {"side": "NORTH"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 0,
-      "sides": [
-        {"side": "EAST"},
-        {"side": "WEST"},
-        {"side": "NORTH"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 1,
-      "sides": [
-        {"side": "SOUTH"},
-        {"side": "NORTH"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 0,
-      "sides": [
-        {"side": "SOUTH"},
-        {"side": "WEST"},
-        {"side": "NORTH"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 1,
-      "sides": [{"side": "EAST"}],
-      "type": "bulb",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 0,
-      "sides": [],
-      "type": "None",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 1,
-      "sides": [{"side": "WEST"}],
-      "type": "bulb",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 0,
-      "sides": [
-        {"side": "SOUTH"},
-        {"side": "NORTH"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 1,
-      "sides": [{"side": "EAST"}],
-      "type": "bulb",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 3,
-      "sides": [
-        {"side": "EAST"},
-        {"side": "WEST"},
-        {"side": "NORTH"}
+        {"side": "EAST"}
       ],
       "type": "link",
       "totalRotations": 0
@@ -1522,267 +888,70 @@
     },
     {
       "rotation": 0,
-      "sides": [
-        {"side": "EAST"},
-        {"side": "SOUTH"},
-        {"side": "NORTH"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 2,
-      "sides": [{"side": "EAST"}],
-      "type": "bulb",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 1,
-      "sides": [{"side": "EAST"}],
-      "type": "bulb",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 0,
-      "sides": [
-        {"side": "EAST"},
-        {"side": "SOUTH"},
-        {"side": "NORTH"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 1,
-      "sides": [
-        {"side": "EAST"},
-        {"side": "SOUTH"},
-        {"side": "NORTH"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 1,
-      "sides": [
-        {"side": "SOUTH"},
-        {"side": "NORTH"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 1,
-      "sides": [
-        {"side": "WEST"},
-        {"side": "NORTH"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 3,
-      "sides": [{"side": "WEST"}],
-      "type": "bulb",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 0,
-      "sides": [
-        {"side": "EAST"},
-        {"side": "SOUTH"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 0,
-      "sides": [{"side": "WEST"}],
-      "type": "bulb",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 1,
-      "sides": [
-        {"side": "EAST"},
-        {"side": "SOUTH"},
-        {"side": "WEST"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 2,
-      "sides": [
-        {"side": "EAST"},
-        {"side": "SOUTH"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 0,
-      "sides": [{"side": "EAST"}],
-      "type": "bulb",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 1,
-      "sides": [
-        {"side": "EAST"},
-        {"side": "WEST"},
-        {"side": "NORTH"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 1,
-      "sides": [
-        {"side": "EAST"},
-        {"side": "SOUTH"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 0,
-      "sides": [
-        {"side": "SOUTH"},
-        {"side": "WEST"},
-        {"side": "NORTH"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 1,
-      "sides": [{"side": "WEST"}],
-      "type": "bulb",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 1,
-      "sides": [{"side": "WEST"}],
-      "type": "bulb",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 2,
-      "sides": [
-        {"side": "SOUTH"},
-        {"side": "WEST"},
-        {"side": "NORTH"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 2,
-      "sides": [{"side": "EAST"}],
-      "type": "bulb",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 4,
-      "sides": [
-        {"side": "EAST"},
-        {"side": "SOUTH"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 4,
-      "sides": [
-        {"side": "WEST"},
-        {"side": "NORTH"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 0,
-      "sides": [
-        {"side": "EAST"},
-        {"side": "SOUTH"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 1,
-      "sides": [
-        {"side": "EAST"},
-        {"side": "SOUTH"},
-        {"side": "NORTH"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 1,
-      "sides": [
-        {"side": "WEST"},
-        {"side": "NORTH"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 0,
-      "sides": [
-        {"side": "EAST"},
-        {"side": "NORTH"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 0,
-      "sides": [
-        {"side": "SOUTH"},
-        {"side": "WEST"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 0,
-      "sides": [{"side": "EAST"}],
-      "type": "bulb",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 2,
-      "sides": [
-        {"side": "EAST"},
-        {"side": "SOUTH"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 1,
       "sides": [{"side": "SOUTH"}],
       "type": "bulb",
       "totalRotations": 0
     },
     {
-      "rotation": 1,
+      "rotation": 0,
+      "sides": [{"side": "SOUTH"}],
+      "type": "bulb",
+      "totalRotations": 3
+    },
+    {
+      "rotation": 0,
+      "sides": [{"side": "SOUTH"}],
+      "type": "bulb",
+      "totalRotations": 1
+    },
+    {
+      "rotation": 0,
+      "sides": [{"side": "EAST"}],
+      "type": "bulb",
+      "totalRotations": 0
+    },
+    {
+      "rotation": 0,
       "sides": [
-        {"side": "EAST"},
-        {"side": "SOUTH"},
-        {"side": "NORTH"}
+        {"side": "NORTH"},
+        {"side": "WEST"}
       ],
       "type": "link",
       "totalRotations": 0
     },
     {
-      "rotation": 1,
+      "rotation": 3,
+      "sides": [{"side": "NORTH"}],
+      "type": "bulb",
+      "totalRotations": 6
+    },
+    {
+      "rotation": 2,
       "sides": [
-        {"side": "EAST"},
-        {"side": "NORTH"}
+        {"side": "SOUTH"},
+        {"side": "WEST"},
+        {"side": "EAST"}
+      ],
+      "type": "link",
+      "totalRotations": 0
+    },
+    {
+      "rotation": 0,
+      "sides": [{"side": "WEST"}],
+      "type": "bulb",
+      "totalRotations": 3
+    },
+    {
+      "rotation": 0,
+      "sides": [{"side": "SOUTH"}],
+      "type": "bulb",
+      "totalRotations": 0
+    },
+    {
+      "rotation": 0,
+      "sides": [
+        {"side": "NORTH"},
+        {"side": "SOUTH"}
       ],
       "type": "link",
       "totalRotations": 0
@@ -1790,17 +959,28 @@
     {
       "rotation": 0,
       "sides": [
-        {"side": "EAST"},
-        {"side": "NORTH"}
+        {"side": "NORTH"},
+        {"side": "SOUTH"}
       ],
       "type": "link",
       "totalRotations": 0
     },
     {
-      "rotation": 1,
+      "rotation": 0,
       "sides": [
-        {"side": "EAST"},
-        {"side": "NORTH"}
+        {"side": "NORTH"},
+        {"side": "SOUTH"},
+        {"side": "EAST"}
+      ],
+      "type": "link",
+      "totalRotations": 0
+    },
+    {
+      "rotation": 0,
+      "sides": [
+        {"side": "NORTH"},
+        {"side": "SOUTH"},
+        {"side": "WEST"}
       ],
       "type": "link",
       "totalRotations": 0
@@ -1812,66 +992,152 @@
       "totalRotations": 0
     },
     {
-      "rotation": 1,
-      "sides": [
-        {"side": "EAST"},
-        {"side": "SOUTH"}
-      ],
-      "type": "link",
-      "totalRotations": 0
-    },
-    {
-      "rotation": 1,
+      "rotation": 0,
       "sides": [
         {"side": "SOUTH"},
-        {"side": "NORTH"}
+        {"side": "EAST"}
       ],
       "type": "link",
-      "totalRotations": 0
+      "totalRotations": 2
     },
     {
-      "rotation": 1,
+      "rotation": 0,
       "sides": [
-        {"side": "EAST"},
-        {"side": "NORTH"}
+        {"side": "SOUTH"},
+        {"side": "WEST"}
+      ],
+      "type": "link",
+      "totalRotations": 3
+    },
+    {
+      "rotation": 0,
+      "sides": [],
+      "type": "None",
+      "totalRotations": 0
+    },
+    {
+      "rotation": 0,
+      "sides": [{"side": "EAST"}],
+      "type": "bulb",
+      "totalRotations": 3
+    },
+    {
+      "rotation": 0,
+      "sides": [
+        {"side": "NORTH"},
+        {"side": "WEST"},
+        {"side": "EAST"}
       ],
       "type": "link",
       "totalRotations": 0
     },
     {
-      "rotation": 1,
-      "sides": [{"side": "SOUTH"}],
+      "rotation": 0,
+      "sides": [
+        {"side": "NORTH"},
+        {"side": "WEST"},
+        {"side": "EAST"}
+      ],
+      "type": "link",
+      "totalRotations": 3
+    },
+    {
+      "rotation": 0,
+      "sides": [
+        {"side": "NORTH"},
+        {"side": "SOUTH"},
+        {"side": "WEST"}
+      ],
+      "type": "link",
+      "totalRotations": 3
+    },
+    {
+      "rotation": 0,
+      "sides": [{"side": "NORTH"}],
       "type": "bulb",
       "totalRotations": 0
     },
     {
-      "rotation": 1,
+      "rotation": 0,
       "sides": [
-        {"side": "EAST"},
-        {"side": "SOUTH"},
-        {"side": "NORTH"}
+        {"side": "NORTH"},
+        {"side": "EAST"}
       ],
       "type": "link",
       "totalRotations": 0
     },
     {
-      "rotation": 4,
+      "rotation": 0,
       "sides": [
-        {"side": "EAST"},
+        {"side": "WEST"},
+        {"side": "EAST"}
+      ],
+      "type": "link",
+      "totalRotations": 0
+    },
+    {
+      "rotation": 0,
+      "sides": [
+        {"side": "NORTH"},
         {"side": "WEST"}
       ],
       "type": "link",
       "totalRotations": 0
     },
     {
-      "rotation": 1,
+      "rotation": 0,
       "sides": [
-        {"side": "EAST"},
-        {"side": "NORTH"}
+        {"side": "NORTH"},
+        {"side": "EAST"}
+      ],
+      "type": "link",
+      "totalRotations": 3
+    },
+    {
+      "rotation": 0,
+      "sides": [
+        {"side": "WEST"},
+        {"side": "EAST"}
+      ],
+      "type": "link",
+      "totalRotations": 1
+    },
+    {
+      "rotation": 0,
+      "sides": [
+        {"side": "WEST"},
+        {"side": "EAST"}
+      ],
+      "type": "link",
+      "totalRotations": 1
+    },
+    {
+      "rotation": 0,
+      "sides": [
+        {"side": "WEST"},
+        {"side": "EAST"}
+      ],
+      "type": "link",
+      "totalRotations": 1
+    },
+    {
+      "rotation": 0,
+      "sides": [
+        {"side": "WEST"},
+        {"side": "EAST"}
+      ],
+      "type": "link",
+      "totalRotations": 1
+    },
+    {
+      "rotation": 0,
+      "sides": [
+        {"side": "NORTH"},
+        {"side": "WEST"}
       ],
       "type": "link",
       "totalRotations": 0
     }
   ],
-  "timeLeft": 892
+  "timeLeft": 565
 }

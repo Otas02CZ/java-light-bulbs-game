@@ -34,7 +34,7 @@ DESC: HowToPlay scene definition
       <TextFlow styleClass="textJustify">
          <Text styleClass="whiteText">
             Welcome to the built-in manual of game Light Bulbs. Here you can find all necessary
-            information about the game, how to play it aw well as information about some hidden features.
+            information about the game, how to play it as well as information about some hidden features.
          </Text>
       </TextFlow>
       <!-- Chapter with its text -->
@@ -95,7 +95,7 @@ DESC: HowToPlay scene definition
       </TextFlow>
       <TextFlow styleClass="textJustify">
          <Text styleClass="whiteText">
-            Help View shows you how many rotations each game cell needs to be in the right position.
+            Help View shows you how many rotations each game cell needs to be in the right orientation.
             It can be opened by pressing its button in the game menu. Finishing the game automatically
             closes the Help View window. Do not use it too much. That would be cheating!!
          </Text>
@@ -118,7 +118,8 @@ DESC: HowToPlay scene definition
       <TextFlow styleClass="textJustify">
          <Text styleClass="whiteText">
             If you feel tired, then you can use the built-in auto solver, which will lock the game
-            and solve the game step by step. Once turned on, it cannot be disabled
+            and solve the game step by step. If you wish to you can use the auto solver to solve just
+            a portion of the game and solve the rest on your own.
          </Text>
       </TextFlow>
       <!-- Chapter with its text -->
