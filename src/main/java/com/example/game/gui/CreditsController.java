@@ -53,6 +53,6 @@ public class CreditsController extends Controller {
      */
     @FXML
     public void handleMotivationLink() {
-        hostServices.showDocument("https://www.youtube.com/watch?v=G1IbRujko-A");
+        hostServices.showDocument("https://www.youtube.com/watch?v=asjQNZn7vng");
     }
 }
