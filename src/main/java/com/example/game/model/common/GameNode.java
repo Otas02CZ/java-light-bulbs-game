@@ -51,7 +51,7 @@ public class GameNode implements ToolField, GameObservable {
      * Stores reference to gameObserver, used to notify Game when
      * connection recheck is required
      */
-    protected GameObserver gameObserver;
+    protected ArrayList<GameObserver> observers = new ArrayList<>();
 
     /**
      * Stores which sides are connectors to other nodes
@@ -69,7 +69,6 @@ public class GameNode implements ToolField, GameObservable {
         connectors.put(Side.EAST, false);
         this.position = new Position(0, 0);
         this.powered = false;
-        this.gameObserver = null;
     }
 
     /**
@@ -84,7 +83,6 @@ public class GameNode implements ToolField, GameObservable {
         connectors.put(Side.EAST, false);
         this.position = position;
         this.powered = false;
-        this.gameObserver = null;
     }
 
     /**
@@ -264,23 +262,23 @@ public class GameNode implements ToolField, GameObservable {
      * @param observer to use for notifying about Game events
      */
     public void setupGameObserver(GameObserver observer) {
-        this.gameObserver = observer;
+        observers.add(observer);
     }
 
     /**
      * Removes set Game observer
      */
-    public void removeGameObserver() {
-        this.gameObserver = null;
+    public void removeGameObserver(GameObserver observer) {
+        observers.remove(observer);
     }
 
     /**
      * Notify Game observer when connection recalculation is required
      */
     public void notifyGameObserver() {
-        if (gameObserver == null)
-            return;
-        this.gameObserver.update(this);
+        for (GameObserver observer : observers) {
+            observer.update(this);
+        }
     }
 
     public void setRotation(int rotation) {
