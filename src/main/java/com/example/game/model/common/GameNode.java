@@ -1,5 +1,5 @@
 /**
- * IJA HW: 2
+ * IJA PROJECT: Light Bulbs Game
  * FILE: GameNode.java
  * AUTHOR: Otakar Kočí xkocio00@stud.fit.vutbr.cz
  * AUTHOR: Martin Mendl x247581@stud.fit.vutbr.cz
@@ -99,6 +99,10 @@ public class GameNode implements ToolField, GameObservable {
         return position;
     }
 
+    /**
+     * Sets position of node in 2D space
+     * @param position Position
+     */
     public void internalTurn(boolean left) {
         HashMap<Side, Boolean> tempConnectors = new HashMap<>();
 
@@ -142,32 +146,42 @@ public class GameNode implements ToolField, GameObservable {
         this.notifyGameObserver();
     }
 
+    /**
+     * Turns (rotates) node 90 deg counterclockwise
+     */
     public void turnLeft() {
         logger.log(Level.INFO, this + " turned left");
         internalTurn(true);
         this.notifyGameObserver();
     }
 
+    /**
+     * retuns boolean whether this node is empty
+     * @return boolean
+     */
     public boolean isEmpty() {
         return true;
     }
 
     /**
-     * @return boolean is node a link ?
+     * returns boolean whether this node is a link
+     * @return boolean
      */
     public boolean isLink() {
         return false;
     }
 
     /**
-     * @return boolean is node a bulb ?
+     * returns boolean whether this node is a bulb
+     * @return boolean
      */
     public boolean isBulb() {
         return false;
     }
 
     /**
-     * @return boolean is node a power source ?
+     * returns boolean whether this node is a power source
+     * @return boolean
      */
     public boolean isPower() {
         return false;
@@ -211,7 +225,7 @@ public class GameNode implements ToolField, GameObservable {
 
     /**
      * Overrides toString to print in format:
-     * {TYPE[ROW@COL][SIDE_1,SIDE_2,...]}
+     * {E[ROW@COL][SIDE_1,SIDE_2,...]}
      * @return String representation
      */
     @Override
@@ -277,6 +291,7 @@ public class GameNode implements ToolField, GameObservable {
 
     /**
      * Removes set Game observer
+     * @param observer to remove
      */
     public void removeGameObserver(GameObserver observer) {
         observers.remove(observer);
@@ -291,18 +306,34 @@ public class GameNode implements ToolField, GameObservable {
         }
     }
 
+    /**
+     * Sets position of node in 2D space
+     * @param position Position
+     */
     public void setRotation(int rotation) {
         this.rotation = rotation;
     }
 
+    /**
+     * Sets the total amount of rotations
+     * @param totalRotations int
+     */
     public void setTotalRotations(int totalRotations) {
         this.totalRotations = totalRotations;
     }
 
+    /**
+     * returns the amount of turns used
+     * @return int rotation
+     */
     public int usedTurns() {
         return totalRotations;
     }
 
+    /**
+     * Gets current rotation of node
+     * @return int rotation
+     */
     public int remainingTurns() {
         boolean isIShape = (north() && south() && !west() && !east()) ||
                 (east() && west() && !north() && !south());
@@ -314,8 +345,10 @@ public class GameNode implements ToolField, GameObservable {
 
     }
 
-    /**
-     * Helper function for simplification of toString override
+     /**
+     * Method to get the string representation of the GameNode in this format:
+     * {TYPE[ROW@COL][SIDE_1,SIDE_2,...]}
+     * @return String representation
      */
     protected String getToString(String name) {
         // required order of sides
@@ -335,14 +368,23 @@ public class GameNode implements ToolField, GameObservable {
                 String.join(",", activeConnectors));
     }
 
+    /**
+     * Represent node in text format
+     * @param bfr1 StringBuilder for first line
+     * @param bfr2 StringBuilder for second line
+     * @param bfr3 StringBuilder for third line
+     */
     public void represent(StringBuilder bfr1, StringBuilder bfr2, StringBuilder bfr3) {
         String space = "\uD83E\uDDAF";
         bfr1.append(space).append(space).append(space);
         bfr2.append(space).append(space).append(space);
         bfr3.append(space).append(space).append(space);
     }
-
-
+    
+    /**
+     * Convert this node to JSON format
+     * @return JSONObject
+     */
     public JSONObject toJSON() {
         JSONObject obj = new JSONObject();
         obj.put("rotation", rotation);

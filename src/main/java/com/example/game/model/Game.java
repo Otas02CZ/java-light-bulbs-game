@@ -1,5 +1,5 @@
 /**
- * IJA HW: 2
+ * IJA PROJECT: Light Bulbs Game
  * FILE: Game.java
  * AUTHOR: Otakar Kočí xkocio00@stud.fit.vutbr.cz
  * AUTHOR: Martin Mendl x247581@stud.fit.vutbr.cz
@@ -28,7 +28,6 @@ import java.util.Stack;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Represents LightBulb game
@@ -37,22 +36,49 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class Game implements ToolEnvironment, GameObservable.GameObserver, TimerObservable, GUIObservable {
 
+    /**
+     * Whether the game is won
+     */
     boolean gameWon = false;
 
+    /**
+     * Number of bulbs in the game
+     */
     private int amountOfBulbs = 0;
 
+    /**
+     * Number of bulbs that are on
+     */
     private int bulbsOn = 0;
 
+    /**
+     * Backlog of moves
+     */
     private UndoBackLog undoBackLog;
 
+    /**
+     * Timer manager
+     */
     private final TimerManager timerManager = new TimerManager();
 
+    /**
+     * List of GUI observers
+     */
     private List<GUIObserver> observers = new ArrayList<>();
 
+    /**
+     * Executor for solving the game
+    */
     private ScheduledExecutorService solverExecutor = null;
 
+    /**
+     * Whether the solver was used
+    */
     private boolean usedSolver = false;
 
+    /**
+     * Number of turns that were used
+    */
     private int amountOfTurns = 0;
 
     /**
@@ -106,15 +132,29 @@ public class Game implements ToolEnvironment, GameObservable.GameObserver, Timer
         return game;
     }
 
+    /**
+     * Sets the timer for the game
+     * @param timeLeft int time left in seconds
+    */
     public void startTimer(int timeLeft) {
         this.timerManager.startTimer(timeLeft);
     }
 
+    /**
+     * Stops the timer for the game
+    */
     public void stopTimer() {
         this.timerManager.stopTimer();
     }
 
-
+    /**
+     * Generates a new game with given parameters
+     * @param rows int number of rows
+     * @param cols int number of columns
+     * @param emptyCoef float coefficient of empty spaces
+     * @param shuffleCoef int coefficient of shuffling
+     * @return Game instance
+     */
     public static Game generate(int rows, int cols, float emptyCoef, int shuffleCoef) {
         Game game = Game.create(rows, cols);
 
@@ -148,22 +188,37 @@ public class Game implements ToolEnvironment, GameObservable.GameObserver, Timer
         return game;
     }
 
+    /**
+     * Sets up the timer observer
+     * @param timerObserver TimerObserver instance
+     */
     public void setupTimerObserver(TimerObserver timerObserver) {
         this.timerManager.setupTimerObserver(timerObserver);
     }
 
+    /**
+     * Removes the timer observer
+     * @param observer TimerObserver instance
+     */
     public void removeTimerObserver(TimerObserver observer) {
         this.timerManager.removeTimerObserver(observer);
     }
 
-    public void notifyTimerObserver() {
+    // magic
+    public void notifyTimerObserver() {}
 
-    }
-
+    /**
+     * Sets up the GUI observer
+     * @param observer GUIObserver instance
+     */
     public void setupGUIObserver(GUIObserver observer) {
         observers.add(observer);
     }
 
+    /**
+     * Removes the GUI observer
+     * @param observer GUIObserver instance
+     */
     public void removeGUIObserver(GUIObserver observer) {
         Iterator<GUIObserver> it = observers.iterator();
         while (it.hasNext()) {
@@ -175,12 +230,20 @@ public class Game implements ToolEnvironment, GameObservable.GameObserver, Timer
         }
     }
 
+    /**
+     * Notifies all GUI observers about the change
+     */
     public void notifyGUIObserver() {
         for (GUIObserver observer : observers) {
             observer.updateGUI();
         }
     }
 
+    /**
+     * Creates a JSON object from a file
+     * @param path String path to the file
+     * @return JSONObject
+    */
     private static JSONObject createJSON(String path) throws JSONException {
         try {
             String content = new String(Files.readAllBytes(Paths.get(path)));
@@ -191,6 +254,12 @@ public class Game implements ToolEnvironment, GameObservable.GameObserver, Timer
         }
     }
 
+    /**
+     * Loads a game from a JSON file
+     * @param path String path to the file
+     * @return Game instance
+     * @throws JSONException if the JSON is invalid
+    */
     public static Game load(String path) throws JSONException {
 
         JSONObject data = createJSON(path);
@@ -286,6 +355,11 @@ public class Game implements ToolEnvironment, GameObservable.GameObserver, Timer
         return game;
     }
 
+    /**
+     * Saves the game to a JSON file
+     * @param path String path to the file
+     * @throws IOException if the file cannot be written
+    */
     public void save(String path) throws IOException {
 
         JSONObject obj = new JSONObject();
@@ -307,8 +381,12 @@ public class Game implements ToolEnvironment, GameObservable.GameObserver, Timer
         FileWriter file = new FileWriter(path);
         file.write(obj.toString(2)); // 2 = pretty print with 2-space indent
         file.flush();
+        file.close();
     }
 
+    /**
+     * Undo last move
+    */
     public void undo() {
         if (!canUndo()) return;
         Position pos = undoBackLog.Undo();
@@ -317,6 +395,9 @@ public class Game implements ToolEnvironment, GameObservable.GameObserver, Timer
         this.powerUp();
     }
 
+    /**
+     * Redo last move
+    */
     public void redo() {
         if (!canRedo()) return;
         Position pos = undoBackLog.Redo();
@@ -324,40 +405,67 @@ public class Game implements ToolEnvironment, GameObservable.GameObserver, Timer
         this.powerUp();
     }
 
+    /**
+     * Checks if there is a move to undo
+    */
     public boolean canUndo() {
         return undoBackLog.canUndo();
     }
 
+    /**
+     * Checks if there is a move to redo
+    */
     public boolean canRedo() {
         return undoBackLog.canRedo();
     }
 
+    /**
+     * Checks if the game is won
+     * @return true if the game is won, false otherwise
+    */
     public boolean hasWon() {
         return gameWon;
     }
 
+    /**
+     * Returns the number of bulbs that are on
+     * @return int number of bulbs that are on
+    */
     public int getBulbsOn() {
         return bulbsOn;
     }
 
+    /**
+     * Returns the number of bulbs that are in the game
+     * @return int number of bulbs
+    */
     public int getBulbsTotal() {
         return amountOfBulbs;
     }
 
+    /**
+     * Returns the number of turns that were used
+     * @return int number of turns
+    */
     public int getUsedTurnsTotal() {
         return amountOfTurns;
     }
 
+    /**
+     * returns if the solver was used
+    */
     public boolean usedSolver() {
         return this.usedSolver;
     }
 
-
+    /**
+     * Starts the solver
+     * @param timeout int time in milliseconds
+    */
     public void solve(int timeout) {
         if (solverExecutor != null) return;
 
         ArrayList<GameNode> nodes = new ArrayList<>();
-
         for (int i = 0; i < rows(); i++) {
             for (int j = 0; j < cols(); j++) {
                 GameNode node = map[i][j];
@@ -366,6 +474,8 @@ public class Game implements ToolEnvironment, GameObservable.GameObserver, Timer
                 }
             }
         }
+        // Shuffle the nodes to randomize the order
+        java.util.Collections.shuffle(nodes);
 
         solverExecutor = Executors.newSingleThreadScheduledExecutor();
         solverExecutor.scheduleAtFixedRate(() -> {
@@ -378,7 +488,9 @@ public class Game implements ToolEnvironment, GameObservable.GameObserver, Timer
         }, 0, timeout, TimeUnit.MILLISECONDS);
     }
 
-    // Ensure you shut down the executor when done (e.g., on app exit)
+    /**
+     * Stops the solver
+    */
     public void stopSolver() {
         if (solverExecutor != null) {
             solverExecutor.shutdownNow();
@@ -458,6 +570,9 @@ public class Game implements ToolEnvironment, GameObservable.GameObserver, Timer
         return this.sizeCols;
     }
 
+    /**
+     * Returns the time left in the game
+    */
     public int timeLeft() {
         return this.timerManager.getTimeLeft();
     }

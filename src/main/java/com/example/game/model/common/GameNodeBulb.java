@@ -1,5 +1,5 @@
 /**
- * IJA HW: 2
+ * IJA PROJECT: Light Bulbs Game
  * FILE: GameNodeBulb.java
  * AUTHOR: Otakar Kočí xkocio00@stud.fit.vutbr.cz
  * AUTHOR: Martin Mendl x247581@stud.fit.vutbr.cz
@@ -9,7 +9,6 @@
 
 package com.example.game.model.common;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
@@ -26,21 +25,38 @@ public class GameNodeBulb extends GameNode {
         this.connectors.put(side, true);
     }
 
+    /**
+     * helper method to indentify the type of GameNode
+     */
     @Override
     public boolean isEmpty() {
         return false;
     }
 
+    /**
+     * helper method to indentify the type of GameNode
+     */
     @Override
     public boolean isBulb() {
         return true;
     }
 
+    /**
+     * Overrides toString to print in format:
+     * {B[ROW@COL][SIDE_1,SIDE_2,...]}
+     * @return String representation
+     */
     @Override
     public String toString() {
         return getToString("B");
     }
 
+    /**
+     * Method to get the string representation of the GameNode
+     * @param bfr1 StringBuilder for the first line
+     * @param bfr2 StringBuilder for the second line
+     * @param bfr3 StringBuilder for the third line
+     */
     @Override
     public void represent(StringBuilder bfr1, StringBuilder bfr2, StringBuilder bfr3) {
         String space = "\uD83E\uDDAF";
@@ -52,6 +68,10 @@ public class GameNodeBulb extends GameNode {
         bfr3.append(space).append(containsConnector(Side.SOUTH) ? wire : space).append(space);
     }
 
+    /**
+     * Method to get the JSON representation of the GameNode
+     * @return JSON object representing the GameNode
+     */
     @Override
     public JSONObject toJSON() {
         JSONObject obj = super.toJSON();

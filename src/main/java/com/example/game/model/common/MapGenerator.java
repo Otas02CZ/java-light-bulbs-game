@@ -1,20 +1,62 @@
+/**
+ * IJA PROJECT: Light Bulbs Game
+ * FILE: MapElement.java
+ * AUTHOR: Martin Mendl x247581@stud.fit.vutbr.cz
+ * CREATED: 03/2025
+ * DESCRIPTION: Class MapElement represents an element of a 2D map in the game.
+ *              It manages its position, connections to other elements, rotation,
+ *              and its state as a root or light source. Used for generating the gameModel
+ */
+
 package com.example.game.model.common;
 
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Class for creating a map for the game.
+ * It generates a 2D map with elements that can be connected to each other.
+ * The map is generated using a modified Prim's algorithm that ensures that all elements are connected.
+*/
 public class MapGenerator {
 
+    /**
+     * Percentage of empty spaces in the map.
+     */
     final private int rows;
+
+    /**
+     * Number of rows in the map.
+     */
     final private int cols;
+
+    /**
+     * 2D array representing the map.
+     */
     final private MapElement[][] map;
-    private Position rootPosition;
+
+    /**
+     * Priority queue for managing the elements in the map.
+     */
     final private PriorityQueue queue;
+
+    /**
+     * Random number generator for generating random positions in the map.
+     */
     final private Random random;
-    private int powerConnections;
+
+    /**
+     * Logger for logging information.
+     */
     private final Logger logger = Logger.getLogger(getClass().getName());
 
+    /**
+     * Constructor for the MapGenerator class.
+     * @param rows Number of rows in the map.
+     * @param cols Number of columns in the map.
+     * @param emptyPercentage Percentage of empty spaces in the map.
+     */
     public MapGenerator(int rows, int cols, float emptyPercentage) {
         this.rows = rows;
         this.cols = cols;
@@ -58,6 +100,10 @@ public class MapGenerator {
         removeInvalidMoves();
     }
 
+    /**
+     * Removes invalid moves from the queue.
+     * A move is invalid if it leads to an out of bounds position or if the target element has connections.
+     */
     private void removeInvalidMoves() {
 
         int idx = 0;
@@ -70,11 +116,15 @@ public class MapGenerator {
                 queue.removeIdx(idx);
                 idx--; // in case we removed one element, we need to move back one slot, for the logic to work
             }
-
             elm = queue.getQueueElement(++idx);
         }
     }
 
+    /**
+     * Checks if the given position is out of bounds of the map.
+     * @param pos The position to check.
+     * @return true if the position is out of bounds, false otherwise.
+     */
     private boolean isOutOfBounds(Position pos) {
         int x = pos.getCol();
         int y = pos.getRow();
@@ -82,6 +132,11 @@ public class MapGenerator {
         return x < 0 || x >= cols || y < 0 || y >= rows;
     }
 
+    /**
+     * Gets the MapElement at the given position.
+     * @param pos The position of the element.
+     * @return The MapElement at the given position, or null if it is out of bounds.
+     */
     public MapElement getMapElement(Position pos) {
 
         int x = pos.getCol();
@@ -91,6 +146,11 @@ public class MapGenerator {
         return map[y][x];
     }
 
+    /**
+     * Gets the neighbor of the given QueueElement.
+     * @param elm The QueueElement to get the neighbor of.
+     * @return The MapElement at the neighbor position, or null if it is out of bounds.
+     */
     private MapElement getNeighbor(QueueElement elm) {
 
         if (elm == null) return null;
@@ -102,6 +162,10 @@ public class MapGenerator {
         return getMapElement(neighbourPos);
     }
 
+    /**
+     * Adds available moves for the given MapElement to the queue.
+     * @param targetElement The MapElement to add available moves for.
+    */
     private void AddAvailableMoves(MapElement targetElement) {
 
         Position targetPos = targetElement.getPos();
@@ -117,6 +181,10 @@ public class MapGenerator {
         }
     }
 
+    /**
+     * Generates the map using a modified Prim's algorithm.
+     * It connects all elements in the map and ensures that all elements are reachable from the root element.
+     */
     public void generateMap() {
 
         int overflowProtection = rows * cols * 10;
@@ -146,6 +214,10 @@ public class MapGenerator {
         }
     }
 
+    /**
+     * Randomizes the map by rotating a given number of elements.
+     * @param amountOfRotations The number of elements to rotate.
+     */
     public void randomizeMap(int amountOfRotations) {
 
         int rotationsDone = 0;
@@ -162,7 +234,10 @@ public class MapGenerator {
         }
     }
 
-    // Method for printing the map, for cmd line only
+    /**
+     * Prints the map to the terminal.
+     * It shows the connections between elements and their positions.
+     */
     public void printMapTerminal() {
 
         StringBuilder bfr0 = new StringBuilder();

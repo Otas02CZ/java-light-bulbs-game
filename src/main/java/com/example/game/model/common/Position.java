@@ -1,5 +1,5 @@
 /**
- * IJA HW: 2
+ * IJA PROJECT: Light Bulbs Game
  * FILE: Position.java
  * AUTHOR: Otakar Kočí xkocio00@stud.fit.vutbr.cz
  * AUTHOR: Martin Mendl x247581@stud.fit.vutbr.cz
@@ -46,6 +46,11 @@ public final class Position {
         return col;
     }
 
+    /**
+     * Compares two Position objects for equality
+     * @param o Object to compare
+     * @return true if the positions are equal, false otherwise
+    */
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
@@ -54,14 +59,21 @@ public final class Position {
         return row == position.row && col == position.col;
     }
 
+    /**
+     * Generates a hash code for the Position object
+     * @return int hash code
+    */
     @Override
-    //TODO: maybe change?
     public int hashCode() {
         int result = row;
         result = 31 * result + col;
         return result;
     }
 
+    /**
+     * Returns a string representation of the Position object
+     * @return String representation of the position
+    */
     @Override
     public String toString() {
         return "(" + col + ", " + row + ")";

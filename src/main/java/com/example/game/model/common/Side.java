@@ -1,5 +1,5 @@
 /**
- * IJA HW: 2
+ * IJA PROJECT: Light Bulbs Game
  * FILE: Side.java
  * AUTHOR: Otakar Kočí xkocio00@stud.fit.vutbr.cz
  * AUTHOR: Martin Mendl x247581@stud.fit.vutbr.cz
