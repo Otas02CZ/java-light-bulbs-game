@@ -22,6 +22,8 @@ import java.net.URL;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 
+// we love IJA and gandalf ngl. Also hello?
+
 /**
  * GUI application entry point, starts JavaFX application.
  * Creates main stage, prepares fonts and setups.
