@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+FILE: credits.fxml
+TEAM: 247555
+AUTHOR: Otakar Kočí 247555
+DESC: Credits scene definition
+-->
 
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 
+<!-- Whole scene is scrollable -->
 <ScrollPane
         xmlns="http://javafx.com/javafx/21"
         xmlns:fx="http://javafx.com/fxml/1"
@@ -13,6 +20,7 @@
         styleClass="blackBackground"
         fitToWidth="true"
 >
+    <!-- Everything is vertically stacked -->
     <VBox alignment="CENTER" spacing="20" styleClass="credits-container">
         <!-- Game Title -->
         <Text text="Light Bulbs" styleClass="game-title,whiteText" />
@@ -20,7 +28,7 @@
         <!-- Authors Label -->
         <Text text="Authors" styleClass="authors-label,whiteText" />
 
-        <!-- Author Names (each on its own line) -->
+        <!-- Author Names -->
         <VBox alignment="CENTER" spacing="5" styleClass="authors-list">
             <Text text="Otakar Kočí" styleClass="author-name,whiteText" />
             <Text text="Martin Mendl" styleClass="author-name,whiteText" />
@@ -29,7 +37,7 @@
         <!-- Year -->
         <Text text="2025" styleClass="year-text,whiteText"/>
 
-        <!-- Block of Justified Text (Using TextFlow for wrapping) -->
+        <!-- Block of Justified Text -->
         <TextFlow styleClass="credits-text-flow">
             <Text styleClass="whiteText">
                 A simple light bulbs game clone. Rotate power source,
@@ -45,6 +53,7 @@
             <Hyperlink text="Font Press Start 2P" onAction="#handlePressStartLink"/>
             <Hyperlink text="Alarm clock icon" onAction="#handleAlarmClockLink"/>
 
+            <!-- Block of Justified Text -->
             <TextFlow styleClass="credits-text-flow">
                 <Text styleClass="whiteText">
                     Other icons and backgrounds were created manually or with slight help
@@ -52,7 +61,7 @@
                 </Text>
             </TextFlow>
         </VBox>
-        
+        <!-- Project Motivation -->
         <VBox alignment="CENTER" spacing="5" styleClass="assets-list">
             <Hyperlink text="Project Motivation" onAction="#handleMotivationLink"/>
         </VBox>

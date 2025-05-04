@@ -1,9 +1,18 @@
+/*
+FILE: styles.css
+TEAM: 247555
+AUTHOR: Otakar Kočí 247555
+DESC: CSS for JavaFX game
+*/
+
+/*Basic styling for all elements*/
 .root {
     -fx-font-family: 'Space Mono Regular';
     -fx-font-size: 16px;
     -fx-text-fill: white;
 }
 
+/*Basic styling for all buttons*/
 .button {
     -fx-cursor: hand;
     -fx-font-scale: 1.2;
@@ -11,66 +20,65 @@
     -fx-text-fill: black;
 }
 
+/*All buttons are slightly enlarged on hover*/
+.button:hover {
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}
+
+/*Background with partially lit bulbs*/
 .background {
     -fx-background-image: url('images/backgrounds/background_half.jpg');
     -fx-background-size: cover;
     -fx-padding: 20px;
 }
 
+/*Background with all bulbs turned off*/
 .backgroundLost {
     -fx-background-image: url('images/backgrounds/background_none.jpg');
     -fx-background-size: cover;
     -fx-padding: 20px;
 }
 
+/*Background with all bulbs turned on*/
 .backgroundWon {
     -fx-background-image: url('images/backgrounds/background_all.jpg');
     -fx-background-size: cover;
     -fx-padding: 20px;
 }
 
+/*Styling for almost all labels*/
 .infoLabel {
     -fx-font-size: 20px;
     -fx-text-fill: white;
 }
 
+/*Styling for main title*/
 .mainTitle {
     -fx-font-family: 'Press Start 2P Regular';
     -fx-font-size: 48px;
     -fx-text-fill: white;
 }
 
+/*Subtitle styling*/
 .subtitle {
-    -fx-font-size: 36px;
-    -fx-text-fill: black;
+    -fx-font-size: 30px;
+    -fx-text-fill: white;
 }
 
+/*Background of game menu is transparent*/
 .gameMenu {
     -fx-background-color: transparent;
 }
 
+/*Styling for large buttons in Intro and gameSetup scenes*/
 .button-text {
     -fx-text-fill: black;
     -fx-pref-width: 200px;
     -fx-pref-height: 50px;
 }
 
-.button-text:hover {
-    -fx-text-fill: black;
-    -fx-pref-width: 200px;
-    -fx-pref-height: 50px;
-}
-
-.button:hover {
-    -fx-scale-x: 1.05;
-    -fx-scale-y: 1.05;
-}
-
-.subtitle {
-    -fx-font-size: 30px;
-    -fx-text-fill: white;
-}
-
+/*Same width for elements in game setup*/
 .combo-box, .spinner {
     -fx-pref-width: 150px;
 }
@@ -81,11 +89,13 @@
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 5, 0.5, 0.0, 0.0);
 }
 
+/*Game cells are slightly enlarged on hover*/
 .game-cell:hover {
     -fx-scale-x: 1.05;
     -fx-scale-y: 1.05;
 }
 
+/*Help view cells basic styling*/
 .help-view-cell {
     -fx-background-image: url('images/icons/empty.jpg');
     -fx-background-repeat: no-repeat;
@@ -93,6 +103,7 @@
     -fx-background-position: center center;
 }
 
+/*Game grid has round border*/
 #gameGrid {
     -fx-border-color: black;
     -fx-border-width: 10px;
@@ -100,25 +111,29 @@
     -fx-border-radius: 7px;
 }
 
+/*Heading in HowToPlay scene*/
 .howToPlayHeading {
     -fx-font-size: 28px;
     -fx-fill: white;
 }
 
+/*Chapter in HowToPlay scene*/
 .howToPlayChapter {
     -fx-font-size: 22px;
     -fx-fill: white;
 }
 
+/*Sets font color to white*/
 .whiteText {
     -fx-fill: white;
 }
 
+/*Sets font color to white*/
 .whiteLabel {
     -fx-text-fill: white;
 }
 
-/* General container styling for credits */
+/*General container styling for credits*/
 .credits-container {
     -fx-padding: 20;
     -fx-alignment: center;
@@ -126,70 +141,73 @@
     -fx-background-size: cover;
 }
 
-/* Styling for the game title */
+/*Styling for the game title*/
 .game-title {
     -fx-font-size: 24px;
     -fx-text-alignment: center;
 }
 
-/* Styling for the authors label */
+/*Styling for the authors label*/
 .authors-label {
     -fx-font-size: 18px;
     -fx-text-alignment: center;
 }
 
-/* Styling for each author name */
+/*Styling for each author name*/
 .author-name {
     -fx-font-size: 16px;
     -fx-text-alignment: center;
 }
 
-/* Styling for the year text */
+/*Styling for the year text*/
 .year-text {
     -fx-font-size: 16px;
     -fx-text-alignment: center;
 }
 
-/* Styling for the block of text (using TextFlow for wrapping) */
+/*Styling for the block of text - justify*/
 .credits-text-flow {
     -fx-font-size: 14px;
     -fx-text-alignment: justify;
     -fx-wrap-text: true;
-    -fx-pref-width: 400px; /* Adjust the preferred width for wrapping */
+    -fx-pref-width: 400px;
 }
 
-/* Styling for the assets title */
+/*Styling for the assets title*/
 .assets-title {
     -fx-font-size: 18px;
     -fx-text-alignment: center;
 }
 
-/* Styling for each asset item */
+/*Styling for each asset item*/
 .asset-item {
     -fx-font-size: 14px;
 }
 
-/* Styling for the list of authors and assets (spacing between items) */
+/*Styling for the list of authors and assets*/
 .authors-list,
 .assets-list {
     -fx-alignment: center;
     -fx-spacing: 5;
 }
 
+/*Blocks of text*/
 .textJustify {
     -fx-font-size: 14px;
     -fx-text-alignment: justify;
     -fx-wrap-text: true;
-    -fx-pref-width: 400px; /* Adjust the preferred width for wrapping */
+    -fx-pref-width: 400px;
     -fx-padding: 0 0 15 0;
 }
 
+/*Background and padding for HowToPlay scene*/
 .howToPlayContainer {
     -fx-background-image: url('images/backgrounds/background_none.jpg');
     -fx-background-size: cover;
     -fx-padding: 20;
 }
 
+/*Black background*/
 .blackBackground {
     -fx-background-color: black;
 }

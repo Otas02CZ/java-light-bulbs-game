@@ -5,3 +5,5 @@ ija-project.iml
 *.log
 dependency-reduced-pom.xml
 .DS_Store
+xkocio00.zip
+*docs*

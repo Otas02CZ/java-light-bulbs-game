@@ -1,33 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+FILE: gameSetup.fxml
+TEAM: 247555
+AUTHOR: Otakar Kočí 247555
+DESC: GameSetup scene definition
+-->
 
 <?import java.lang.*?>
 <?import javafx.collections.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 
 <BorderPane
-        styleClass="background"
-        stylesheets="@styles.css"
         xmlns="http://javafx.com/javafx/21"
         xmlns:fx="http://javafx.com/fxml/1"
         fx:controller="com.example.game.gui.GameSetupController"
+        styleClass="background"
+        stylesheets="@styles.css"
 >
 
+    <!-- Upper part contains a title -->
     <top>
         <Label styleClass="mainTitle" text="Light Bulbs" BorderPane.alignment="CENTER"  textAlignment="CENTER" />
     </top>
 
+    <!-- Center contains V-Box with configuration selection -->
     <center>
         <VBox alignment="CENTER" spacing="20">
+            <!-- Configuration label -->
             <Label styleClass="subtitle" text="New Game" alignment="CENTER" textAlignment="CENTER" />
-
+            <!-- Grid pane with all the configuration options -->
             <GridPane alignment="CENTER" hgap="10" vgap="15">
 
+                <!-- Difficulty class setup via ComboBox -->
                 <Label styleClass="infoLabel" text="Difficulty:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
                 <ComboBox fx:id="difficultyComboBox" onAction="#onDifficultyChange" GridPane.columnIndex="1" GridPane.rowIndex="0">
                     <items>
                         <FXCollections fx:factory="observableArrayList">
+                            <!-- Predefined values -->
                             <String fx:value="Easy" />
                             <String fx:value="Medium" />
                             <String fx:value="Hard" />
@@ -35,16 +45,18 @@
                         </FXCollections>
                     </items>
                 </ComboBox>
+                <!-- Advanced Configuration Options -->
 
+                <!-- Game Map Size -->
                 <Label styleClass="infoLabel" text="Size:" GridPane.columnIndex="0" GridPane.rowIndex="1" alignment="CENTER" textAlignment="CENTER" />
                 <Spinner fx:id="sizeSpinner" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-
+                <!-- Empty Cells Coefficient -->
                 <Label styleClass="infoLabel" text="Empty cells:" GridPane.columnIndex="0" GridPane.rowIndex="2" alignment="CENTER" textAlignment="CENTER" />
                 <Slider fx:id="emptySlider" showTickLabels="true" showTickMarks="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-
+                <!-- Shuffle Strength Coefficient -->
                 <Label styleClass="infoLabel" text="Shuffle strength:" GridPane.columnIndex="0" GridPane.rowIndex="3" alignment="CENTER" textAlignment="CENTER" />
                 <Slider fx:id="shuffleSlider" showTickLabels="true" showTickMarks="true" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-
+                <!-- Timer Duration -->
                 <Label styleClass="infoLabel" text="Max time (mins):" GridPane.columnIndex="0" GridPane.rowIndex="4" alignment="CENTER" textAlignment="CENTER" />
                 <Spinner fx:id="timeSpinner" GridPane.columnIndex="1" GridPane.rowIndex="4" />
 
@@ -52,6 +64,7 @@
         </VBox>
     </center>
 
+    <!-- Bottom part with action buttons -->
     <bottom>
         <HBox alignment="CENTER" spacing="30">
             <Button onAction="#onBackClicked" text="Back to Main Menu" />

@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+FILE: howToPlay.fxml
+TEAM: 247555
+AUTHOR: Otakar Kočí 247555
+DESC: HowToPlay scene definition
+-->
 
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.VBox?>
@@ -8,17 +14,19 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.control.Label?>
 
+<!-- The whole scene is scrollable -->
 <ScrollPane
         xmlns="http://javafx.com/javafx/21"
         xmlns:fx="http://javafx.com/fxml/1"
         fx:controller="com.example.game.gui.HowToPlayController"
-        stylesheets="styles.css"
         styleClass="blackBackground"
+        stylesheets="styles.css"
         fitToWidth="true"
 >
-
+   <!-- Everything is stacked vertically -->
    <VBox styleClass="howToPlayContainer">
       <TextFlow>
+         <!-- Simple heading of the section -->
          <Text styleClass="howToPlayHeading">Game Manual</Text>
       </TextFlow>
 
@@ -28,7 +36,7 @@
             information about the game, how to play it aw well as information about some hidden features.
          </Text>
       </TextFlow>
-
+      <!-- Chapter with its text -->
       <TextFlow>
          <Text styleClass="howToPlayChapter">Basic Principles</Text>
       </TextFlow>
@@ -46,6 +54,8 @@
          <Text styleClass="howToPlayChapter">Cell Types</Text>
       </TextFlow>
 
+      <!-- H-Boxes with an image and descriptor -->
+
       <HBox spacing="10" alignment="CENTER_LEFT">
          <ImageView fx:id="powerSourceImage" fitHeight="50.0" fitWidth="50.0" />
          <Label styleClass="whiteLabel" text="Power Source" />
@@ -60,14 +70,14 @@
          <ImageView fx:id="wireImage" fitHeight="50.0" fitWidth="50.0" />
          <Label styleClass="whiteLabel" text="Wire" />
       </HBox>
-
+      <!-- Chapter with its text -->
       <TextFlow styleClass="textJustify">
          <Text styleClass="whiteText">
             These cell types come in different configurations. The configurations denote which of their
             sides can be connected and whether they are powered or not. Power source is always powered on.
          </Text>
       </TextFlow>
-
+      <!-- Chapter with its text -->
       <TextFlow>
          <Text styleClass="howToPlayChapter">Basic Controls</Text>
       </TextFlow>
@@ -78,7 +88,7 @@
             ends, then you lose the game. After the game is finished (won or lost), the game cells become inactive to your clicks.
          </Text>
       </TextFlow>
-
+      <!-- Chapter with its text -->
       <TextFlow>
          <Text styleClass="howToPlayChapter">Help View</Text>
       </TextFlow>
@@ -89,7 +99,7 @@
             closes the Help View window. Do not use it too much. That would be cheating!!
          </Text>
       </TextFlow>
-
+      <!-- Chapter with its text -->
       <TextFlow>
          <Text styleClass="howToPlayChapter">Undo and Redo</Text>
       </TextFlow>
@@ -100,7 +110,7 @@
             disables when the game finishes.
          </Text>
       </TextFlow>
-
+      <!-- Chapter with its text -->
       <TextFlow>
          <Text styleClass="howToPlayChapter">Auto Solving</Text>
       </TextFlow>
@@ -110,7 +120,7 @@
             and solve the game step by step. Once turned on, it cannot be disabled
          </Text>
       </TextFlow>
-
+      <!-- Chapter with its text -->
       <TextFlow>
          <Text styleClass="howToPlayChapter">Gameplay Tips</Text>
       </TextFlow>

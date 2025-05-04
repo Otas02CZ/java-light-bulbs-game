@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+FILE: game.fxml
+TEAM: 247555
+AUTHOR: Otakar Kočí 247555
+DESC: Game scene definition
+-->
 
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
@@ -6,17 +12,18 @@
 <?import javafx.scene.layout.*?>
 
 <BorderPane
-        fx:id="gamePane"
-        styleClass="background"
-        stylesheets="@styles.css"
         xmlns="http://javafx.com/javafx/21"
         xmlns:fx="http://javafx.com/fxml/1"
         fx:controller="com.example.game.gui.GameController"
+        stylesheets="@styles.css"
+        styleClass="background"
+        fx:id="gamePane"
 >
 
     <!-- Top Area -->
     <top>
         <VBox spacing="5">
+            <!-- Game Menu with buttons -->
             <ToolBar prefHeight="40.0" prefWidth="200.0" styleClass="gameMenu">
                 <Button mnemonicParsing="false" onAction="#handleToMainMenu" text="Main Menu" maxWidth="Infinity" HBox.hgrow="ALWAYS" />
                 <Button mnemonicParsing="false" onAction="#handleQuit" text="Quit" maxWidth="Infinity" HBox.hgrow="ALWAYS" />
@@ -48,7 +55,7 @@
     <center>
         <VBox alignment="CENTER" fillWidth="false">
             <GridPane fx:id="gameGrid">
-                <!-- game cells -->
+                <!-- Game Cells -->
             </GridPane>
         </VBox>
     </center>
@@ -56,12 +63,15 @@
     <!-- Bottom Area -->
     <bottom>
         <BorderPane>
+            <!-- Total turns label -->
             <left>
                 <Label styleClass="infoLabel" fx:id="turnsLabel" text="Turns: 0" alignment="CENTER" textAlignment="CENTER" />
             </left>
+            <!-- Difficulty -->
             <center>
                 <Label styleClass="infoLabel" fx:id="difficultyLabel" text="Hard" alignment="CENTER" textAlignment="CENTER" />
             </center>
+            <!-- Lit up bulbs label -->
             <right>
                 <Label styleClass="infoLabel" fx:id="litUpLabel" text="Lit up: 0/0" alignment="CENTER" textAlignment="CENTER" />
             </right>
