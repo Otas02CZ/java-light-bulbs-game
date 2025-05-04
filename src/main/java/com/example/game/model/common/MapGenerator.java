@@ -1,6 +1,8 @@
 package com.example.game.model.common;
 
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class MapGenerator {
 
@@ -11,6 +13,7 @@ public class MapGenerator {
     final private PriorityQueue queue;
     final private Random random;
     private int powerConnections;
+    private final Logger logger = Logger.getLogger(getClass().getName());
 
     public MapGenerator(int rows, int cols, float emptyPercentage) {
         this.rows = rows;
@@ -24,6 +27,9 @@ public class MapGenerator {
         MapElement root =  new MapElement(new Position(ry, rx));
         root.setRoot();
         map[ry][rx] = root;
+
+        logger.log(Level.INFO, "Generating Map");
+        logger.log(Level.INFO, "root element: " + root.getPos());
 
         // create the root neighbours
         for (Side side : Side.values()) {
@@ -132,7 +138,7 @@ public class MapGenerator {
 
             // execute the move
             MapElement neighbour = getNeighbor(elm);
-            if (neighbour == null) return; // mby not needed?
+            logger.log(Level.INFO, "generating connection to neighbour: " + neighbour.getPos());
 
             queue.executeMove(elm, neighbour);
             AddAvailableMoves(neighbour);

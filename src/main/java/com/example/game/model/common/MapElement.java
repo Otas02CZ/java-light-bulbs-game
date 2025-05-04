@@ -3,10 +3,13 @@ package com.example.game.model.common;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class MapElement {
 
     final private Position pos;
+    private final Logger logger = Logger.getLogger(getClass().getName());
 
     private int rotated = 0;
     private boolean isRoot = false;
@@ -40,6 +43,8 @@ public class MapElement {
     public void setRoot() {isRoot = true;};
 
     public void rotate() {
+
+        logger.log(Level.INFO, "Rotating " + this.getPos());
 
         // north <-> East
         boolean tmp = north;

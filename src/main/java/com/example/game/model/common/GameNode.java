@@ -15,6 +15,8 @@ import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -28,12 +30,17 @@ import org.json.JSONObject;
 public class GameNode implements ToolField, GameObservable {
 
     /**
+     * Logger
+    */
+    protected final Logger logger = Logger.getLogger(getClass().getName());
+
+    /**
      * CurrentRotation
      */
     protected int rotation;
 
     /**
-     * Countr for rotations
+     * Counter for rotations
      */
     protected int totalRotations = 0;
 
@@ -132,11 +139,13 @@ public class GameNode implements ToolField, GameObservable {
      * Turns (rotates) node 90 deg clockwise
      */
     public void turn() {
+        logger.log(Level.INFO, this + " turned right");
         internalTurn(false);
         this.notifyGameObserver();
     }
 
     public void turnLeft() {
+        logger.log(Level.INFO, this + " turned left");
         internalTurn(true);
         this.notifyGameObserver();
     }
@@ -187,6 +196,7 @@ public class GameNode implements ToolField, GameObservable {
      * Turns node off
      */
     public void turnOff() {
+        logger.log(Level.INFO, this + " turned off");
         if (!powered)
             return;
         powered = false;
@@ -196,8 +206,8 @@ public class GameNode implements ToolField, GameObservable {
      * Turns node on
      */
     public void turnOn() {
-        if (powered)
-            return;
+        if (powered) return;
+        logger.log(Level.INFO, this + " turned on");
         powered = true;
     }
 

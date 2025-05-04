@@ -4,9 +4,9 @@ import java.util.Random;
 
 public class QueueElement {
 
-    private int cost;
-    private MapElement node;
-    private Side direction;
+    private final int cost;
+    private final MapElement node;
+    private final Side direction;
     private int idx;
 
     public QueueElement(MapElement node, Side direction, Random random, int idx) {
