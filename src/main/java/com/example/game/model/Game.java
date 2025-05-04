@@ -572,6 +572,7 @@ public class Game implements ToolEnvironment, GameObservable.GameObserver, Timer
 
     /**
      * Returns the time left in the game
+     * @return int time left in seconds
     */
     public int timeLeft() {
         return this.timerManager.getTimeLeft();
@@ -591,8 +592,8 @@ public class Game implements ToolEnvironment, GameObservable.GameObserver, Timer
 
     /**
      * Return node (ToolField) instance at given row and col
-     * @param row
-     * @param col
+     * @param row the row
+     * @param col the column
      * @return ToolField node
      */
     public ToolField fieldAt(int row, int col) {

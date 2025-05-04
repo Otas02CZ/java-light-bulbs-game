@@ -117,7 +117,6 @@ public class MapElement {
 
     /**
      * Checks if the element is a root element.
-     * @return true if the element is a root, false otherwise.
      */
     public void setRoot() {isRoot = true;};
 

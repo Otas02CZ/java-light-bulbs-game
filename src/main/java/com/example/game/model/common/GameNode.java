@@ -100,8 +100,8 @@ public class GameNode implements ToolField, GameObservable {
     }
 
     /**
-     * Sets position of node in 2D space
-     * @param position Position
+     * Intrenal method for turning node
+     * @param left boolean whether to turn left or right
      */
     public void internalTurn(boolean left) {
         HashMap<Side, Boolean> tempConnectors = new HashMap<>();
@@ -307,8 +307,8 @@ public class GameNode implements ToolField, GameObservable {
     }
 
     /**
-     * Sets position of node in 2D space
-     * @param position Position
+     * Sets the rotation of the node
+     * @param rotation int
      */
     public void setRotation(int rotation) {
         this.rotation = rotation;
@@ -348,6 +348,7 @@ public class GameNode implements ToolField, GameObservable {
      /**
      * Method to get the string representation of the GameNode in this format:
      * {TYPE[ROW@COL][SIDE_1,SIDE_2,...]}
+     * @param name Type of node
      * @return String representation
      */
     protected String getToString(String name) {
