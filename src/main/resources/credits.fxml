@@ -54,6 +54,11 @@ DESC: Credits scene definition
             <Hyperlink text="Font Press Start 2P" onAction="#handlePressStartLink"/>
             <Hyperlink text="Alarm clock icon" onAction="#handleAlarmClockLink"/>
 
+            <!-- Authors Label -->
+            <Text text="Assets help" styleClass="authors-label,whiteText" />
+            <!-- Author Names -->
+            <Text text="A. Mendl" styleClass="author-name,whiteText" />
+
             <!-- Block of Justified Text -->
             <TextFlow styleClass="credits-text-flow">
                 <Text styleClass="whiteText">

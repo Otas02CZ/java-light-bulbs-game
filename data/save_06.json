@@ -1,0 +1,190 @@
+{
+  "backlog": {
+    "buffer": [{
+      "col": 0,
+      "row": 0
+    }],
+    "currentIndex": 0
+  },
+  "usedSolver": false,
+  "rows": 5,
+  "turnsTotal": 1,
+  "cols": 5,
+  "map": [
+    {
+      "rotation": 3,
+      "sides": [{"side": "EAST"}],
+      "type": "bulb",
+      "totalRotations": 1
+    },
+    {
+      "rotation": 1,
+      "sides": [{"side": "WEST"}],
+      "type": "bulb",
+      "totalRotations": 0
+    },
+    {
+      "rotation": 0,
+      "sides": [],
+      "type": "None",
+      "totalRotations": 0
+    },
+    {
+      "rotation": 0,
+      "sides": [],
+      "type": "None",
+      "totalRotations": 0
+    },
+    {
+      "rotation": 0,
+      "sides": [],
+      "type": "None",
+      "totalRotations": 0
+    },
+    {
+      "rotation": 1,
+      "sides": [
+        {"side": "SOUTH"},
+        {"side": "WEST"},
+        {"side": "EAST"}
+      ],
+      "type": "link",
+      "totalRotations": 0
+    },
+    {
+      "rotation": 0,
+      "sides": [
+        {"side": "NORTH"},
+        {"side": "SOUTH"},
+        {"side": "WEST"}
+      ],
+      "type": "link",
+      "totalRotations": 0
+    },
+    {
+      "rotation": 0,
+      "sides": [],
+      "type": "None",
+      "totalRotations": 0
+    },
+    {
+      "rotation": 0,
+      "sides": [],
+      "type": "None",
+      "totalRotations": 0
+    },
+    {
+      "rotation": 0,
+      "sides": [],
+      "type": "None",
+      "totalRotations": 0
+    },
+    {
+      "rotation": 2,
+      "sides": [
+        {"side": "NORTH"},
+        {"side": "SOUTH"}
+      ],
+      "type": "link",
+      "totalRotations": 0
+    },
+    {
+      "rotation": 2,
+      "sides": [{"side": "SOUTH"}],
+      "type": "bulb",
+      "totalRotations": 0
+    },
+    {
+      "rotation": 0,
+      "sides": [],
+      "type": "None",
+      "totalRotations": 0
+    },
+    {
+      "rotation": 0,
+      "sides": [],
+      "type": "None",
+      "totalRotations": 0
+    },
+    {
+      "rotation": 0,
+      "sides": [],
+      "type": "None",
+      "totalRotations": 0
+    },
+    {
+      "rotation": 2,
+      "sides": [
+        {"side": "NORTH"},
+        {"side": "SOUTH"}
+      ],
+      "type": "link",
+      "totalRotations": 0
+    },
+    {
+      "rotation": 0,
+      "sides": [],
+      "type": "None",
+      "totalRotations": 0
+    },
+    {
+      "rotation": 2,
+      "sides": [{"side": "NORTH"}],
+      "type": "bulb",
+      "totalRotations": 0
+    },
+    {
+      "rotation": 0,
+      "sides": [],
+      "type": "None",
+      "totalRotations": 0
+    },
+    {
+      "rotation": 0,
+      "sides": [],
+      "type": "None",
+      "totalRotations": 0
+    },
+    {
+      "rotation": 3,
+      "sides": [
+        {"side": "NORTH"},
+        {"side": "WEST"}
+      ],
+      "type": "link",
+      "totalRotations": 0
+    },
+    {
+      "rotation": 4,
+      "sides": [
+        {"side": "WEST"},
+        {"side": "EAST"}
+      ],
+      "type": "link",
+      "totalRotations": 0
+    },
+    {
+      "rotation": 2,
+      "sides": [
+        {"side": "SOUTH"},
+        {"side": "WEST"},
+        {"side": "EAST"}
+      ],
+      "type": "power",
+      "totalRotations": 0
+    },
+    {
+      "rotation": 0,
+      "sides": [{"side": "WEST"}],
+      "type": "bulb",
+      "totalRotations": 0
+    },
+    {
+      "rotation": 0,
+      "sides": [],
+      "type": "None",
+      "totalRotations": 0
+    }
+  ],
+  "timeLeft": 229
+}

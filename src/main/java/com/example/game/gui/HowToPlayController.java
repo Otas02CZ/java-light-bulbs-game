@@ -16,26 +16,45 @@ import java.util.logging.Level;
 
 /**
  * Controller for the HowToPlay scene
+ * Only setups images.
  */
 public class HowToPlayController extends Controller {
 
+    /**
+     * Image of a power source
+     */
     @FXML
     public ImageView powerSourceImage;
 
+    /**
+     * Image of light bulb
+     */
     @FXML
     public ImageView lightBulbImage;
 
+    /**
+     * Image of a wire
+     */
     @FXML
     public ImageView wireImage;
 
+    /**
+     * Setup this controller
+     */
     public void setup() {
-        WIDTH = 400;
-        super.setup();
+        WIDTH = 400; // override the width of the window
+        super.setup(); // setup in parent
+        // setup images
         setupImage(powerSourceImage, "/images/icons/power_0001.jpg");
         setupImage(lightBulbImage, "/images/icons/bulb_on_1000.jpg");
         setupImage(wireImage, "/images/icons/wire_on_1100.jpg");
     }
 
+    /**
+     * Setup given Image view to use Image from specified path
+     * @param imageView to set up
+     * @param path with the image to use
+     */
     private void setupImage(ImageView imageView, String path) {
         InputStream imageURL = getClass().getResourceAsStream(path);
         if (imageURL == null) {

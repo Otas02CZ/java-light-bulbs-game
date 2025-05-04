@@ -33,6 +33,7 @@ public final class Position {
     }
 
     /**
+     * Returns X coordinate in 2D space
      * @return int X coordinate in 2D space
      */
     public int getRow() {
@@ -40,6 +41,7 @@ public final class Position {
     }
 
     /**
+     * Returns Y coordinate in 2D space
      * @return int Y coordinate in 2D space
      */
     public int getCol() {
