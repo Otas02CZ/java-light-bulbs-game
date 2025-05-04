@@ -36,22 +36,27 @@ DESC: Intro scene definition
 
    <!-- Bottom section -->
    <bottom>
-      <HBox spacing="10" BorderPane.alignment="BOTTOM_CENTER">
-         <!-- Authors section on the left -->
-         <VBox alignment="BOTTOM_LEFT">
-            <Label styleClass="infoLabel" text="Otakar Kočí" alignment="CENTER" textAlignment="CENTER" />
-            <Label styleClass="infoLabel" text="Martin Mendl" alignment="CENTER" textAlignment="CENTER" />
-         </VBox>
-
-         <!-- This Region acts as a spacer to push the year label to the far right -->
-         <Region HBox.hgrow="ALWAYS" />
-
-         <!-- Year label directly at the bottom-right -->
-         <VBox alignment="BOTTOM_LEFT">
-            <Label styleClass="infoLabel" text="2025" alignment="CENTER" textAlignment="CENTER" />
-         </VBox>
-
-      </HBox>
+      <BorderPane>
+         <!-- Total turns label -->
+         <left>
+            <VBox>
+               <Label styleClass="infoLabel" text="Otakar Kočí" alignment="CENTER" textAlignment="CENTER" />
+               <Label styleClass="infoLabel" text="Martin Mendl" alignment="CENTER" textAlignment="CENTER" />
+            </VBox>
+         </left>
+         <!-- Difficulty -->
+         <center>
+            <VBox>
+               <Button fx:id="musicButton" styleClass="button-text" onAction="#handleMusicControls" text="Music: OFF" />
+            </VBox>
+         </center>
+         <!-- Lit up bulbs label -->
+         <right>
+            <VBox>
+               <Label styleClass="infoLabel" text="2025" alignment="CENTER" textAlignment="CENTER" />
+            </VBox>
+         </right>
+      </BorderPane>
    </bottom>
 
 </BorderPane>

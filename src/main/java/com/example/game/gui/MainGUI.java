@@ -8,6 +8,7 @@
 
 package com.example.game.gui;
 
+import com.example.game.gui.shared.MusicManager;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -30,6 +31,8 @@ public class MainGUI extends Application {
      * JavaFX stage of the GUI
      */
     private Stage stage;
+
+    private MusicManager musicManager = null;
 
     /**
      * Logger instance for logging within this class
@@ -56,6 +59,9 @@ public class MainGUI extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         this.stage = stage;
+
+        // setup music manager
+        musicManager = new MusicManager("/audio/soundtrack.mp3");
 
         // load intro scene and setup its controller
         URL introFXML = getClass().getResource("/intro.fxml");

@@ -1,64 +1,105 @@
+/**
+ * IJA PROJECT: Light Bulbs Game
+ * FILE: TimerManager.java
+ * AUTHOR: Otakar Kočí xkocio00@stud.fit.vutbr.cz
+ * CREATED: 04/2025
+ * DESCRIPTION: Timer implementation for the Game model
+ */
+
 package com.example.game.model.common;
 
 import com.example.game.shared.TimerObservable;
 import javafx.application.Platform;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
+/**
+ * Class that handles Timer. Internally ScheduledExecutorService is used.
+ */
 public class TimerManager implements TimerObservable {
 
-    private final AtomicInteger timeLeft = new AtomicInteger(); // Holds the remaining time
+    /**
+     * Holds the remaining time
+     */
+    private final AtomicInteger timeLeft = new AtomicInteger();
+    /**
+     * scheduled executor service for timer
+     */
     private ScheduledExecutorService scheduledExecutor;
+
+    /**
+     * List of observers to notify when a second passes
+     */
     private final List<TimerObservable.TimerObserver> timerObservers = new ArrayList<>();
 
-    // Starts the timer with an initial time
+    /**
+     * Starts timer with specified time, each second notifies the observers
+     * @param initialTime to start the timer with
+     */
     public void startTimer(int initialTime) {
         this.timeLeft.set(initialTime);
 
+        // shutdown existing executor
         if (scheduledExecutor != null && !scheduledExecutor.isShutdown()) {
             scheduledExecutor.shutdownNow(); // Stop any previous timer
         }
 
+        // create new executor
         scheduledExecutor = Executors.newSingleThreadScheduledExecutor();
 
-        // Schedule a task to run every 1 second
+        // schedule task to run every 1 second
         scheduledExecutor.scheduleAtFixedRate(() -> {
             int currentValue = timeLeft.decrementAndGet();
             if (currentValue <= 0) {
-                stopTimer(); // Stop when timer reaches 0
+                stopTimer(); // stop when timer reaches 0
             }
 
-            // Notify on the JavaFX application thread
+            // notify observers on the JavaFX application thread
             Platform.runLater(this::notifyTimerObserver);
 
-        }, 0, 1, TimeUnit.SECONDS); // Initial delay: 0, interval: 1 second
+        }, 0, 1, TimeUnit.SECONDS);
     }
 
-    // Stops the timer
+    /**
+     * Stop timer if it exists
+     */
     public void stopTimer() {
         if (scheduledExecutor != null) {
             scheduledExecutor.shutdownNow();
         }
     }
 
+    /**
+     * Register specified observer for further notifications
+     * @param observer the TimerObserver instance to be registered for timer updates
+     */
     public void setupTimerObserver(TimerObserver observer) {
         timerObservers.add(observer);
     }
 
+    /**
+     * Remove specified observer from registered observers
+     * @param observer the TimerObserver instance to be removed from receiving timer updates
+     */
     public void removeTimerObserver(TimerObserver observer) {
         timerObservers.remove(observer);
     }
 
-    // Notify observer (called on JavaFX thread)
+    /**
+     * Notify all registered observers
+     */
     public void notifyTimerObserver() {
         for (TimerObserver observer : timerObservers) {
             observer.updateTimer(timeLeft.get());
         }
     }
 
+    /**
+     * Return remaining time of the timer
+     * @return remaining time
+     */
     public int getTimeLeft() {
         return timeLeft.get();
     }

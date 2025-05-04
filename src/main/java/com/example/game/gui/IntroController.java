@@ -8,12 +8,14 @@
 
 package com.example.game.gui;
 
+import com.example.game.gui.shared.MusicManager;
 import com.example.game.model.Game;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.json.JSONException;
@@ -37,6 +39,11 @@ public class IntroController extends Controller {
      * Stores instance of Credits stage if it is opened.
      */
     private Stage creditsStage = null;
+
+    private MusicManager musicManager = null;
+
+    @FXML
+    private Button musicButton;
 
     /**
      * Setups Intro controller
@@ -225,7 +232,7 @@ public class IntroController extends Controller {
             return;
         }
 
-        //
+        // load Credits scene and setup controller
         URL creditsFXML = getClass().getResource("/credits.fxml");
         if (creditsFXML == null) {
             logger.log(Level.SEVERE, "Failed to load credits.fxml file.");
@@ -239,7 +246,6 @@ public class IntroController extends Controller {
         FXMLLoader loader = new FXMLLoader(creditsFXML);
         Parent root = loader.load();
         CreditsController creditsController = loader.getController();
-
         creditsStage = new Stage();
 
         creditsController.setStage(creditsStage);
@@ -251,25 +257,43 @@ public class IntroController extends Controller {
         creditsStage.show();
         logger.log(Level.INFO, "Opened Credits stage.");
 
+        // setup event when user closes the Credits window
         creditsStage.setOnCloseRequest(event -> {
             creditsStage = null;
             logger.log(Level.INFO, "Closing Credits stage.");
         });
     }
 
+    /**
+     * Handles Quit button that quits the whole application
+     */
     @FXML
     private void handleQuit() {
+        // close HowToPlay window if opened
         if (howToPlayStage != null) {
             howToPlayStage.close();
             howToPlayStage = null;
         }
-
+        // close Credits window if opened
         if (creditsStage != null) {
             creditsStage.close();
             creditsStage = null;
         }
 
+        // quit the app
         stage.close();
         logger.log(Level.INFO, "Closing GUI from Intro scene.");
+    }
+
+    @FXML
+    private void handleMusicControls() {
+        musicManager.toggleMusic();
+
+        if (musicManager.isMusicPlaying()) {
+            musicButton.setText("Music: ON");
+        } else {
+            musicButton.setText("Music: OFF");
+        }
+
     }
 }

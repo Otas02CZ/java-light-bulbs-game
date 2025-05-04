@@ -1,12 +1,22 @@
+/**
+ * IJA PROJECT: Light Bulbs Game
+ * FILE: HowToPlayController.java
+ * AUTHOR: Otakar Kočí xkocio00@stud.fit.vutbr.cz
+ * CREATED: 04/2025
+ * DESCRIPTION: Controller for the HowToPlay scene
+ */
+
 package com.example.game.gui;
 
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-
 import java.io.InputStream;
 import java.util.logging.Level;
 
+/**
+ * Controller for the HowToPlay scene
+ */
 public class HowToPlayController extends Controller {
 
     @FXML
